@@ -32,6 +32,33 @@ def test_content_public_surface_has_no_write_route():
     assert "methods=[\"POST\"]" not in source
 
 
+def test_content_frontend_asset_uses_safe_responsive_grid():
+    manifest = _manifest(CONTENT / "__manifest__.py")
+    asset = "monynha_content/static/src/scss/content.scss"
+    assert asset in manifest.get("assets", {}).get("web.assets_frontend", [])
+
+    scss = (CONTENT / "static/src/scss/content.scss").read_text()
+    assert ".monynha-work-grid" in scss
+    assert "minmax(0, 1fr)" in scss
+    assert "min-width: 0;" in scss
+    assert "min(100%," not in scss
+    assert "overflow-wrap: anywhere;" in scss
+
+
+def test_content_templates_preserve_editor_and_accessibility_semantics():
+    work_xml = (CONTENT / "views/work_templates.xml").read_text()
+    snippets_xml = (CONTENT / "views/snippets.xml").read_text()
+    combined = work_xml + snippets_xml
+
+    assert 't-set="main_object" t-value="work"' in work_xml
+    assert 't-field="work.body_html"' in work_xml
+    assert "<article" in work_xml
+    assert 't-att-alt="work.name"' in work_xml
+    assert 'aria-label="Work navigation"' in snippets_xml
+    assert "focus-visible" in (ROOT / "theme_monynha/static/src/scss/components.scss").read_text()
+    assert "javascript:" not in combined.lower()
+
+
 def test_defaults_do_not_ship_fake_proof():
     shipped = "\n".join(
         p.read_text(errors="ignore")
