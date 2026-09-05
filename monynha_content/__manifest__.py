@@ -13,6 +13,11 @@
         "views/work_templates.xml",
         "views/snippets.xml",
     ],
+    "assets": {
+        "web.assets_frontend": [
+            "monynha_content/static/src/scss/content.scss",
+        ],
+    },
     "installable": True,
     "application": False,
 }
