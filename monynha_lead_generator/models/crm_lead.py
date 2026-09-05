@@ -28,6 +28,12 @@ class CrmLead(models.Model):
     monynha_linkedin_url = fields.Char(string="LinkedIn")
     monynha_discovery_version = fields.Char(default="1", readonly=True)
     monynha_discovery_completed_at = fields.Datetime(string="Discovery Completed At", readonly=True)
+    monynha_followup_requested_at = fields.Datetime(
+        string="Project Signal Follow-up Requested At",
+        readonly=True,
+        copy=False,
+        index=True,
+    )
     monynha_diagnosis_ids = fields.One2many(
         "monynha.lead.diagnosis",
         "lead_id",
