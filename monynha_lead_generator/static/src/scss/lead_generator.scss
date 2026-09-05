@@ -76,7 +76,10 @@
 .monynha-next-move h2 { max-width: 720px; margin: .5rem 0 1rem; font-size: clamp(2rem,5vw,4rem); line-height: .98; letter-spacing: -.04em; }
 .monynha-next-move p:last-child { max-width: 700px; color: rgba(255,255,255,.68); }
 .monynha-route { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin: 3rem 0; color: rgba(255,255,255,.78); font-weight: 800; }
+.monynha-followup-zone { display: grid; justify-items: start; gap: .85rem; }
 .monynha-report-cta { padding: 1rem 1.4rem; border: 2px solid #000; border-radius: .8rem; background: var(--m-violet); color: #fff; box-shadow: 6px 6px 0 #fff; font-weight: 900; }
+.monynha-report-cta[aria-disabled="true"] { opacity: .75; pointer-events: none; }
+.monynha-followup-status { min-height: 1.4rem; color: rgba(255,255,255,.72); font-size: .9rem; }
 .monynha-report-note { margin-top: 2rem; color: rgba(255,255,255,.5); font-size: .85rem; }
 
 @keyframes monynhaPulse { 50% { transform: scale(1.25); filter: brightness(1.4); } }
