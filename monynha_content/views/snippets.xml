@@ -37,7 +37,7 @@
     </template>
 
     <template id="s_monynha_featured_work" name="Monynha Featured Work">
-        <t t-set="works" t-value="request.env['monynha.content.query'].get_works(request.website, featured=True, limit=3)"/>
+        <t t-set="works" t-value="request.env['monynha.content.query'].get_works(featured=True, limit=3)"/>
         <section class="s_monynha_featured_work monynha-section" data-snippet="s_monynha_featured_work" data-name="Monynha Featured Work">
             <div class="monynha-container monynha-stack">
                 <header class="monynha-section-header">
@@ -54,7 +54,7 @@
     </template>
 
     <template id="s_monynha_work_grid" name="Monynha Work Grid">
-        <t t-set="works" t-value="request.env['monynha.content.query'].get_works(request.website, limit=6)"/>
+        <t t-set="works" t-value="request.env['monynha.content.query'].get_works(limit=6)"/>
         <section class="s_monynha_work_grid monynha-section" data-snippet="s_monynha_work_grid" data-name="Monynha Work Grid">
             <div class="monynha-container monynha-stack">
                 <header class="monynha-section-header">
@@ -71,7 +71,7 @@
     </template>
 
     <template id="s_monynha_latest_projects" name="Monynha Latest Projects">
-        <t t-set="works" t-value="request.env['monynha.content.query'].get_works(request.website, work_type='project', limit=3)"/>
+        <t t-set="works" t-value="request.env['monynha.content.query'].get_works(work_type='project', limit=3)"/>
         <section class="s_monynha_latest_projects monynha-section" data-snippet="s_monynha_latest_projects" data-name="Monynha Latest Projects">
             <div class="monynha-container monynha-stack">
                 <header class="monynha-section-header"><p class="monynha-eyebrow">Projects</p><h2>Latest projects.</h2></header>
@@ -83,7 +83,7 @@
     </template>
 
     <template id="s_monynha_selected_cases" name="Monynha Selected Cases">
-        <t t-set="works" t-value="request.env['monynha.content.query'].get_works(request.website, work_type='case', featured=True, limit=3)"/>
+        <t t-set="works" t-value="request.env['monynha.content.query'].get_works(work_type='case', featured=True, limit=3)"/>
         <section class="s_monynha_selected_cases monynha-section" data-snippet="s_monynha_selected_cases" data-name="Monynha Selected Cases">
             <div class="monynha-container monynha-stack">
                 <header class="monynha-section-header"><p class="monynha-eyebrow">Cases</p><h2>Selected cases.</h2></header>
@@ -95,7 +95,7 @@
     </template>
 
     <template id="s_monynha_latest_labs" name="Monynha Latest Labs">
-        <t t-set="works" t-value="request.env['monynha.content.query'].get_works(request.website, work_type='lab', limit=3)"/>
+        <t t-set="works" t-value="request.env['monynha.content.query'].get_works(work_type='lab', limit=3)"/>
         <section class="s_monynha_latest_labs monynha-section" data-snippet="s_monynha_latest_labs" data-name="Monynha Latest Labs">
             <div class="monynha-container monynha-stack">
                 <header class="monynha-section-header"><p class="monynha-eyebrow">Labs</p><h2>Latest experiments.</h2></header>
@@ -108,7 +108,7 @@
 
     <template id="s_monynha_related_work" name="Monynha Related Work">
         <t t-if="main_object and main_object._name == 'monynha.work'">
-            <t t-set="related_works" t-value="request.env['monynha.content.query'].get_works(request.website, work_type=main_object.type, limit=4)"/>
+            <t t-set="related_works" t-value="request.env['monynha.content.query'].get_works(work_type=main_object.type, limit=4)"/>
             <section class="s_monynha_related_work monynha-section" data-snippet="s_monynha_related_work" data-name="Monynha Related Work">
                 <div class="monynha-container monynha-stack">
                     <header class="monynha-section-header"><p class="monynha-eyebrow">Related work</p><h2>Continue exploring.</h2></header>
@@ -154,7 +154,7 @@
     </template>
 
     <template id="s_monynha_latest_insights" name="Monynha Latest Insights">
-        <t t-set="posts" t-value="request.env['monynha.content.query'].get_blog_posts(request.website, limit=3)"/>
+        <t t-set="posts" t-value="request.env['monynha.content.query'].get_blog_posts(limit=3)"/>
         <section class="s_monynha_latest_insights monynha-section" data-snippet="s_monynha_latest_insights" data-name="Monynha Latest Insights">
             <div class="monynha-container monynha-stack">
                 <header class="monynha-section-header"><p class="monynha-eyebrow">Insights</p><h2>Latest thinking.</h2></header>
@@ -166,7 +166,7 @@
     </template>
 
     <template id="s_monynha_insights_grid" name="Monynha Insights Grid">
-        <t t-set="posts" t-value="request.env['monynha.content.query'].get_blog_posts(request.website, limit=6)"/>
+        <t t-set="posts" t-value="request.env['monynha.content.query'].get_blog_posts(limit=6)"/>
         <section class="s_monynha_insights_grid monynha-section" data-snippet="s_monynha_insights_grid" data-name="Monynha Insights Grid">
             <div class="monynha-container monynha-stack">
                 <header class="monynha-section-header"><p class="monynha-eyebrow">Insights</p><h2>Notes from the work.</h2></header>
