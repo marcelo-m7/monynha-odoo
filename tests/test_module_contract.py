@@ -54,6 +54,24 @@ def test_theme_loads_tokens_before_components_and_keeps_reduced_motion():
     assert 'prefers-reduced-motion' in scss
 
 
+def test_theme_uses_odoo_native_page_and_menu_templates():
+    pages_path = ROOT / 'theme_monynha' / 'data' / 'pages.xml'
+    menu_path = ROOT / 'theme_monynha' / 'data' / 'menu.xml'
+    assert pages_path.exists()
+    assert menu_path.exists()
+    pages = pages_path.read_text()
+    menu = menu_path.read_text()
+    assert 'model="theme.website.page"' in pages
+    assert 'model="website.page"' not in pages
+    assert 'model="theme.website.menu"' in menu
+    assert 'model="website.menu"' not in menu
+    assert '<field name="url">/start</field>' in pages
+    manifest = _manifest('theme_monynha')
+    homepage = manifest.get('configurator_snippets', {}).get('homepage', [])
+    assert 's_monynha_hero' in homepage
+    assert 's_monynha_cta' in homepage
+
+
 def test_lead_generator_uses_crm_lead_and_secure_public_report_token():
     lead_model = (ROOT / 'monynha_lead_generator' / 'models' / 'crm_lead.py').read_text()
     diagnosis_model = (ROOT / 'monynha_lead_generator' / 'models' / 'diagnosis.py').read_text()
