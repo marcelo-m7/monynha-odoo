@@ -8,6 +8,7 @@
     "license": "LGPL-3",
     "depends": ["crm", "website", "mail"],
     "data": [
+        "security/monynha_security.xml",
         "security/ir.model.access.csv",
         "data/mail_templates.xml",
         "views/crm_lead_views.xml",
