@@ -8,6 +8,7 @@ class TestMonynhaContentHttp(HttpCase):
         super().setUpClass()
         cls.website = cls.env["website"].get_current_website()
         cls.other_website = cls.env["website"].create({"name": "M4 HTTP Other Website"})
+        cls.tag = cls.env["monynha.work.tag"].create({"name": "HTTP Architecture"})
 
         cls.published = cls.env["monynha.work"].create({
             "name": "HTTP Published Work",
@@ -16,13 +17,22 @@ class TestMonynhaContentHttp(HttpCase):
             "is_published": True,
             "website_id": cls.website.id,
             "sequence": 1,
+            "tag_ids": [(6, 0, cls.tag.ids)],
+        })
+        cls.published_lab = cls.env["monynha.work"].create({
+            "name": "HTTP Published Lab",
+            "type": "lab",
+            "summary": "Structured lab marker",
+            "is_published": True,
+            "website_id": cls.website.id,
+            "sequence": 2,
         })
         cls.unpublished = cls.env["monynha.work"].create({
             "name": "HTTP Unpublished Work",
             "type": "case",
             "summary": "Should never be public",
             "website_id": cls.website.id,
-            "sequence": 2,
+            "sequence": 3,
         })
         cls.other_site = cls.env["monynha.work"].create({
             "name": "HTTP Other Website Work",
@@ -30,7 +40,7 @@ class TestMonynhaContentHttp(HttpCase):
             "summary": "Wrong website marker",
             "is_published": True,
             "website_id": cls.other_website.id,
-            "sequence": 3,
+            "sequence": 4,
         })
         cls.page_items = cls.env["monynha.work"]
         for index in range(12):
@@ -46,6 +56,9 @@ class TestMonynhaContentHttp(HttpCase):
         for route in ("/work", "/projects", "/cases", "/labs"):
             response = self.url_open(route)
             self.assertEqual(response.status_code, 200, route)
+        labs = self.url_open("/labs")
+        self.assertIn("HTTP Published Lab", labs.text)
+        self.assertNotIn("HTTP Other Website Work", labs.text)
 
     def test_published_current_site_detail_renders(self):
         response = self.url_open(self.published.website_url)
@@ -71,3 +84,14 @@ class TestMonynhaContentHttp(HttpCase):
         self.assertIn("HTTP Published Work", first_page.text)
         self.assertNotIn("Catalogue Item 12", first_page.text)
         self.assertIn("Catalogue Item 12", second_page.text)
+
+    def test_catalogue_tag_filter_and_unknown_tag(self):
+        filtered = self.url_open(f"/projects?tag={self.tag.id}")
+        self.assertEqual(filtered.status_code, 200)
+        self.assertIn("HTTP Published Work", filtered.text)
+        self.assertNotIn("Catalogue Item 01", filtered.text)
+
+        empty = self.url_open("/projects?tag=999999999")
+        self.assertEqual(empty.status_code, 200)
+        self.assertNotIn("HTTP Published Work", empty.text)
+        self.assertNotIn("Catalogue Item 01", empty.text)
