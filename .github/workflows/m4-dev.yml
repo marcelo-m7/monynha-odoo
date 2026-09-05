@@ -32,7 +32,7 @@ jobs:
             sleep 2
           done
           exit 1
-      - name: Install content and run Work model tests
+      - name: Install content and run content regressions
         run: |
           docker run --rm \
             --network monynha-m4-dev \
@@ -48,7 +48,7 @@ jobs:
             --without-demo=True \
             -d monynha_content_ci \
             -i monynha_content \
-            --test-tags /monynha_content:TestMonynhaWork \
+            --test-tags /monynha_content \
             --stop-after-init
       - name: PostgreSQL logs on failure
         if: failure()
