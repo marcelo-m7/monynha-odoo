@@ -12,6 +12,7 @@
         "data/ir_asset.xml",
         "views/snippets.xml",
         "views/snippets_m2.xml",
+        "views/snippets_m3.xml",
         "data/pages.xml",
         "data/menu.xml",
     ],
