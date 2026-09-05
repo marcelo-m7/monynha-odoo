@@ -14,6 +14,7 @@
         "views/snippets_m2.xml",
         "views/snippets_m3.xml",
         "views/snippets_m4.xml",
+        "data/page_templates_m4.xml",
         "data/pages.xml",
         "data/menu.xml",
     ],
