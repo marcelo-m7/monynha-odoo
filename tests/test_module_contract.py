@@ -100,6 +100,17 @@ def test_discovery_keeps_progressive_accessible_keyboard_and_draft_behavior():
     assert 'vue' not in js.lower()
 
 
+def test_followup_idempotency_is_serialized_at_the_crm_lead_row():
+    diagnosis = (ROOT / 'monynha_lead_generator' / 'models' / 'diagnosis.py').read_text()
+    assert 'FOR UPDATE' in diagnosis
+    assert 'invalidate_recordset(["monynha_followup_requested_at"])' in diagnosis
+
+
+def test_project_signal_followup_keeps_contact_fallback_on_rpc_failure():
+    report_js = (ROOT / 'monynha_lead_generator' / 'static' / 'src' / 'js' / 'report.js').read_text()
+    assert 'window.location.assign(link.href)' in report_js
+
+
 def test_odoo19_constraint_api_and_scss_compatibility():
     diagnosis = (ROOT / 'monynha_lead_generator' / 'models' / 'diagnosis.py').read_text()
     scss = (ROOT / 'monynha_lead_generator' / 'static' / 'src' / 'scss' / 'lead_generator.scss').read_text()
