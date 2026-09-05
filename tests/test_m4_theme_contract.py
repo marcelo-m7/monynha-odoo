@@ -40,3 +40,17 @@ def test_m4_container_avoids_mixed_unit_sass_min():
     assert "min(100%, 16rem)" not in scss
     assert "width: calc(100% - 2rem);" in scss
     assert "max-width: 80rem;" in scss
+
+
+def test_m4_preserves_reduced_motion_and_has_no_external_runtime_assets():
+    component_scss = (THEME / "static/src/scss/components.scss").read_text()
+    assert "prefers-reduced-motion: reduce" in component_scss
+
+    runtime_text = "\n".join(
+        path.read_text(errors="ignore")
+        for path in list((THEME / "static/src").rglob("*.scss"))
+        + list((THEME / "views").rglob("*.xml"))
+        + list((THEME / "data").rglob("*.xml"))
+    ).lower()
+    forbidden = ("fonts.googleapis.com", "fonts.gstatic.com", "cdnjs.cloudflare.com", "unpkg.com", "@import url(")
+    assert not any(token in runtime_text for token in forbidden)
