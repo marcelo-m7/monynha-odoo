@@ -92,6 +92,27 @@ def test_m3_theme_contract_and_brand_asset():
     assert '<field name="url">/</field>' not in pages
 
 
+def test_m3_homepage_snippets_use_approved_editorial_content():
+    m3_path = ROOT / 'theme_monynha' / 'views' / 'snippets_m3.xml'
+    assert m3_path.exists()
+    m3 = m3_path.read_text()
+    assert 's_monynha_principles' in m3
+    assert 's_monynha_labs_showcase' in m3
+    for text in ('FACODI', 'Codoo Importer', 'Monynha Odoo'):
+        assert text in m3
+    for forbidden in ('Open slot', 'Próximo experimento'):
+        assert forbidden not in m3
+
+    core = (ROOT / 'theme_monynha' / 'views' / 'snippets.xml').read_text()
+    assert 'Where Engineering Meets Intuition' in core
+    assert 'href="/start"' in core
+    assert 'href="/labs"' in core
+
+    m2 = (ROOT / 'theme_monynha' / 'views' / 'snippets_m2.xml').read_text()
+    assert 'Sample signal' not in m2
+    assert '>82<' not in m2
+
+
 def test_lead_generator_uses_crm_lead_and_secure_public_report_token():
     lead_model = (ROOT / 'monynha_lead_generator' / 'models' / 'crm_lead.py').read_text()
     diagnosis_model = (ROOT / 'monynha_lead_generator' / 'models' / 'diagnosis.py').read_text()
