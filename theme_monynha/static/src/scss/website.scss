@@ -18,6 +18,29 @@ h1, h2, h3, h4, h5, h6, .monynha-display {
     outline-offset: 3px;
 }
 
+.monynha-process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.monynha-process-grid .monynha-panel {
+    min-height: 16rem;
+    padding: 1.5rem;
+}
+
+.monynha-process-grid .monynha-panel small {
+    color: var(--monynha-muted);
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.monynha-process-grid .monynha-panel h3 {
+    margin-top: 1rem;
+    font-weight: 800;
+}
+
 header#top {
     border-bottom: 2px solid var(--monynha-ink);
     background: rgba(250, 250, 252, .96);
@@ -157,6 +180,10 @@ footer.o_footer a:focus-visible {
 }
 
 @media (max-width: 991.98px) {
+    .monynha-process-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     header#top .navbar {
         min-height: 4.25rem;
     }
@@ -189,6 +216,10 @@ footer.o_footer a:focus-visible {
 }
 
 @media (max-width: 575.98px) {
+    .monynha-process-grid {
+        grid-template-columns: 1fr;
+    }
+
     h1, .monynha-display {
         overflow-wrap: anywhere;
     }
