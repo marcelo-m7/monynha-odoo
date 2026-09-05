@@ -158,6 +158,11 @@ class MonynhaLeadDiagnosis(models.Model):
         """Record one public follow-up request and use standard CRM activities when possible."""
         self.ensure_one()
         lead = self.lead_id
+
+        # Serialize requests for this CRM lead so two simultaneous public calls
+        # cannot both pass the idempotency check and create duplicate side effects.
+        self.env.cr.execute("SELECT id FROM crm_lead WHERE id = %s FOR UPDATE", (lead.id,))
+        lead.invalidate_recordset(["monynha_followup_requested_at"])
         if lead.monynha_followup_requested_at:
             return False
 
