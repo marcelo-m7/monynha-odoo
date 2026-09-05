@@ -1,6 +1,25 @@
 from odoo.tests import HttpCase, tagged
 
 
+M4_STATIC_KEYS = {
+    "theme_monynha.s_monynha_hero_split",
+    "theme_monynha.s_monynha_section_header",
+    "theme_monynha.s_monynha_longform_intro",
+    "theme_monynha.s_monynha_split_content",
+    "theme_monynha.s_monynha_media_copy",
+    "theme_monynha.s_monynha_quote",
+    "theme_monynha.s_monynha_steps",
+    "theme_monynha.s_monynha_timeline",
+    "theme_monynha.s_monynha_feature_grid",
+    "theme_monynha.s_monynha_technology_grid",
+    "theme_monynha.s_monynha_deliverables",
+    "theme_monynha.s_monynha_engagement_scope",
+    "theme_monynha.s_monynha_comparison",
+    "theme_monynha.s_monynha_terminal_panel",
+    "theme_monynha.s_monynha_contact_cta",
+}
+
+
 @tagged("-at_install", "post_install")
 class TestMonynhaTheme(HttpCase):
     @classmethod
@@ -32,6 +51,13 @@ class TestMonynhaTheme(HttpCase):
         }
         views = self.env["ir.ui.view"].search([("key", "in", list(keys)), ("website_id", "!=", False)])
         self.assertEqual(set(views.mapped("key")), keys)
+
+    def test_m4_static_snippets_registered(self):
+        views = self.env["ir.ui.view"].search([
+            ("key", "in", list(M4_STATIC_KEYS)),
+            ("website_id", "!=", False),
+        ])
+        self.assertEqual(set(views.mapped("key")), M4_STATIC_KEYS)
 
     def test_theme_page_starters_registered(self):
         xmlids = (
