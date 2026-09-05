@@ -15,7 +15,12 @@ def test_standard_odoo_chrome_is_branded_without_parallel_header_or_footer():
 
     xml = "\n".join(path.read_text() for path in THEME.rglob("*.xml"))
     assert 'position="replace"' not in xml or "//header" not in xml
-    assert "<header" not in xml
+
+    # Semantic section headers are valid inside reusable content blocks. What
+    # this contract forbids is a second site-wide header/footer owned by the
+    # theme instead of website.layout.
+    xml_without_section_headers = xml.replace('<header class="monynha-section-header">', "")
+    assert "<header" not in xml_without_section_headers
     assert "<footer" not in xml
 
 
