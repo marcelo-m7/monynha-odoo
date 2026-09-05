@@ -1,7 +1,7 @@
 {
     "name": "Monynha Theme",
     "summary": "Monynha Softwares brutalist-digital identity for Odoo Website",
-    "version": "19.0.1.0.0",
+    "version": "19.0.2.0.0",
     "category": "Theme/Creative",
     "sequence": 120,
     "author": "Monynha Softwares",
@@ -11,11 +11,13 @@
     "data": [
         "data/ir_asset.xml",
         "views/snippets.xml",
+        "views/snippets_m2.xml",
     ],
     "images": ["static/description/theme_monynha.svg"],
     "images_preview_theme": {},
     "assets": {
         "web.assets_frontend": [
+            "theme_monynha/static/src/scss/tokens.scss",
             "theme_monynha/static/src/scss/components.scss",
             "theme_monynha/static/src/scss/snippets.scss",
             "theme_monynha/static/src/scss/website.scss",
