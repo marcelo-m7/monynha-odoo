@@ -210,6 +210,17 @@ Public controllers must:
 
 There is no M4 public API.
 
+### Route ownership and theme-only fallback
+
+M3 already provides a static `/labs` Website page in `theme_monynha`. M4 must preserve the same fallback pattern already used by `/start` and `monynha_lead_generator`:
+
+- with only `theme_monynha` installed, `/labs` remains the existing editable Website page;
+- when `monynha_content` is installed, its `/labs` catalogue route becomes the active structured Labs experience;
+- uninstalling `monynha_content` restores the theme-only `/labs` fallback without requiring a theme data migration;
+- this ownership rule must be covered by HTTP/integration tests.
+
+No static theme page should be introduced at `/work`, `/projects`, or `/cases`, because those routes belong exclusively to `monynha_content`.
+
 ## Theme composition system
 
 M4 evolves the existing M2/M3 snippets into a clearer composition hierarchy:
@@ -362,12 +373,14 @@ M4 adds reusable Monynha starting compositions. They are starting points, not ri
 | Service | Intro → problem → capability → process → FAQ → CTA |
 | About | Intro → manifesto → principles → process → CTA |
 | Contact | Intro → contact/context → standard Odoo form → CTA |
-| Work index | Intro → Work catalogue → CTA |
-| Project/Case | Intro → metadata → narrative → related work → CTA |
-| Lab | Intro → experiment context → body → related Labs |
+| Work catalogue composition | Intro → Work catalogue block → CTA |
+| Project/Case composition | Intro → metadata-style block → narrative → related-work-style block → CTA |
+| Lab composition | Intro → experiment context → body → related-Labs-style block |
 | Insight index | Intro → standard Blog feed |
 | Documentation | Intro → navigation/content → related resources |
 | Changelog | Intro → chronological entries |
+
+The Work/Project/Case/Lab entries in this table are **static composition starters** available from the theme. They do not own the structured public routes and do not query `monynha.work` unless the corresponding dynamic blocks from `monynha_content` are explicitly used. Structured `/work*` and `/labs` catalogue/detail pages remain owned by `monynha_content` as defined above.
 
 Existing M3 pages remain valid and should be refactored only when doing so directly improves reuse or consistency. M4 is not a rewrite of the existing site.
 
@@ -466,7 +479,8 @@ Cover at least:
 - `/work`;
 - `/projects`;
 - `/cases`;
-- `/labs`;
+- `/labs` with content addon route ownership;
+- `/labs` theme-only fallback when content addon is absent;
 - published Work detail;
 - unpublished Work detail;
 - wrong-website Work detail;
@@ -523,16 +537,17 @@ M4 is complete when all of the following are true:
 2. Existing M2/M3 pages still work and preserve Odoo standard chrome/layout ownership.
 3. `monynha_content` provides one structured `monynha.work` model for Projects, Cases, and Labs.
 4. `/work`, `/projects`, `/cases`, `/labs`, and `/work/<slug>` work for published current-website records.
-5. Work detail supports structured metadata plus an editable rich narrative body.
-6. Work tags, publication, SEO, images, ordering, featured state, and multi-website ownership are supported.
-7. Dynamic Work snippets use real records and centralized query behavior.
-8. Insights snippets consume `blog.post` rather than duplicate Blog content.
-9. Empty dynamic blocks never ship fake production content.
-10. Static theme functionality remains valid without `monynha_content`.
-11. Lead Generator remains independent.
-12. Security and multi-website isolation tests pass.
-13. Clean-install, combined-install, HTTP, and upgrade/regression CI passes.
-14. No parallel CMS, frontend, header/footer, SEO layer, publication engine, or Blog implementation is introduced.
+5. Theme-only `/labs` remains available when `monynha_content` is not installed.
+6. Work detail supports structured metadata plus an editable rich narrative body.
+7. Work tags, publication, SEO, images, ordering, featured state, and multi-website ownership are supported.
+8. Dynamic Work snippets use real records and centralized query behavior.
+9. Insights snippets consume `blog.post` rather than duplicate Blog content.
+10. Empty dynamic blocks never ship fake production content.
+11. Static theme functionality remains valid without `monynha_content`.
+12. Lead Generator remains independent.
+13. Security and multi-website isolation tests pass.
+14. Clean-install, combined-install, HTTP, and upgrade/regression CI passes.
+15. No parallel CMS, frontend, header/footer, SEO layer, publication engine, or Blog implementation is introduced.
 
 ## Implementation principle
 
