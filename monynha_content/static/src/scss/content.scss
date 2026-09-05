@@ -1,0 +1,91 @@
+/* Monynha structured content presentation.
+ * Brand primitives remain owned by theme_monynha; this file only composes
+ * Work and Insights-specific layout and media behavior.
+ */
+
+.monynha-work-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.monynha-work-card,
+.monynha-insight-card,
+.monynha-work-detail,
+.monynha-work-detail__header,
+.monynha-work-body {
+    min-width: 0;
+}
+
+.monynha-work-card__cover,
+.monynha-work-detail__cover {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.monynha-work-card__cover {
+    aspect-ratio: 16 / 9;
+    margin-bottom: 1.25rem;
+    border-radius: calc(var(--monynha-radius) - 2px);
+}
+
+.monynha-work-detail__header {
+    max-width: 58rem;
+}
+
+.monynha-work-detail__cover {
+    max-height: 42rem;
+    border: var(--monynha-border);
+    border-radius: var(--monynha-radius);
+    aspect-ratio: 16 / 9;
+}
+
+.monynha-work-body {
+    width: 100%;
+    max-width: 56rem;
+    overflow-wrap: anywhere;
+}
+
+.monynha-work-body img,
+.monynha-work-body video,
+.monynha-work-body iframe {
+    max-width: 100%;
+}
+
+.monynha-work-body pre,
+.monynha-work-body code {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.monynha-insight-card__cover {
+    width: 100%;
+    min-height: 12rem;
+    margin-bottom: 1.25rem;
+    border-radius: calc(var(--monynha-radius) - 2px);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.monynha-work-metadata {
+    max-width: 52rem;
+}
+
+.monynha-work-detail__next .monynha-card {
+    min-width: 0;
+}
+
+@media (max-width: 991.98px) {
+    .monynha-work-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 575.98px) {
+    .monynha-work-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

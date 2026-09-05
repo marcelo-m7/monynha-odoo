@@ -1,0 +1,218 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="snippets_m4" inherit_id="website.snippets" name="Monynha M4 snippets">
+        <xpath expr="//snippets[@id='snippet_structure']" position="inside">
+            <t t-snippet="theme_monynha.s_monynha_hero_split" string="Hero Split" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="theme_monynha.s_monynha_section_header" string="Section Header" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="theme_monynha.s_monynha_longform_intro" string="Long-form Intro" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="theme_monynha.s_monynha_split_content" string="Split Content" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="theme_monynha.s_monynha_media_copy" string="Image + Copy" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="theme_monynha.s_monynha_quote" string="Pull Quote" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="theme_monynha.s_monynha_steps" string="Numbered Steps" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="theme_monynha.s_monynha_timeline" string="Process Timeline" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="theme_monynha.s_monynha_feature_grid" string="Feature Grid" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="theme_monynha.s_monynha_technology_grid" string="Technology Grid" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="theme_monynha.s_monynha_deliverables" string="Deliverables" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="theme_monynha.s_monynha_engagement_scope" string="Engagement Scope" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="theme_monynha.s_monynha_comparison" string="Comparison" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="theme_monynha.s_monynha_terminal_panel" string="Terminal Panel" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="theme_monynha.s_monynha_contact_cta" string="Contact CTA" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+        </xpath>
+    </template>
+
+    <template id="s_monynha_hero_split" name="Monynha Hero Split">
+        <section class="s_monynha_hero_split monynha-section o_cc o_cc1" data-snippet="s_monynha_hero_split" data-name="Hero Split">
+            <div class="container monynha-split">
+                <div class="monynha-stack">
+                    <p class="monynha-kicker">Digital engineering studio</p>
+                    <h1 class="monynha-display">Make the operation legible.</h1>
+                    <p class="lead">Start with the real workflow, keep interfaces explicit, and build only the layer the system still needs.</p>
+                    <div class="monynha-cluster">
+                        <a href="/start" class="monynha-button monynha-button-primary">Start a Project</a>
+                        <a href="/services" class="monynha-button monynha-button-secondary">Explore Services</a>
+                    </div>
+                </div>
+                <aside class="monynha-terminal" aria-label="Architecture lens">
+                    <p>&gt; understand operation</p>
+                    <p>&gt; locate friction</p>
+                    <p>&gt; define interfaces</p>
+                    <p><code>&gt; build smallest useful system</code></p>
+                </aside>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_section_header" name="Monynha Section Header">
+        <section class="s_monynha_section_header monynha-section o_cc o_cc3" data-snippet="s_monynha_section_header" data-name="Section Header">
+            <div class="container">
+                <header class="monynha-section-header">
+                    <p class="monynha-kicker">Section</p>
+                    <h2>A clear heading for the next idea.</h2>
+                    <p class="lead">Use this block to introduce one topic before the content that explains it.</p>
+                </header>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_longform_intro" name="Monynha Long-form Intro">
+        <section class="s_monynha_longform_intro monynha-section o_cc o_cc3" data-snippet="s_monynha_longform_intro" data-name="Long-form Intro">
+            <div class="container monynha-longform">
+                <p class="monynha-eyebrow">Context</p>
+                <div class="monynha-stack">
+                    <h2>Explain the problem before the implementation.</h2>
+                    <p class="lead">A useful system starts with shared context: who performs the work, which information moves through it, where decisions happen and what outcome matters.</p>
+                    <p>This composition gives longer editorial copy room to breathe while remaining a normal Website Builder block.</p>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_split_content" name="Monynha Split Content">
+        <section class="s_monynha_split_content monynha-section o_cc o_cc3" data-snippet="s_monynha_split_content" data-name="Split Content">
+            <div class="container monynha-split">
+                <div class="monynha-stack">
+                    <p class="monynha-kicker">Problem</p>
+                    <h2>Keep one idea on each side.</h2>
+                    <p class="lead">Use the first column for the operational context and the second for the technical or organisational response.</p>
+                </div>
+                <article class="monynha-panel monynha-stack">
+                    <p class="monynha-eyebrow">Response</p>
+                    <h3>Define a small boundary.</h3>
+                    <p>Prefer an explicit interface that can be tested, observed and replaced over hidden coupling between systems.</p>
+                </article>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_media_copy" name="Monynha Image and Copy">
+        <section class="s_monynha_media_copy monynha-section o_cc o_cc3" data-snippet="s_monynha_media_copy" data-name="Image + Copy">
+            <div class="container monynha-split">
+                <figure class="monynha-media-frame">
+                    <img src="/theme_monynha/static/src/img/monynha-wordmark.svg" alt="Monynha Softwares" class="img-fluid"/>
+                </figure>
+                <div class="monynha-stack">
+                    <p class="monynha-kicker">Visual context</p>
+                    <h2>Pair a real visual with useful explanation.</h2>
+                    <p class="lead">Replace the image and copy in Website Builder while keeping a consistent responsive composition.</p>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_quote" name="Monynha Pull Quote">
+        <section class="s_monynha_quote monynha-section" data-snippet="s_monynha_quote" data-name="Pull Quote">
+            <div class="container">
+                <blockquote>Good engineering makes the system easier to understand, operate and change.</blockquote>
+                <p class="monynha-meta">Monynha operating principle</p>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_steps" name="Monynha Numbered Steps">
+        <section class="s_monynha_steps monynha-section o_cc o_cc3" data-snippet="s_monynha_steps" data-name="Numbered Steps">
+            <div class="container">
+                <div class="monynha-section-header"><p class="monynha-kicker">Steps</p><h2>Move through uncertainty in small slices.</h2></div>
+                <div class="monynha-grid">
+                    <article class="monynha-card"><small>01</small><h3>Understand</h3><p>Map people, data, constraints and the result that matters.</p></article>
+                    <article class="monynha-card"><small>02</small><h3>Shape</h3><p>Choose the smallest architecture that can be verified.</p></article>
+                    <article class="monynha-card"><small>03</small><h3>Observe</h3><p>Ship, inspect the effects and improve with evidence.</p></article>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_timeline" name="Monynha Process Timeline">
+        <section class="s_monynha_timeline monynha-section o_cc o_cc3" data-snippet="s_monynha_timeline" data-name="Process Timeline">
+            <div class="container">
+                <div class="monynha-section-header"><p class="monynha-kicker">Timeline</p><h2>A sequence with visible decisions.</h2></div>
+                <ol class="monynha-timeline-list">
+                    <li><span class="monynha-meta">01 / Discovery</span><div><h3>Context</h3><p>Understand the operation and define the question.</p></div></li>
+                    <li><span class="monynha-meta">02 / Architecture</span><div><h3>Boundaries</h3><p>Define ownership, interfaces and failure modes.</p></div></li>
+                    <li><span class="monynha-meta">03 / Delivery</span><div><h3>Evidence</h3><p>Build a testable slice and observe it in use.</p></div></li>
+                </ol>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_feature_grid" name="Monynha Feature Grid">
+        <section class="s_monynha_feature_grid monynha-section o_cc o_cc3" data-snippet="s_monynha_feature_grid" data-name="Feature Grid">
+            <div class="container">
+                <div class="monynha-section-header"><p class="monynha-kicker">Features</p><h2>Describe capabilities without hiding the mechanism.</h2></div>
+                <div class="monynha-grid">
+                    <article class="monynha-card"><h3>Observable</h3><p>Expose state and ownership so people can understand what happened.</p></article>
+                    <article class="monynha-card"><h3>Replaceable</h3><p>Keep providers and integrations behind clear interfaces.</p></article>
+                    <article class="monynha-card"><h3>Maintainable</h3><p>Prefer standard platform behavior before custom equivalents.</p></article>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_technology_grid" name="Monynha Technology Grid">
+        <section class="s_monynha_technology_grid monynha-section o_cc o_cc3" data-snippet="s_monynha_technology_grid" data-name="Technology Grid">
+            <div class="container">
+                <div class="monynha-section-header"><p class="monynha-kicker">Interfaces</p><h2>Technology is useful when its role is explicit.</h2></div>
+                <div class="monynha-grid">
+                    <article class="monynha-panel"><p class="monynha-eyebrow">Platform</p><h3>Odoo</h3><p>Business models, workflows, Website, Portal and standard application behavior.</p></article>
+                    <article class="monynha-panel"><p class="monynha-eyebrow">Integration</p><h3>HTTP APIs</h3><p>Small contracts between systems with clear ownership and failure handling.</p></article>
+                    <article class="monynha-panel"><p class="monynha-eyebrow">Events</p><h3>Webhooks</h3><p>Event-driven handoffs where asynchronous boundaries are a better fit.</p></article>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_deliverables" name="Monynha Deliverables">
+        <section class="s_monynha_deliverables monynha-section o_cc o_cc3" data-snippet="s_monynha_deliverables" data-name="Deliverables">
+            <div class="container monynha-split">
+                <div class="monynha-stack"><p class="monynha-kicker">Deliverables</p><h2>Make the output inspectable.</h2><p class="lead">Use this block to describe the concrete artefacts a piece of work produces.</p></div>
+                <ul class="monynha-deliverables-list">
+                    <li><strong>Architecture</strong><span>Boundaries, data ownership and interfaces.</span></li>
+                    <li><strong>Implementation</strong><span>Small, testable units integrated with the platform.</span></li>
+                    <li><strong>Verification</strong><span>Tests and operational evidence for the agreed behavior.</span></li>
+                </ul>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_engagement_scope" name="Monynha Engagement Scope">
+        <section class="s_monynha_engagement_scope monynha-section o_cc o_cc3" data-snippet="s_monynha_engagement_scope" data-name="Engagement Scope">
+            <div class="container">
+                <div class="monynha-section-header"><p class="monynha-kicker">Scope</p><h2>State what belongs inside the work.</h2><p class="lead">Clear scope makes dependencies and decisions visible before implementation begins.</p></div>
+                <div class="monynha-scope-grid">
+                    <article class="monynha-panel"><h3>In scope</h3><ul><li>Workflow and data mapping</li><li>Required interfaces</li><li>Verification criteria</li></ul></article>
+                    <article class="monynha-panel"><h3>Boundary</h3><ul><li>Existing platform ownership</li><li>External provider responsibilities</li><li>Explicit follow-up work</li></ul></article>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_comparison" name="Monynha Comparison">
+        <section class="s_monynha_comparison monynha-section o_cc o_cc3" data-snippet="s_monynha_comparison" data-name="Comparison">
+            <div class="container">
+                <div class="monynha-section-header"><p class="monynha-kicker">Decision lens</p><h2>Choose the smallest level of customization.</h2></div>
+                <div class="monynha-comparison-grid">
+                    <article class="monynha-panel"><p class="monynha-eyebrow">01</p><h3>Standard</h3><p>Use the platform behavior as-is when it already fits the operation.</p></article>
+                    <article class="monynha-panel"><p class="monynha-eyebrow">02</p><h3>Extension</h3><p>Add a bounded customization around a real gap.</p></article>
+                    <article class="monynha-panel"><p class="monynha-eyebrow">03</p><h3>Custom</h3><p>Build a dedicated component only when it owns a distinct responsibility.</p></article>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_terminal_panel" name="Monynha Terminal Panel">
+        <section class="s_monynha_terminal_panel monynha-section o_cc o_cc3" data-snippet="s_monynha_terminal_panel" data-name="Terminal Panel">
+            <div class="container monynha-split">
+                <div class="monynha-stack"><p class="monynha-kicker">Technical note</p><h2>Show a process as an inspectable sequence.</h2><p class="lead">Useful for architecture notes, Labs, implementation context and operational walkthroughs.</p></div>
+                <div class="monynha-terminal" role="group" aria-label="Technical sequence"><p>&gt; input: known context</p><p>&gt; boundary: explicit contract</p><p>&gt; output: observable state</p><p><code>&gt; fallback: defined</code></p></div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_contact_cta" name="Monynha Contact CTA">
+        <section class="s_monynha_contact_cta monynha-section" data-snippet="s_monynha_contact_cta" data-name="Contact CTA">
+            <div class="container monynha-contact-panel">
+                <div class="monynha-stack"><p class="monynha-kicker">Start with context</p><h2>What part of the operation needs to become clearer?</h2><p class="lead">Describe the workflow, the people involved and where information or time is being lost.</p></div>
+                <div class="monynha-cluster"><a href="/start" class="monynha-button monynha-button-primary">Start a Project</a><a href="/contactus" class="monynha-button monynha-button-secondary">Contact</a></div>
+            </div>
+        </section>
+    </template>
+</odoo>

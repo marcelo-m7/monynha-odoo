@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="snippets" inherit_id="website.snippets" name="Monynha dynamic content snippets">
+        <xpath expr="//snippets[@id='snippet_structure']" position="inside">
+            <t t-snippet="monynha_content.s_monynha_featured_work" string="Monynha Featured Work" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="monynha_content.s_monynha_work_grid" string="Monynha Work Grid" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="monynha_content.s_monynha_latest_projects" string="Monynha Latest Projects" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="monynha_content.s_monynha_selected_cases" string="Monynha Selected Cases" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="monynha_content.s_monynha_latest_labs" string="Monynha Latest Labs" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="monynha_content.s_monynha_related_work" string="Monynha Related Work" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="monynha_content.s_monynha_work_tags" string="Monynha Work Tags" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="monynha_content.s_monynha_work_metadata" string="Monynha Work Metadata" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="monynha_content.s_monynha_work_navigation" string="Monynha Work Navigation" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="monynha_content.s_monynha_latest_insights" string="Monynha Latest Insights" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="monynha_content.s_monynha_insights_grid" string="Monynha Insights Grid" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+        </xpath>
+    </template>
+
+    <template id="insight_card" name="Monynha Insight Card">
+        <article class="monynha-insight-card monynha-card">
+            <t t-set="cover_background" t-value="post._get_background(height=420, width=720)"/>
+            <div t-if="cover_background != 'none'"
+                 class="monynha-insight-card__cover"
+                 role="img"
+                 t-att-aria-label="post.name"
+                 t-att-style="'background-image: %s;' % cover_background"/>
+            <div class="monynha-stack">
+                <p class="monynha-eyebrow">Insight</p>
+                <h3><a class="monynha-link" t-att-href="post.website_url" t-esc="post.name"/></h3>
+                <p t-if="post.teaser" t-esc="post.teaser"/>
+                <p class="monynha-meta" t-if="post.post_date">
+                    <time t-field="post.post_date" t-options="{'widget': 'date'}"/>
+                </p>
+                <a class="monynha-link" t-att-href="post.website_url">Read insight</a>
+            </div>
+        </article>
+    </template>
+
+    <template id="s_monynha_featured_work" name="Monynha Featured Work">
+        <t t-set="works" t-value="request.env['monynha.content.query'].get_works(request.website, featured=True, limit=3)"/>
+        <section class="s_monynha_featured_work monynha-section" data-snippet="s_monynha_featured_work" data-name="Monynha Featured Work">
+            <div class="monynha-container monynha-stack">
+                <header class="monynha-section-header">
+                    <p class="monynha-eyebrow">Selected work</p>
+                    <h2>Systems worth showing.</h2>
+                    <p class="lead">Published Monynha work selected by the editorial team.</p>
+                </header>
+                <div class="monynha-grid" t-if="works">
+                    <t t-foreach="works" t-as="work"><t t-call="monynha_content.work_card"/></t>
+                </div>
+                <div class="monynha-panel p-4" t-else=""><p class="mb-0">No featured work is published yet.</p></div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_work_grid" name="Monynha Work Grid">
+        <t t-set="works" t-value="request.env['monynha.content.query'].get_works(request.website, limit=6)"/>
+        <section class="s_monynha_work_grid monynha-section" data-snippet="s_monynha_work_grid" data-name="Monynha Work Grid">
+            <div class="monynha-container monynha-stack">
+                <header class="monynha-section-header">
+                    <p class="monynha-eyebrow">Work</p>
+                    <h2>Projects, cases and labs.</h2>
+                </header>
+                <div class="monynha-grid" t-if="works">
+                    <t t-foreach="works" t-as="work"><t t-call="monynha_content.work_card"/></t>
+                </div>
+                <div class="monynha-panel p-4" t-else=""><p class="mb-0">No published work is available yet.</p></div>
+                <div><a class="monynha-link" href="/work">Explore all work</a></div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_latest_projects" name="Monynha Latest Projects">
+        <t t-set="works" t-value="request.env['monynha.content.query'].get_works(request.website, work_type='project', limit=3)"/>
+        <section class="s_monynha_latest_projects monynha-section" data-snippet="s_monynha_latest_projects" data-name="Monynha Latest Projects">
+            <div class="monynha-container monynha-stack">
+                <header class="monynha-section-header"><p class="monynha-eyebrow">Projects</p><h2>Latest projects.</h2></header>
+                <div class="monynha-grid" t-if="works"><t t-foreach="works" t-as="work"><t t-call="monynha_content.work_card"/></t></div>
+                <div class="monynha-panel p-4" t-else=""><p class="mb-0">No projects are published yet.</p></div>
+                <div><a class="monynha-link" href="/projects">Explore projects</a></div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_selected_cases" name="Monynha Selected Cases">
+        <t t-set="works" t-value="request.env['monynha.content.query'].get_works(request.website, work_type='case', featured=True, limit=3)"/>
+        <section class="s_monynha_selected_cases monynha-section" data-snippet="s_monynha_selected_cases" data-name="Monynha Selected Cases">
+            <div class="monynha-container monynha-stack">
+                <header class="monynha-section-header"><p class="monynha-eyebrow">Cases</p><h2>Selected cases.</h2></header>
+                <div class="monynha-grid" t-if="works"><t t-foreach="works" t-as="work"><t t-call="monynha_content.work_card"/></t></div>
+                <div class="monynha-panel p-4" t-else=""><p class="mb-0">No selected cases are published yet.</p></div>
+                <div><a class="monynha-link" href="/cases">Explore cases</a></div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_latest_labs" name="Monynha Latest Labs">
+        <t t-set="works" t-value="request.env['monynha.content.query'].get_works(request.website, work_type='lab', limit=3)"/>
+        <section class="s_monynha_latest_labs monynha-section" data-snippet="s_monynha_latest_labs" data-name="Monynha Latest Labs">
+            <div class="monynha-container monynha-stack">
+                <header class="monynha-section-header"><p class="monynha-eyebrow">Labs</p><h2>Latest experiments.</h2></header>
+                <div class="monynha-grid" t-if="works"><t t-foreach="works" t-as="work"><t t-call="monynha_content.work_card"/></t></div>
+                <div class="monynha-panel p-4" t-else=""><p class="mb-0">No labs are published yet.</p></div>
+                <div><a class="monynha-link" href="/labs">Explore labs</a></div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_related_work" name="Monynha Related Work">
+        <t t-if="main_object and main_object._name == 'monynha.work'">
+            <t t-set="related_works" t-value="request.env['monynha.content.query'].get_works(request.website, work_type=main_object.type, limit=4)"/>
+            <section class="s_monynha_related_work monynha-section" data-snippet="s_monynha_related_work" data-name="Monynha Related Work">
+                <div class="monynha-container monynha-stack">
+                    <header class="monynha-section-header"><p class="monynha-eyebrow">Related work</p><h2>Continue exploring.</h2></header>
+                    <div class="monynha-grid">
+                        <t t-foreach="related_works" t-as="work">
+                            <t t-if="work.id != main_object.id"><t t-call="monynha_content.work_card"/></t>
+                        </t>
+                    </div>
+                </div>
+            </section>
+        </t>
+    </template>
+
+    <template id="s_monynha_work_tags" name="Monynha Work Tags">
+        <t t-if="main_object and main_object._name == 'monynha.work'">
+            <section class="s_monynha_work_tags" data-snippet="s_monynha_work_tags" data-name="Monynha Work Tags" t-if="main_object.tag_ids">
+                <div class="monynha-cluster">
+                    <t t-foreach="main_object.tag_ids" t-as="tag_record"><span class="monynha-tag" t-esc="tag_record.name"/></t>
+                </div>
+            </section>
+        </t>
+    </template>
+
+    <template id="s_monynha_work_metadata" name="Monynha Work Metadata">
+        <t t-if="main_object and main_object._name == 'monynha.work'">
+            <section class="s_monynha_work_metadata" data-snippet="s_monynha_work_metadata" data-name="Monynha Work Metadata">
+                <t t-set="work" t-value="main_object"/>
+                <t t-call="monynha_content.work_metadata"/>
+            </section>
+        </t>
+    </template>
+
+    <template id="s_monynha_work_navigation" name="Monynha Work Navigation">
+        <t t-if="main_object and main_object._name == 'monynha.work'">
+            <t t-set="type_url" t-value="{'project': '/projects', 'case': '/cases', 'lab': '/labs'}.get(main_object.type, '/work')"/>
+            <section class="s_monynha_work_navigation" data-snippet="s_monynha_work_navigation" data-name="Monynha Work Navigation">
+                <nav class="monynha-cluster" aria-label="Work navigation">
+                    <a class="monynha-link" t-att-href="type_url">More of this type</a>
+                    <a class="monynha-link" href="/work">All work</a>
+                </nav>
+            </section>
+        </t>
+    </template>
+
+    <template id="s_monynha_latest_insights" name="Monynha Latest Insights">
+        <t t-set="posts" t-value="request.env['monynha.content.query'].get_blog_posts(request.website, limit=3)"/>
+        <section class="s_monynha_latest_insights monynha-section" data-snippet="s_monynha_latest_insights" data-name="Monynha Latest Insights">
+            <div class="monynha-container monynha-stack">
+                <header class="monynha-section-header"><p class="monynha-eyebrow">Insights</p><h2>Latest thinking.</h2></header>
+                <div class="monynha-grid" t-if="posts"><t t-foreach="posts" t-as="post"><t t-call="monynha_content.insight_card"/></t></div>
+                <div class="monynha-panel p-4" t-else=""><p class="mb-0">No insights are published yet.</p></div>
+                <div><a class="monynha-link" href="/blog">Explore insights</a></div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_insights_grid" name="Monynha Insights Grid">
+        <t t-set="posts" t-value="request.env['monynha.content.query'].get_blog_posts(request.website, limit=6)"/>
+        <section class="s_monynha_insights_grid monynha-section" data-snippet="s_monynha_insights_grid" data-name="Monynha Insights Grid">
+            <div class="monynha-container monynha-stack">
+                <header class="monynha-section-header"><p class="monynha-eyebrow">Insights</p><h2>Notes from the work.</h2></header>
+                <div class="monynha-grid" t-if="posts"><t t-foreach="posts" t-as="post"><t t-call="monynha_content.insight_card"/></t></div>
+                <div class="monynha-panel p-4" t-else=""><p class="mb-0">No insights are published yet.</p></div>
+            </div>
+        </section>
+    </template>
+</odoo>

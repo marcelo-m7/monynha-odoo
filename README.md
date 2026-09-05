@@ -1,194 +1,125 @@
 # Monynha Odoo
 
-Native Odoo 19 Community implementation of the Monynha Softwares website experience and lead-generation workflow.
+Native Odoo 19 Community implementation of the Monynha Softwares website, structured content and commercial discovery experience.
 
-The project revives the interaction and visual DNA of the historical Monynha/open2.tech presence while replacing its old parallel frontend/backend stack with standard Odoo Website and CRM mechanisms.
+The project preserves the visual and interaction DNA of the historical Monynha/open2.tech presence while using standard Odoo Website, Blog and CRM mechanisms as the owners of public content, editing and commercial workflows.
 
 ## Addons
 
+| Addon | Responsibility | Dependency boundary |
+| --- | --- | --- |
+| `theme_monynha` | Standalone visual identity, reusable Website Builder snippets and native new-page starters | `theme_common`, `website` only |
+| `monynha_content` | Structured Work catalogue plus aggregation of standard Odoo Blog posts | Depends on `theme_monynha`, `website`, `website_blog` |
+| `monynha_lead_generator` | Guided discovery, Project Signal and CRM follow-up | Independent from `monynha_content` |
+
 ### `theme_monynha`
 
-M3 completes the visual identity and Website Builder layer as an **Odoo-native branded theme**:
+The theme is the presentation layer. It keeps `website.layout`, standard Website navigation/footer, `theme.website.page`, snippets and Website Builder as the structural owners.
 
-- brutalist-futuristic design system led by void/black, violet and paper surfaces;
-- self-contained Monynha wordmark asset;
-- reusable Monynha Website Builder snippet group;
-- Hero, Services, Process, Labs, CTA, Project Signal, Selected Work, Capability, Manifesto, Metrics, FAQ, Page Intro, Operating Principles and Labs Showcase snippets;
-- Odoo-native `theme.website.page` starters for Services, Odoo, Software, AI & Automation, Process, Labs, About and a safe `/start` fallback;
-- Odoo-native `theme.website.menu` navigation seed;
-- homepage composition through `configurator_snippets`, not a destructive direct `/` page seed;
-- standard Odoo Website header, menu, dropdown, mobile navbar and footer rendering with Monynha styling layered on top;
-- responsive typography, reduced hard shadows on narrow screens, visible focus states and `prefers-reduced-motion` support;
-- no React/Vue frontend runtime, parallel CMS or theme-specific business model.
+It provides the Monynha design system, responsive/reduced-motion behavior, the existing section library, M4 composition primitives, and Odoo-native `+ New` page starters for Landing, Service, About, Contact, Work Story, Lab Story, Insights, Documentation and Changelog compositions. Static theme snippets never query `monynha.work` or `blog.post`.
 
-The final homepage composition is:
+The theme can be installed by itself. Its `/start` page remains a safe fallback to standard Website contact behavior, and its `/labs` page remains editable fallback content when `monynha_content` is absent.
+
+### `monynha_content`
+
+The content addon adds a single structured Work domain model:
 
 ```text
-Hero
-→ Project Signal
-→ Capabilities
-→ Selected Work
-→ Operating Principles
-→ Labs / Open Work
-→ Manifesto
-→ CTA
+monynha.work
+  type = project | case | lab
 ```
 
-Selected Work and Labs use real editorial project references — FACODI, Codoo Importer and Monynha Odoo — without fabricated client outcomes or commercial metrics.
+It owns the public catalogue routes:
+
+- `/work`
+- `/projects`
+- `/cases`
+- `/labs`
+- canonical detail `/work/<slug>`
+
+Work records support Website publication, website assignment, cover image, summary, editable rich HTML body, tags, featured state, repository/external links, publication date and standard Website SEO metadata.
+
+Dynamic Website Builder snippets render Work and Insights server-side through the centralized `monynha.content.query` service. Insights remain standard `blog.post` records; M4 does not introduce a parallel article model.
+
+When `monynha_content` is installed, its explicit `/labs` controller becomes the public structured Labs catalogue. The theme fallback page remains useful for theme-only installations and as editable source material, but it does not become a second Labs CMS.
 
 ### `monynha_lead_generator`
 
-Commercial discovery layer:
+The commercial discovery addon remains separate from content. It provides:
 
 - interactive six-step `/start` discovery;
-- server-side validation and explicit public-field whitelist;
+- server-side validation and an explicit public-field whitelist;
 - standard `crm.lead` as the canonical commercial record;
 - deterministic `local_rules` Project Signal provider;
 - append-only `monynha.lead.diagnosis` history;
-- four diagnostic dimensions plus signals, opportunities and a normalized recommended next action;
-- secure `/diagnosis/<token>` public Project Signal;
-- tokenized, idempotent follow-up request from the public report;
-- standard CRM chatter and `mail.activity` follow-up when a responsible user exists;
-- Odoo `mail.template` messages for diagnosis-ready and follow-up confirmation;
-- no mandatory external AI provider.
+- secure `/diagnosis/<token>` reports and idempotent follow-up;
+- standard CRM chatter, activities and mail templates.
 
-The addons are intentionally independent: neither depends on the other. With only the theme installed, `/start` remains a safe Website page that falls back to `/contactus`. With the lead generator installed, its explicit `/start` controller provides the interactive discovery.
+With the addon installed, its explicit `/start` controller owns the interactive route. Without it, the theme fallback remains safe and usable.
+
+## Installation combinations
+
+Supported boundaries are validated in CI:
+
+```text
+theme_monynha
+monynha_lead_generator
+monynha_content                         # resolves theme + website_blog dependencies
+theme_monynha + monynha_content
+theme_monynha + monynha_lead_generator
+theme_monynha + monynha_content + monynha_lead_generator
+```
+
+The full stack is also upgraded in CI with all module regression tests rerun after `-u`.
 
 ## Website ownership model
 
-M3 deliberately keeps Odoo Website as the owner of the public experience:
-
 ```text
-Homepage starter     configurator_snippets
-Seeded pages         theme.website.page → editable website.page copies
-Navigation           theme.website.menu → standard website.menu copies
-Header / footer      standard Odoo Website rendering + Monynha SCSS
-Labs / Selected Work ordinary editable Website content
-/start               theme fallback; lead-generator controller when installed
+Global layout/header/footer  standard Odoo Website
+Navigation                   standard website.menu copies
+Homepage                     configurator_snippets + Website Builder
+Static page starters         theme.website.page + is_new_page_template
+Static Monynha blocks        theme_monynha, ORM-free
+Structured Work              monynha_content / monynha.work
+Insights                     standard website_blog / blog.post
+/start                       theme fallback; lead generator when installed
+/labs                        theme fallback; content catalogue when installed
 ```
 
-The theme does not hardcode a second navigation tree, replace the Odoo header/footer, create a Labs CMS, or rewrite user-edited `website.page` bodies during normal upgrades.
+There is no React/Vue frontend runtime, parallel CMS, duplicated Blog model or custom navigation engine.
 
-## Public routes
+## M4 reusable Website Builder library
 
-The theme seeds editable starters for:
+M4 adds composition-level blocks including Hero Split, Section Header, Long-form Intro, Split Content, Image + Copy, Pull Quote, Numbered Steps, Process Timeline, Feature Grid, Technology Grid, Deliverables, Engagement Scope, Comparison, Terminal Panel and Contact CTA.
 
-- `/services`
-- `/services/odoo`
-- `/services/software`
-- `/services/ai-automation`
-- `/process`
-- `/labs`
-- `/about`
-- `/start` — safe standalone fallback
+When `monynha_content` is installed, additional dynamic blocks include Featured Work, Work Grid, Latest Projects, Selected Cases, Latest Labs, Related Work, Work Tags, Work Metadata, Work Navigation, Latest Insights and Insights Grid.
 
-`/process` uses the four-stage method:
+See `docs/m4-composable-content.md` for the complete authoring, route, security and extension map.
 
-```text
-Discovery → Architecture → Build → Observe
-```
+## Security and multiwebsite boundaries
 
-## End-to-end commercial flow
+Public catalogue controllers are GET-only. They do not expose a public create/write route or a generic public ACL on `monynha.work`.
 
-```text
-Website
-  ↓
-/start
-  ↓
-Discovery
-  ↓
-crm.lead
-  ↓
-monynha.lead.diagnosis (local_rules)
-  ↓
-/diagnosis/<secure-token>
-  ↓
-Project Signal
-  ↓
-Follow-up request
-  ↓
-crm.lead timestamp + internal note + standard CRM activity
-```
+Public rendering goes through `monynha.content.query`, which performs the narrow read elevation and enforces:
 
-The lead is created **before** diagnosis processing, so a provider failure never loses the commercial enquiry. Diagnosis history is append-only; later analyses do not silently overwrite prior results.
+- published records only;
+- current website or website-neutral records only;
+- type/tag/featured filters when requested;
+- exact canonical Work slug resolution;
+- published, non-future Blog posts for the current/general website.
 
-## Project Signal schema
-
-The default provider returns a normalized deterministic structure:
-
-```text
-overall
-digital_maturity
-automation_potential
-process_clarity
-odoo_fit
-signals[]
-opportunities[]
-recommended_action
-```
-
-`recommended_action` is one of:
-
-- `clarify`
-- `automate`
-- `centralize`
-- `integrate`
-- `architecture`
-
-These values describe where a technical conversation should begin. They are not CRM close-probability scoring and do not automatically convert leads into opportunities or quotations.
-
-## Security boundaries
-
-- Public discovery accepts only the explicit server-side whitelist.
-- Public CRM creation uses narrowly scoped server-assembled values.
-- Project Signal URLs use high-entropy non-sequential tokens.
-- Follow-up requests accept only the diagnosis token and are idempotent.
-- Raw diagnosis payloads and technical errors remain internal/system-only.
-- No arbitrary administrator is assigned when a lead has no salesperson or team leader.
-
-## Website Builder editing
-
-After theme installation, editors should use normal Odoo Website tools:
-
-- edit page copy and hierarchy through Website Builder;
-- reorder or replace Monynha snippets as normal sections;
-- edit Labs and Selected Work cards directly rather than changing a model;
-- manage the canonical Website menu in Odoo after the initial theme seed;
-- keep `/start` content as a safe theme-only fallback — the lead generator owns the interactive controller when installed.
-
-See `docs/m3-theme-completion.md` for the M3 ownership and route map.
+Backend Work and tag editing is granted to Website editors/designers through scoped ACLs.
 
 ## Development
 
-Contract tests:
+Repository contracts:
 
 ```bash
 pytest -q tests
 ```
 
-Clean install against Odoo 19:
-
-```bash
-odoo --stop-after-init -d monynha_test \
-  -i theme_monynha,monynha_lead_generator \
-  --test-enable
-```
-
-Upgrade regression:
-
-```bash
-odoo --stop-after-init -d monynha_test \
-  -u theme_monynha,monynha_lead_generator \
-  --test-enable
-```
-
-GitHub Actions uses the official Odoo 19 image, PostgreSQL 16 and a pinned Odoo `design-themes` checkout for `theme_common`. The release gate verifies:
-
-- theme-only installation;
-- lead-generator-only installation and regressions;
-- combined installation;
-- combined upgrade regressions.
+The GitHub Actions release gate uses the official Odoo 19 image, PostgreSQL 16 and a pinned Odoo `design-themes` checkout for `theme_common`. It verifies standalone boundaries, content/model/HTTP/snippet behavior, combined installations and full-stack upgrade regressions.
 
 ## Future provider extensions
 
-The core provider registry is the extension point for optional integrations such as Gemini or OpenAI. Provider-specific credentials and SDK dependencies should live in separate addons; the core must remain functional with `local_rules` alone.
+The lead-generator provider registry remains the extension point for optional AI integrations. Provider-specific credentials and SDK dependencies should live in separate addons; the core discovery flow remains functional with `local_rules` alone.

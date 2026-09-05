@@ -240,9 +240,114 @@
     box-shadow: 0 0 18px 7px rgba(151, 103, 228, .7), 0 0 35px 12px rgba(0, 229, 255, .22);
 }
 
+/* M4 reusable composition primitives. */
+.monynha-section {
+    padding-block: clamp(4rem, 8vw, 8rem);
+}
+
+.monynha-container {
+    width: calc(100% - 2rem);
+    max-width: 80rem;
+    margin-inline: auto;
+}
+
+.monynha-stack {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: var(--monynha-stack-gap, 1.5rem);
+}
+
+.monynha-stack > * {
+    min-width: 0;
+}
+
+.monynha-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .75rem;
+    min-width: 0;
+}
+
+.monynha-split {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+}
+
+.monynha-split > * {
+    min-width: 0;
+}
+
+.monynha-grid {
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1rem;
+}
+
+.monynha-card--dark {
+    background: var(--monynha-void);
+    color: var(--monynha-white);
+    box-shadow: var(--monynha-shadow-violet);
+}
+
+.monynha-card--outlined {
+    background: transparent;
+    box-shadow: none;
+}
+
+.monynha-tag {
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    padding: .3rem .65rem;
+    font-size: .8rem;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.monynha-meta {
+    margin: 0;
+    color: var(--monynha-muted);
+    font-size: .875rem;
+    line-height: 1.4;
+}
+
+.monynha-eyebrow {
+    margin: 0;
+    color: var(--monynha-violet);
+    font-size: .75rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+}
+
+.monynha-link {
+    color: inherit;
+    font-weight: 800;
+    text-decoration-thickness: 2px;
+    text-underline-offset: .22em;
+}
+
+.monynha-link:focus-visible {
+    border-radius: .2rem;
+    outline: 3px solid var(--monynha-violet);
+    outline-offset: 4px;
+}
+
 @media (max-width: 991.98px) {
     .monynha-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .monynha-split {
+        grid-template-columns: minmax(0, 1fr);
     }
 }
 

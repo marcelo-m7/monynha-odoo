@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="view_page_template_landing" name="Monynha Landing Starter">
+        <t t-set="additional_title" t-valuef="Landing"/>
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure">
+                <section class="s_monynha_hero_split monynha-section o_cc o_cc1"><div class="container monynha-split"><div class="monynha-stack"><p class="monynha-kicker">Landing</p><h1 class="monynha-display">Make one important idea clear.</h1><p class="lead">Use this page as a starting composition, then replace the copy and blocks with the real context.</p><div class="monynha-cluster"><a href="/start" class="monynha-button monynha-button-primary">Start a Project</a><a href="/services" class="monynha-button monynha-button-secondary">Explore Services</a></div></div><div class="monynha-terminal"><p>&gt; context</p><p>&gt; friction</p><p>&gt; smallest useful system</p></div></div></section>
+                <section class="s_monynha_split_content monynha-section o_cc o_cc3"><div class="container monynha-split"><div class="monynha-stack"><p class="monynha-kicker">Context</p><h2>Explain why this matters.</h2><p class="lead">Describe the operation, audience or problem before introducing the implementation.</p></div><article class="monynha-panel"><p class="monynha-eyebrow">Response</p><h3>Keep the boundary explicit.</h3><p>Show what changes, what stays standard and what success looks like.</p></article></div></section>
+                <section class="s_monynha_feature_grid monynha-section o_cc o_cc3"><div class="container"><div class="monynha-section-header"><p class="monynha-kicker">Capabilities</p><h2>Three useful building blocks.</h2></div><div class="monynha-grid"><article class="monynha-card"><h3>Understand</h3><p>Start with workflow and ownership.</p></article><article class="monynha-card"><h3>Build</h3><p>Add only the missing layer.</p></article><article class="monynha-card"><h3>Observe</h3><p>Verify the result in real use.</p></article></div></div></section>
+                <section class="s_monynha_contact_cta monynha-section"><div class="container monynha-contact-panel"><div class="monynha-stack"><p class="monynha-kicker">Next step</p><h2>Start with the real context.</h2><p class="lead">Replace this CTA with the action that belongs to the page.</p></div><a href="/start" class="monynha-button monynha-button-primary">Start a Project</a></div></section>
+            </div>
+        </t>
+    </template>
+    <record id="page_template_landing" model="theme.website.page"><field name="view_id" ref="view_page_template_landing"/><field name="url">/monynha-template-landing</field><field name="is_published" eval="False"/><field name="is_new_page_template" eval="True"/></record>
+
+    <template id="view_page_template_service" name="Monynha Service Starter">
+        <t t-set="additional_title" t-valuef="Service"/><t t-call="website.layout"><div id="wrap" class="oe_structure">
+            <section class="s_monynha_intro"><div class="container"><div><p class="monynha-kicker">Service</p><h1>Name the capability in operational terms.</h1></div><span class="monynha-spark" aria-hidden="true"/></div></section>
+            <section class="s_monynha_split_content monynha-section o_cc o_cc3"><div class="container monynha-split"><div class="monynha-stack"><p class="monynha-kicker">Problem</p><h2>What does this service help make clearer?</h2><p class="lead">Frame the real workflow and its constraints before listing features.</p></div><article class="monynha-panel"><p class="monynha-eyebrow">Capability</p><h3>Describe the smallest useful intervention.</h3><p>Keep the service understandable without assuming a specific tool too early.</p></article></div></section>
+            <section class="s_monynha_steps monynha-section o_cc o_cc3"><div class="container"><div class="monynha-section-header"><p class="monynha-kicker">Process</p><h2>Discover. Architect. Build. Observe.</h2></div><div class="monynha-grid"><article class="monynha-card"><small>01</small><h3>Discovery</h3><p>Context and constraints.</p></article><article class="monynha-card"><small>02</small><h3>Build</h3><p>Small testable delivery.</p></article><article class="monynha-card"><small>03</small><h3>Observe</h3><p>Evidence and iteration.</p></article></div></div></section>
+            <section class="s_monynha_faq o_cc o_cc3"><div class="container"><div class="monynha-section-header"><p class="monynha-kicker">FAQ</p><h2>Questions that reduce uncertainty.</h2></div><div class="monynha-faq"><details open="open"><summary>What should be clear before starting?</summary><p>The expected outcome, the people involved and the boundaries of the current workflow.</p></details><details><summary>Does every project require custom software?</summary><p>No. Standard platform mechanisms remain the preferred starting point when they fit.</p></details></div></div></section>
+            <section class="s_monynha_cta"><div class="container"><p class="monynha-kicker">Start</p><h2>Bring the workflow, not a pre-selected solution.</h2><a href="/start" class="monynha-button monynha-button-primary">Start a Project</a></div></section>
+        </div></t>
+    </template>
+    <record id="page_template_service" model="theme.website.page"><field name="view_id" ref="view_page_template_service"/><field name="url">/monynha-template-service</field><field name="is_published" eval="False"/><field name="is_new_page_template" eval="True"/></record>
+
+    <template id="view_page_template_about" name="Monynha About Starter">
+        <t t-set="additional_title" t-valuef="About"/><t t-call="website.layout"><div id="wrap" class="oe_structure">
+            <section class="s_monynha_intro"><div class="container"><div><p class="monynha-kicker">About</p><h1>Explain what the studio is trying to make possible.</h1></div><span class="monynha-spark" aria-hidden="true"/></div></section>
+            <section class="s_monynha_manifesto"><div class="container monynha-manifesto-layout"><p class="monynha-kicker">Manifesto</p><blockquote>Engineering should make complexity legible.</blockquote></div></section>
+            <section class="s_monynha_principles o_cc o_cc3"><div class="container"><div class="monynha-section-header"><p class="monynha-kicker">Principles</p><h2>Describe how decisions are made.</h2></div><div class="monynha-grid"><article class="monynha-card"><h3>Standard first</h3><p>Reuse mature mechanisms.</p></article><article class="monynha-card"><h3>Small boundaries</h3><p>Make ownership explicit.</p></article><article class="monynha-card"><h3>Observable systems</h3><p>Verify states and effects.</p></article></div></div></section>
+            <section class="s_monynha_cta"><div class="container"><p class="monynha-kicker">Work together</p><h2>Start with a concrete operational question.</h2><a href="/start" class="monynha-button monynha-button-primary">Start a Project</a></div></section>
+        </div></t>
+    </template>
+    <record id="page_template_about" model="theme.website.page"><field name="view_id" ref="view_page_template_about"/><field name="url">/monynha-template-about</field><field name="is_published" eval="False"/><field name="is_new_page_template" eval="True"/></record>
+
+    <template id="view_page_template_contact" name="Monynha Contact Starter">
+        <t t-set="additional_title" t-valuef="Contact"/><t t-call="website.layout"><div id="wrap" class="oe_structure">
+            <section class="s_monynha_intro"><div class="container"><div><p class="monynha-kicker">Contact</p><h1>Start with context.</h1></div><span class="monynha-spark" aria-hidden="true"/></div></section>
+            <section class="s_monynha_split_content monynha-section o_cc o_cc3"><div class="container monynha-split"><div class="monynha-stack"><p class="monynha-kicker">Before the form</p><h2>Tell us what the operation is trying to achieve.</h2><p class="lead">Useful context includes the current workflow, people involved, systems already in place and where information or time is being lost.</p></div><article class="monynha-panel"><p class="monynha-eyebrow">Standard Odoo contact</p><h3>Use the native contact form.</h3><p>This starter links to the standard Website contact route instead of duplicating form handling.</p><a href="/contactus" class="monynha-button monynha-button-primary">Open Contact Form</a></article></div></section>
+            <section class="s_monynha_cta"><div class="container"><p class="monynha-kicker">Discovery</p><h2>Prefer a guided first pass?</h2><a href="/start" class="monynha-button monynha-button-primary">Start a Project</a></div></section>
+        </div></t>
+    </template>
+    <record id="page_template_contact" model="theme.website.page"><field name="view_id" ref="view_page_template_contact"/><field name="url">/monynha-template-contact</field><field name="is_published" eval="False"/><field name="is_new_page_template" eval="True"/></record>
+
+    <template id="view_page_template_work_story" name="Monynha Work Story Starter">
+        <t t-set="additional_title" t-valuef="Work Story"/><t t-call="website.layout"><div id="wrap" class="oe_structure">
+            <section class="s_monynha_intro"><div class="container"><div><p class="monynha-kicker">Project / Case</p><h1>Describe one piece of work without inventing proof.</h1></div><span class="monynha-spark" aria-hidden="true"/></div></section>
+            <section class="s_monynha_longform_intro monynha-section o_cc o_cc3"><div class="container monynha-longform"><p class="monynha-eyebrow">Context</p><div class="monynha-stack"><h2>Start with the problem and constraints.</h2><p class="lead">Explain what was known, what needed to change and which boundaries shaped the implementation.</p><p>Use this page starter for editorial stories. Structured Work records are provided separately by the optional Monynha Content addon.</p></div></div></section>
+            <section class="s_monynha_deliverables monynha-section o_cc o_cc3"><div class="container monynha-split"><div><p class="monynha-kicker">Outcome</p><h2>Document what was actually delivered.</h2></div><ul class="monynha-deliverables-list"><li><strong>Architecture</strong><span>Replace with verified output.</span></li><li><strong>Implementation</strong><span>Replace with verified output.</span></li><li><strong>Verification</strong><span>Replace with verified output.</span></li></ul></div></section>
+            <section class="s_monynha_cta"><div class="container"><p class="monynha-kicker">Related work</p><h2>Connect this story to the next relevant resource.</h2><a href="/labs" class="monynha-button monynha-button-secondary">Explore Work</a></div></section>
+        </div></t>
+    </template>
+    <record id="page_template_work_story" model="theme.website.page"><field name="view_id" ref="view_page_template_work_story"/><field name="url">/monynha-template-work-story</field><field name="is_published" eval="False"/><field name="is_new_page_template" eval="True"/></record>
+
+    <template id="view_page_template_lab_story" name="Monynha Lab Story Starter">
+        <t t-set="additional_title" t-valuef="Lab"/><t t-call="website.layout"><div id="wrap" class="oe_structure">
+            <section class="s_monynha_intro"><div class="container"><div><p class="monynha-kicker">Lab / Experiment</p><h1>Make the experiment and its boundary explicit.</h1></div><span class="monynha-spark" aria-hidden="true"/></div></section>
+            <section class="s_monynha_terminal_panel monynha-section o_cc o_cc3"><div class="container monynha-split"><div class="monynha-stack"><p class="monynha-kicker">Hypothesis</p><h2>What are you trying to learn?</h2><p class="lead">State the question, constraints and what evidence would change the next decision.</p></div><div class="monynha-terminal"><p>&gt; hypothesis</p><p>&gt; smallest probe</p><p>&gt; observed result</p><p>&gt; next decision</p></div></div></section>
+            <section class="s_monynha_longform_intro monynha-section o_cc o_cc3"><div class="container monynha-longform"><p class="monynha-eyebrow">Notes</p><div class="monynha-stack"><h2>Record what happened.</h2><p class="lead">Use normal Website Builder content for the narrative, screenshots, diagrams or implementation notes.</p></div></div></section>
+            <section class="s_monynha_cta"><div class="container"><p class="monynha-kicker">Labs</p><h2>Keep the experiment connected to the wider body of work.</h2><a href="/labs" class="monynha-button monynha-button-secondary">Explore Labs</a></div></section>
+        </div></t>
+    </template>
+    <record id="page_template_lab_story" model="theme.website.page"><field name="view_id" ref="view_page_template_lab_story"/><field name="url">/monynha-template-lab-story</field><field name="is_published" eval="False"/><field name="is_new_page_template" eval="True"/></record>
+
+    <template id="view_page_template_insights_index" name="Monynha Insights Index Starter">
+        <t t-set="additional_title" t-valuef="Insights"/><t t-call="website.layout"><div id="wrap" class="oe_structure">
+            <section class="s_monynha_intro"><div class="container"><div><p class="monynha-kicker">Insights</p><h1>Publish notes through Odoo Blog.</h1></div><span class="monynha-spark" aria-hidden="true"/></div></section>
+            <section class="s_monynha_split_content monynha-section o_cc o_cc3"><div class="container monynha-split"><div class="monynha-stack"><p class="monynha-kicker">Editorial</p><h2>Keep articles in the standard Blog domain.</h2><p class="lead">This starter introduces the editorial area; Blog remains the source of truth for posts, publication and URLs.</p></div><article class="monynha-panel"><p class="monynha-eyebrow">Blog</p><h3>Use the standard feed.</h3><p>Open the Blog application to create and publish posts, then link the public Blog here.</p><a href="/blog" class="monynha-button monynha-button-secondary">Open Blog</a></article></div></section>
+        </div></t>
+    </template>
+    <record id="page_template_insights_index" model="theme.website.page"><field name="view_id" ref="view_page_template_insights_index"/><field name="url">/monynha-template-insights</field><field name="is_published" eval="False"/><field name="is_new_page_template" eval="True"/></record>
+
+    <template id="view_page_template_documentation" name="Monynha Documentation Starter">
+        <t t-set="additional_title" t-valuef="Documentation"/><t t-call="website.layout"><div id="wrap" class="oe_structure">
+            <section class="s_monynha_intro"><div class="container"><div><p class="monynha-kicker">Documentation</p><h1>Organize guidance around decisions and interfaces.</h1></div><span class="monynha-spark" aria-hidden="true"/></div></section>
+            <section class="s_monynha_split_content monynha-section o_cc o_cc3"><div class="container monynha-split"><nav class="monynha-panel" aria-label="Documentation sections"><p class="monynha-eyebrow">On this page</p><ul><li><a href="#overview" class="monynha-link">Overview</a></li><li><a href="#interfaces" class="monynha-link">Interfaces</a></li><li><a href="#operations" class="monynha-link">Operations</a></li></ul></nav><div class="monynha-stack" id="overview"><p class="monynha-kicker">Overview</p><h2>Start with the system boundary.</h2><p class="lead">Use standard Website pages or eLearning content for documentation instead of introducing a second documentation CMS.</p><h3 id="interfaces">Interfaces</h3><p>Document inputs, outputs, ownership and failure behavior.</p><h3 id="operations">Operations</h3><p>Document the checks a maintainer needs to understand the running system.</p></div></div></section>
+        </div></t>
+    </template>
+    <record id="page_template_documentation" model="theme.website.page"><field name="view_id" ref="view_page_template_documentation"/><field name="url">/monynha-template-documentation</field><field name="is_published" eval="False"/><field name="is_new_page_template" eval="True"/></record>
+
+    <template id="view_page_template_changelog" name="Monynha Changelog Starter">
+        <t t-set="additional_title" t-valuef="Changelog"/><t t-call="website.layout"><div id="wrap" class="oe_structure">
+            <section class="s_monynha_intro"><div class="container"><div><p class="monynha-kicker">Changelog</p><h1>Record meaningful changes over time.</h1></div><span class="monynha-spark" aria-hidden="true"/></div></section>
+            <section class="s_monynha_timeline monynha-section o_cc o_cc3"><div class="container"><div class="monynha-section-header"><p class="monynha-kicker">Changes</p><h2>Use chronological entries with concrete scope.</h2></div><ol class="monynha-timeline-list"><li><span class="monynha-meta">Current release</span><div><h3>Describe the change</h3><p>Explain what changed, why it matters and any operational action required.</p></div></li><li><span class="monynha-meta">Previous release</span><div><h3>Keep historical context</h3><p>Retain concise entries that help readers understand the evolution of the system.</p></div></li></ol></div></section>
+        </div></t>
+    </template>
+    <record id="page_template_changelog" model="theme.website.page"><field name="view_id" ref="view_page_template_changelog"/><field name="url">/monynha-template-changelog</field><field name="is_published" eval="False"/><field name="is_new_page_template" eval="True"/></record>
+</odoo>
