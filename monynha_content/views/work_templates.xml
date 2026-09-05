@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="work_card" name="Monynha Work Card">
+        <article class="monynha-work-card monynha-card">
+            <t t-set="work_type_label" t-value="{'project': 'Project', 'case': 'Case', 'lab': 'Lab'}.get(work.type, work.type)"/>
+            <t t-if="work.image_1920">
+                <img class="monynha-work-card__cover img-fluid"
+                     t-att-src="'/web/image/monynha.work/%s/image_1920' % work.id"
+                     t-att-alt="work.name"
+                     loading="lazy"/>
+            </t>
+            <div class="monynha-stack">
+                <div class="monynha-cluster">
+                    <span class="monynha-tag" t-esc="work_type_label"/>
+                    <t t-foreach="work.tag_ids" t-as="tag_record">
+                        <span class="monynha-tag" t-esc="tag_record.name"/>
+                    </t>
+                </div>
+                <h2><a class="monynha-link" t-att-href="work.website_url" t-esc="work.name"/></h2>
+                <p t-if="work.summary" t-esc="work.summary"/>
+                <a class="monynha-link" t-att-href="work.website_url">View work</a>
+            </div>
+        </article>
+    </template>
+
+    <template id="work_metadata" name="Monynha Work Metadata">
+        <t t-set="work_type_label" t-value="{'project': 'Project', 'case': 'Case', 'lab': 'Lab'}.get(work.type, work.type)"/>
+        <div class="monynha-work-metadata monynha-stack">
+            <div class="monynha-cluster">
+                <span class="monynha-tag" t-esc="work_type_label"/>
+                <t t-foreach="work.tag_ids" t-as="tag_record">
+                    <span class="monynha-tag" t-esc="tag_record.name"/>
+                </t>
+            </div>
+            <p class="monynha-meta" t-if="work.published_date">
+                Published <time t-field="work.published_date" t-options="{'widget': 'date'}"/>
+            </p>
+            <div class="monynha-cluster" t-if="work.repository_url or work.external_url">
+                <a t-if="work.repository_url" class="monynha-link" t-att-href="work.repository_url" rel="noopener noreferrer">Repository</a>
+                <a t-if="work.external_url" class="monynha-link" t-att-href="work.external_url" rel="noopener noreferrer">Visit project</a>
+            </div>
+        </div>
+    </template>
+
+    <template id="work_index" name="Monynha Work Catalogue">
+        <t t-set="additional_title" t-value="catalogue_title"/>
+        <t t-call="website.layout">
+            <main id="wrap" class="monynha-work-index">
+                <section class="monynha-section">
+                    <div class="monynha-container monynha-stack">
+                        <header class="monynha-section-header">
+                            <p class="monynha-eyebrow">Monynha / Work</p>
+                            <h1 t-esc="catalogue_title"/>
+                            <p class="lead">Published projects, cases and experiments from Monynha.</p>
+                        </header>
+                        <div class="monynha-work-grid monynha-grid" t-if="works">
+                            <t t-foreach="works" t-as="work">
+                                <t t-call="monynha_content.work_card"/>
+                            </t>
+                        </div>
+                        <div class="monynha-panel p-4" t-else="">
+                            <p class="mb-0">No published work is available in this view yet.</p>
+                        </div>
+                        <t t-call="website.pager"/>
+                    </div>
+                </section>
+            </main>
+        </t>
+    </template>
+
+    <template id="work_detail" name="Monynha Work Detail">
+        <t t-set="main_object" t-value="work"/>
+        <t t-set="additional_title" t-value="work.name"/>
+        <t t-call="website.layout">
+            <main id="wrap" class="monynha-work-detail">
+                <section class="monynha-section">
+                    <div class="monynha-container monynha-stack">
+                        <header class="monynha-stack monynha-work-detail__header">
+                            <p class="monynha-eyebrow">Monynha / Work</p>
+                            <h1 t-esc="work.name"/>
+                            <p class="lead" t-if="work.summary" t-esc="work.summary"/>
+                            <t t-call="monynha_content.work_metadata"/>
+                        </header>
+                        <t t-if="work.image_1920">
+                            <img class="monynha-work-detail__cover img-fluid"
+                                 t-att-src="'/web/image/monynha.work/%s/image_1920' % work.id"
+                                 t-att-alt="work.name"/>
+                        </t>
+                        <article class="monynha-work-body" t-if="work.body_html">
+                            <div t-field="work.body_html"/>
+                        </article>
+                    </div>
+                </section>
+                <section class="monynha-section monynha-work-detail__next">
+                    <div class="monynha-container monynha-split">
+                        <div class="monynha-stack">
+                            <p class="monynha-eyebrow">Continue exploring</p>
+                            <h2>More Monynha work</h2>
+                            <p>Browse the public catalogue for other projects, cases and labs.</p>
+                            <a class="monynha-button monynha-button-secondary" href="/work">Explore work</a>
+                        </div>
+                        <div class="monynha-card monynha-card--dark">
+                            <p class="monynha-eyebrow">Start a project</p>
+                            <h2>Bring the next problem.</h2>
+                            <p>Use the Monynha discovery path to frame the context before implementation.</p>
+                            <a class="monynha-button monynha-button-primary" href="/start">Start a project</a>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </t>
+    </template>
+</odoo>

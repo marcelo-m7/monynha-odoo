@@ -10,6 +10,7 @@
     "data": [
         "security/ir.model.access.csv",
         "views/work_views.xml",
+        "views/work_templates.xml",
     ],
     "installable": True,
     "application": False,
