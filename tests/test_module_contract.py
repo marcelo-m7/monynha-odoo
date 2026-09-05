@@ -72,6 +72,26 @@ def test_theme_uses_odoo_native_page_and_menu_templates():
     assert 's_monynha_cta' in homepage
 
 
+def test_m3_theme_contract_and_brand_asset():
+    manifest = _manifest('theme_monynha')
+    assert 'monynha_lead_generator' not in manifest['depends']
+    assert (ROOT / 'theme_monynha/static/src/img/monynha-wordmark.svg').exists()
+    homepage = manifest['configurator_snippets']['homepage']
+    assert homepage == [
+        's_monynha_hero',
+        's_monynha_signal',
+        's_monynha_services',
+        's_monynha_selected_work',
+        's_monynha_principles',
+        's_monynha_labs_showcase',
+        's_monynha_manifesto',
+        's_monynha_cta',
+    ]
+    pages = (ROOT / 'theme_monynha' / 'data' / 'pages.xml').read_text()
+    assert 'model="website.page"' not in pages
+    assert '<field name="url">/</field>' not in pages
+
+
 def test_lead_generator_uses_crm_lead_and_secure_public_report_token():
     lead_model = (ROOT / 'monynha_lead_generator' / 'models' / 'crm_lead.py').read_text()
     diagnosis_model = (ROOT / 'monynha_lead_generator' / 'models' / 'diagnosis.py').read_text()
