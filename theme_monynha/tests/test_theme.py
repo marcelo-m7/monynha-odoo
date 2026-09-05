@@ -19,6 +19,18 @@ M4_STATIC_KEYS = {
     "theme_monynha.s_monynha_contact_cta",
 }
 
+M4_PAGE_TEMPLATE_XMLIDS = (
+    "theme_monynha.page_template_landing",
+    "theme_monynha.page_template_service",
+    "theme_monynha.page_template_about",
+    "theme_monynha.page_template_contact",
+    "theme_monynha.page_template_work_story",
+    "theme_monynha.page_template_lab_story",
+    "theme_monynha.page_template_insights_index",
+    "theme_monynha.page_template_documentation",
+    "theme_monynha.page_template_changelog",
+)
+
 
 @tagged("-at_install", "post_install")
 class TestMonynhaTheme(HttpCase):
@@ -58,6 +70,13 @@ class TestMonynhaTheme(HttpCase):
             ("website_id", "!=", False),
         ])
         self.assertEqual(set(views.mapped("key")), M4_STATIC_KEYS)
+
+    def test_m4_new_page_templates_registered(self):
+        for xmlid in M4_PAGE_TEMPLATE_XMLIDS:
+            page = self.env.ref(xmlid, raise_if_not_found=False)
+            self.assertTrue(page, xmlid)
+            self.assertEqual(page._name, "theme.website.page")
+            self.assertTrue(page.is_new_page_template, xmlid)
 
     def test_theme_page_starters_registered(self):
         xmlids = (
