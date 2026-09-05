@@ -39,11 +39,9 @@ function initProjectSignalFollowup(link) {
                     : "Recebemos o pedido. A próxima conversa vai partir deste Project Signal.";
             }
         } catch {
-            link.removeAttribute("aria-disabled");
-            link.dataset.monynhaSubmitting = "0";
-            if (status) {
-                status.textContent = "Não foi possível registar agora. Podes continuar pelo formulário de contacto.";
-            }
+            // Progressive enhancement must never trap the visitor when the RPC
+            // layer is unavailable: keep the original contact URL as the fallback.
+            window.location.assign(link.href);
         }
     });
 }
