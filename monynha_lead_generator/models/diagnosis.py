@@ -92,7 +92,10 @@ class MonynhaLeadDiagnosis(models.Model):
             key=lambda item: item[1],
         )[0]
         action_labels = dict(RECOMMENDED_ACTION_SELECTION)
-        action = action_labels.get(result.get("recommended_action"), "Define the next architecture step")
+        action = action_labels.get(
+            result.get("recommended_action"),
+            "Define the next architecture step",
+        )
         return (
             f"The discovery shows {strongest} as the strongest current signal. "
             f"Suggested next move: {action}. "
@@ -149,4 +152,48 @@ class MonynhaLeadDiagnosis(models.Model):
                     "raw_payload": result,
                 }
             )
+        return True
+
+    def action_request_followup(self):
+        """Record one public follow-up request and use standard CRM activities when possible."""
+        self.ensure_one()
+        lead = self.lead_id
+        if lead.monynha_followup_requested_at:
+            return False
+
+        lead.write({"monynha_followup_requested_at": fields.Datetime.now()})
+        lead.message_post(
+            body="Project Signal follow-up requested from the public Monynha report.",
+            subtype_xmlid="mail.mt_note",
+        )
+
+        responsible = lead.user_id or lead.team_id.user_id
+        if responsible:
+            existing = lead.activity_ids.filtered(
+                lambda activity: activity.summary == "Monynha Project Signal follow-up"
+            )
+            if not existing:
+                lead.activity_schedule(
+                    "mail.mail_activity_data_todo",
+                    summary="Monynha Project Signal follow-up",
+                    note="The visitor requested a conversation from their public Project Signal.",
+                    user_id=responsible.id,
+                )
+
+        if lead.email_from:
+            template = self.env.ref(
+                "monynha_lead_generator.mail_template_followup_received",
+                raise_if_not_found=False,
+            )
+            if template:
+                try:
+                    template.with_context(report_url=self.public_url).send_mail(
+                        lead.id,
+                        force_send=False,
+                    )
+                except Exception:
+                    _logger.exception(
+                        "Could not queue Monynha follow-up confirmation for lead %s",
+                        lead.id,
+                    )
         return True
