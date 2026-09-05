@@ -54,3 +54,28 @@ def test_m4_preserves_reduced_motion_and_has_no_external_runtime_assets():
     ).lower()
     forbidden = ("fonts.googleapis.com", "fonts.gstatic.com", "cdnjs.cloudflare.com", "unpkg.com", "@import url(")
     assert not any(token in runtime_text for token in forbidden)
+
+
+def test_theme_runtime_chrome_styles_are_isolated_to_active_monynha_site():
+    manifest = _manifest(THEME / "__manifest__.py")
+    assert "views/customizations.xml" in manifest["data"]
+
+    customization = (THEME / "views/customizations.xml").read_text()
+    assert 'inherit_id="website.layout"' in customization
+    assert "wrapwrap" in customization
+    assert "monynha-site" in customization
+
+    scss = (THEME / "static/src/scss/website.scss").read_text()
+    root_level_forbidden = (
+        "body {",
+        "#wrap {",
+        "h1, h2, h3, h4, h5, h6, .monynha-display {",
+        "::selection {",
+        ":focus-visible {",
+        "header#top {",
+        "footer#bottom,",
+    )
+    for line in scss.splitlines():
+        if line == line.lstrip():
+            assert not any(line.startswith(selector) for selector in root_level_forbidden), line
+    assert ".monynha-site {" in scss
