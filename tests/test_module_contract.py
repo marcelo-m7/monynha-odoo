@@ -84,6 +84,17 @@ def test_lead_generator_uses_crm_lead_and_secure_public_report_token():
     assert '/monynha/diagnosis/followup' in controller
 
 
+def test_diagnosis_access_rules_follow_standard_crm_visibility():
+    security_path = ROOT / 'monynha_lead_generator' / 'security' / 'monynha_security.xml'
+    assert security_path.exists()
+    security = security_path.read_text()
+    assert "('lead_id.user_id','=',user.id)" in security
+    assert "('lead_id.user_id','=',False)" in security
+    assert 'sales_team.group_sale_salesman_all_leads' in security
+    assert "('lead_id.company_id', 'in', company_ids + [False])" in security
+    assert 'security/monynha_security.xml' in _manifest('monynha_lead_generator')['data']
+
+
 def test_discovery_keeps_progressive_accessible_keyboard_and_draft_behavior():
     js = (ROOT / 'monynha_lead_generator' / 'static' / 'src' / 'js' / 'discovery.js').read_text()
     templates = (ROOT / 'monynha_lead_generator' / 'views' / 'templates.xml').read_text()
