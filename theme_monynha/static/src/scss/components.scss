@@ -11,6 +11,7 @@
     font-weight: 800;
     letter-spacing: .12em;
     text-transform: uppercase;
+    overflow-wrap: anywhere;
 }
 
 .monynha-button {
@@ -24,7 +25,10 @@
     padding: .85rem 1.2rem;
     font-weight: 800;
     text-decoration: none;
-    transition: transform var(--monynha-motion-fast) ease, box-shadow var(--monynha-motion-fast) ease;
+    overflow-wrap: anywhere;
+    transition:
+        transform var(--monynha-motion-fast) var(--monynha-ease-standard),
+        box-shadow var(--monynha-motion-fast) var(--monynha-ease-standard);
 }
 
 .monynha-button-primary {
@@ -55,11 +59,13 @@
 .monynha-terminal,
 .monynha-principle-card,
 .monynha-lab-card {
+    min-width: 0;
     border: var(--monynha-border);
     border-radius: var(--monynha-radius);
     background: var(--monynha-paper);
     color: var(--monynha-ink);
     box-shadow: var(--monynha-shadow);
+    overflow-wrap: anywhere;
 }
 
 .monynha-grid {
@@ -78,6 +84,7 @@
     font-size: clamp(2.25rem, 5vw, 4.75rem);
     line-height: .98;
     letter-spacing: -.045em;
+    overflow-wrap: anywhere;
 }
 
 .monynha-section-header .lead {
@@ -101,6 +108,7 @@
     min-height: 18rem;
     flex-direction: column;
     align-items: flex-start;
+    padding: 1.5rem;
 }
 
 .monynha-card > p {
@@ -113,6 +121,15 @@
     font-weight: 800;
     text-decoration-thickness: 2px;
     text-underline-offset: .22em;
+}
+
+.monynha-card > a:focus-visible,
+.monynha-work-card > a:focus-visible,
+.monynha-lab-card a:focus-visible,
+.monynha-principle-card a:focus-visible {
+    border-radius: .2rem;
+    outline: 3px solid var(--monynha-violet);
+    outline-offset: 4px;
 }
 
 .monynha-card small,
@@ -163,6 +180,7 @@
 .monynha-lab-card h3 {
     margin-top: 1rem;
     font-weight: 800;
+    overflow-wrap: anywhere;
 }
 
 .monynha-principle-card {
@@ -174,7 +192,7 @@
     border-color: rgba(255, 255, 255, .72);
     background: rgba(5, 7, 10, .72);
     color: var(--monynha-white);
-    box-shadow: 8px 8px 0 var(--monynha-violet);
+    box-shadow: var(--monynha-shadow-violet);
 }
 
 .monynha-lab-card small {
@@ -190,6 +208,7 @@
     margin-top: .5rem;
     font-size: clamp(2rem, 5vw, 4rem);
     line-height: 1;
+    overflow-wrap: anywhere;
 }
 
 .monynha-faq details + details {
@@ -210,6 +229,7 @@
 
 .monynha-terminal code {
     color: var(--monynha-cyan);
+    overflow-wrap: anywhere;
 }
 
 .monynha-spark {
@@ -231,10 +251,19 @@
         grid-template-columns: 1fr;
         gap: .2rem;
     }
+
+    .monynha-button {
+        min-height: 3rem;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
     .monynha-button {
         transition: none;
+    }
+
+    .monynha-button:hover,
+    .monynha-button:focus-visible {
+        transform: none;
     }
 }
