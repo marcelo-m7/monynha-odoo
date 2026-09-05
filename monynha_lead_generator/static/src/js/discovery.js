@@ -13,6 +13,24 @@ function loadDraft() {
     }
 }
 
+function saveDraft(state) {
+    try {
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch {
+        // Draft persistence is an optional UX enhancement. Storage failures
+        // must never block the discovery itself.
+    }
+}
+
+function clearDraft() {
+    try {
+        window.localStorage.removeItem(STORAGE_KEY);
+    } catch {
+        // The server-side submission has already succeeded at this point.
+        // A blocked storage API must not turn success into a visible failure.
+    }
+}
+
 function collectFormData(form, state) {
     const data = Object.fromEntries(new FormData(form).entries());
     data.no_brand = Boolean(form.elements.no_brand?.checked);
@@ -61,7 +79,7 @@ function initDiscovery(root) {
 
     function persistDraft() {
         state.data = collectFormData(form, state);
-        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        saveDraft(state);
     }
 
     function renderStep({ focus = true } = {}) {
@@ -177,7 +195,7 @@ function initDiscovery(root) {
             if (!result?.ok) {
                 throw new Error(result?.error || "Não foi possível concluir o discovery.");
             }
-            window.localStorage.removeItem(STORAGE_KEY);
+            clearDraft();
             window.location.assign(result.report_url || "/contactus");
         } catch (error) {
             submitButton.disabled = false;
