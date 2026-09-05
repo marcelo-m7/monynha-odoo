@@ -33,11 +33,6 @@
                 <filter name="type_project" string="Projects" domain="[('type', '=', 'project')]"/>
                 <filter name="type_case" string="Cases" domain="[('type', '=', 'case')]"/>
                 <filter name="type_lab" string="Labs" domain="[('type', '=', 'lab')]"/>
-                <group expand="0" string="Group By">
-                    <filter name="group_type" string="Type" context="{'group_by': 'type'}"/>
-                    <filter name="group_website" string="Website" context="{'group_by': 'website_id'}" groups="website.group_multi_website"/>
-                    <filter name="group_published" string="Published" context="{'group_by': 'is_published'}"/>
-                </group>
             </search>
         </field>
     </record>
@@ -127,7 +122,6 @@
         <field name="res_model">monynha.work</field>
         <field name="view_mode">list,form</field>
         <field name="search_view_id" ref="view_monynha_work_search"/>
-        <field name="context">{'search_default_published': 0}</field>
     </record>
 
     <record id="action_monynha_work_tags" model="ir.actions.act_window">
