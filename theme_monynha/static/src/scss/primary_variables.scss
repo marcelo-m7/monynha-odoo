@@ -1,0 +1,56 @@
+$monynha-void: #020205;
+$monynha-night: #171220;
+$monynha-ink: #0B0B10;
+$monynha-violet: #9767E4;
+$monynha-paper: #FAFAFC;
+$monynha-white: #FFFFFF;
+
+$o-color-palettes: map-merge($o-color-palettes, (
+    'monynha': (
+        'o-color-1': $monynha-violet,
+        'o-color-2': $monynha-paper,
+        'o-color-3': $monynha-night,
+        'o-color-4': $monynha-white,
+        'o-color-5': $monynha-ink,
+        'o-cc1-bg': 'o-color-3',
+        'o-cc1-text': 'o-color-4',
+        'o-cc1-headings': 'o-color-4',
+        'o-cc1-link': 'o-color-1',
+        'o-cc2-bg': 'o-color-5',
+        'o-cc2-text': 'o-color-4',
+        'o-cc2-headings': 'o-color-4',
+        'o-cc2-link': 'o-color-1',
+        'o-cc3-bg': 'o-color-2',
+        'o-cc3-text': 'o-color-5',
+        'o-cc3-headings': 'o-color-5',
+        'o-cc3-link': 'o-color-1',
+        'menu': 2,
+        'footer': 2,
+        'copyright': 2,
+    ),
+));
+
+$o-selected-color-palettes-names: append($o-selected-color-palettes-names, 'monynha');
+
+$o-theme-color-palettes: map-merge($o-theme-color-palettes, (
+    'monynha': (
+        'alpha': $monynha-violet,
+        'beta': $monynha-paper,
+        'gamma': $monynha-night,
+        'delta': $monynha-white,
+        'epsilon': $monynha-ink,
+    ),
+));
+
+$o-website-values-palettes: ((
+    'color-palettes-name': 'monynha',
+    'link-underline': 'never',
+    'btn-border-radius': .8rem,
+    'btn-border-radius-sm': .65rem,
+    'btn-border-radius-lg': 1rem,
+    'input-border-radius': .8rem,
+    'logo-height': 2.4rem,
+),);
+
+$o-color-palettes-compatibility-indexes: (1: 'monynha');
+$o-theme-color-palettes-compatibility-indexes: (1: 'monynha');
