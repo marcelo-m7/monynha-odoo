@@ -18,7 +18,13 @@ def test_two_addons_exist_with_expected_manifests():
 def test_theme_registers_monynha_snippet_group_and_core_snippets():
     snippets = (ROOT / 'theme_monynha' / 'views' / 'snippets.xml').read_text()
     assert 'snippet-group="monynha"' in snippets
-    for snippet in ('s_monynha_hero', 's_monynha_services', 's_monynha_process', 's_monynha_labs', 's_monynha_cta'):
+    for snippet in (
+        's_monynha_hero',
+        's_monynha_services',
+        's_monynha_process',
+        's_monynha_labs',
+        's_monynha_cta',
+    ):
         assert snippet in snippets
 
 
@@ -31,3 +37,11 @@ def test_lead_generator_uses_crm_lead_and_secure_public_report_token():
     assert 'secrets.token_urlsafe' in diagnosis_model
     assert '/diagnosis/<string:token>' in controller
     assert 'ALLOWED_SUBMISSION_FIELDS' in controller
+
+
+def test_odoo19_constraint_api_and_scss_compatibility():
+    diagnosis = (ROOT / 'monynha_lead_generator' / 'models' / 'diagnosis.py').read_text()
+    scss = (ROOT / 'monynha_lead_generator' / 'static' / 'src' / 'scss' / 'lead_generator.scss').read_text()
+    assert '_sql_constraints' not in diagnosis
+    assert 'models.Constraint(' in diagnosis
+    assert 'width: min(' not in scss
