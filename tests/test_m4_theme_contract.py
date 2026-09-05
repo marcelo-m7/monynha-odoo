@@ -32,3 +32,10 @@ def test_m4_uses_native_new_page_template_mechanism():
     xml = (THEME / "data/page_templates_m4.xml").read_text()
     assert "theme.website.page" in xml
     assert "is_new_page_template" in xml
+
+
+def test_m4_container_avoids_mixed_unit_sass_min():
+    scss = (THEME / "static/src/scss/components.scss").read_text()
+    assert "min(100% - 2rem" not in scss
+    assert "width: calc(100% - 2rem);" in scss
+    assert "max-width: 80rem;" in scss
