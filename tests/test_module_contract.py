@@ -81,6 +81,23 @@ def test_lead_generator_uses_crm_lead_and_secure_public_report_token():
     assert 'secrets.token_urlsafe' in diagnosis_model
     assert '/diagnosis/<string:token>' in controller
     assert 'ALLOWED_SUBMISSION_FIELDS' in controller
+    assert '/monynha/diagnosis/followup' in controller
+
+
+def test_discovery_keeps_progressive_accessible_keyboard_and_draft_behavior():
+    js = (ROOT / 'monynha_lead_generator' / 'static' / 'src' / 'js' / 'discovery.js').read_text()
+    templates = (ROOT / 'monynha_lead_generator' / 'views' / 'templates.xml').read_text()
+    assert 'monynha_discovery_draft_v1' in js
+    assert 'event.key === "Escape"' in js
+    assert 'event.key === "Enter"' in js
+    assert 'submitButton.disabled = true' in js
+    assert 'submitButton.disabled = false' in js
+    assert 'matchMedia("(pointer: coarse)")' in js
+    assert 'role="progressbar"' in templates
+    assert 'data-monynha-progress-text' in templates
+    assert 'aria-live="polite"' in templates
+    assert 'react' not in js.lower()
+    assert 'vue' not in js.lower()
 
 
 def test_odoo19_constraint_api_and_scss_compatibility():
