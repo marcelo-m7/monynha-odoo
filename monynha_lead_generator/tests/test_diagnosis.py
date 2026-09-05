@@ -89,6 +89,37 @@ class TestMonynhaDiagnosis(TransactionCase):
             lead.activity_ids.filtered(lambda activity: activity.summary == "Monynha Project Signal follow-up")
         )
 
+    def test_salesperson_diagnosis_visibility_follows_standard_crm_ownership(self):
+        salesman_group = self.env.ref("sales_team.group_sale_salesman")
+        salesman_a = self.env["res.users"].create({
+            "name": "Monynha Salesperson A",
+            "login": "monynha-salesperson-a",
+            "email": "monynha-salesperson-a@example.com",
+            "group_ids": [(6, 0, salesman_group.ids)],
+        })
+        salesman_b = self.env["res.users"].create({
+            "name": "Monynha Salesperson B",
+            "login": "monynha-salesperson-b",
+            "email": "monynha-salesperson-b@example.com",
+            "group_ids": [(6, 0, salesman_group.ids)],
+        })
+        lead_a = self.env["crm.lead"].create({
+            "name": "Owned diagnosis A",
+            "user_id": salesman_a.id,
+        })
+        lead_b = self.env["crm.lead"].create({
+            "name": "Owned diagnosis B",
+            "user_id": salesman_b.id,
+        })
+        diagnosis_a = lead_a._monynha_create_diagnosis()
+        diagnosis_b = lead_b._monynha_create_diagnosis()
+
+        visible_ids = self.env["monynha.lead.diagnosis"].with_user(salesman_a).search([
+            ("id", "in", (diagnosis_a.id, diagnosis_b.id)),
+        ]).ids
+        self.assertIn(diagnosis_a.id, visible_ids)
+        self.assertNotIn(diagnosis_b.id, visible_ids)
+
     def test_unknown_provider_fails_without_modifying_lead(self):
         lead = self.env["crm.lead"].create({"name": "Provider fixture"})
         diagnosis = lead._monynha_create_diagnosis(provider="missing-provider")
