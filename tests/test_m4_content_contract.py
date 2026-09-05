@@ -59,6 +59,20 @@ def test_content_templates_preserve_editor_and_accessibility_semantics():
     assert "javascript:" not in combined.lower()
 
 
+def test_ci_covers_m4_installation_and_upgrade_boundaries():
+    workflow = (ROOT / ".github/workflows/ci.yml").read_text()
+    required = (
+        "monynha_content_ci",
+        "-i monynha_content",
+        "-i theme_monynha,monynha_content",
+        "-i theme_monynha,monynha_lead_generator",
+        "-i theme_monynha,monynha_content,monynha_lead_generator",
+        "-u theme_monynha,monynha_content,monynha_lead_generator",
+    )
+    for marker in required:
+        assert marker in workflow
+
+
 def test_defaults_do_not_ship_fake_proof():
     shipped = "\n".join(
         p.read_text(errors="ignore")
