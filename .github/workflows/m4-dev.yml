@@ -1,0 +1,55 @@
+name: M4 Content Development
+
+on:
+  push:
+    branches:
+      - feat/m4-composable-content
+
+permissions:
+  contents: read
+
+jobs:
+  content-model:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Checkout pinned Odoo design themes
+        run: |
+          git clone --filter=blob:none https://github.com/odoo/design-themes.git "$RUNNER_TEMP/design-themes"
+          git -C "$RUNNER_TEMP/design-themes" checkout a1818df4ade65406c0cacae8b1ea676e6f70095f
+      - name: Start PostgreSQL 16
+        run: |
+          docker network create monynha-m4-dev
+          docker run -d --name monynha-m4-db \
+            --network monynha-m4-dev \
+            -e POSTGRES_USER=odoo \
+            -e POSTGRES_PASSWORD=odoo \
+            -e POSTGRES_DB=monynha_content_ci \
+            postgres:16
+          for i in $(seq 1 30); do
+            docker exec monynha-m4-db pg_isready -U odoo -d monynha_content_ci && exit 0
+            sleep 2
+          done
+          exit 1
+      - name: Install content and run Work model tests
+        run: |
+          docker run --rm \
+            --network monynha-m4-dev \
+            -e HOST=monynha-m4-db \
+            -e PORT=5432 \
+            -e USER=odoo \
+            -e PASSWORD=odoo \
+            -v "$GITHUB_WORKSPACE:/mnt/extra-addons:ro" \
+            -v "$RUNNER_TEMP/design-themes:/mnt/design-themes:ro" \
+            odoo:19.0 \
+            --addons-path=/usr/lib/python3/dist-packages/odoo/addons,/mnt/design-themes,/mnt/extra-addons \
+            --workers=0 \
+            --without-demo=True \
+            -d monynha_content_ci \
+            -i monynha_content \
+            --test-tags /monynha_content:TestMonynhaWork \
+            --stop-after-init
+      - name: PostgreSQL logs on failure
+        if: failure()
+        run: docker logs monynha-m4-db || true
