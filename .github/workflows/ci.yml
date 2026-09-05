@@ -41,13 +41,55 @@ jobs:
             postgres:16
           for i in $(seq 1 30); do
             if docker exec monynha-db pg_isready -U odoo -d monynha_ci; then
+              docker exec monynha-db createdb -U odoo monynha_theme_ci
+              docker exec monynha-db createdb -U odoo monynha_lead_ci
               exit 0
             fi
             sleep 2
           done
           exit 1
 
-      - name: Install addons and run tests
+      - name: Install theme independently
+        run: |
+          docker run --rm \
+            --network monynha-ci \
+            -e HOST=monynha-db \
+            -e PORT=5432 \
+            -e USER=odoo \
+            -e PASSWORD=odoo \
+            -v "$GITHUB_WORKSPACE:/mnt/extra-addons:ro" \
+            -v "$RUNNER_TEMP/design-themes:/mnt/design-themes:ro" \
+            -v monynha-data:/var/lib/odoo \
+            odoo:19.0 \
+            --addons-path=/usr/lib/python3/dist-packages/odoo/addons,/mnt/design-themes,/mnt/extra-addons \
+            --workers=0 \
+            --without-demo=True \
+            -d monynha_theme_ci \
+            -i theme_monynha \
+            --test-tags /theme_monynha \
+            --stop-after-init
+
+      - name: Install lead generator independently
+        run: |
+          docker run --rm \
+            --network monynha-ci \
+            -e HOST=monynha-db \
+            -e PORT=5432 \
+            -e USER=odoo \
+            -e PASSWORD=odoo \
+            -v "$GITHUB_WORKSPACE:/mnt/extra-addons:ro" \
+            -v "$RUNNER_TEMP/design-themes:/mnt/design-themes:ro" \
+            -v monynha-data:/var/lib/odoo \
+            odoo:19.0 \
+            --addons-path=/usr/lib/python3/dist-packages/odoo/addons,/mnt/design-themes,/mnt/extra-addons \
+            --workers=0 \
+            --without-demo=True \
+            -d monynha_lead_ci \
+            -i monynha_lead_generator \
+            --test-tags /monynha_lead_generator \
+            --stop-after-init
+
+      - name: Install addons together and run tests
         run: |
           docker run --rm \
             --network monynha-ci \
