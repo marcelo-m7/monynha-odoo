@@ -1,7 +1,7 @@
 {
     "name": "Monynha Lead Generator",
     "summary": "Interactive website discovery that creates and enriches standard CRM leads",
-    "version": "19.0.1.0.0",
+    "version": "19.0.2.0.0",
     "category": "Sales/CRM",
     "author": "Monynha Softwares",
     "website": "https://monynha.com",
@@ -18,6 +18,7 @@
         "web.assets_frontend": [
             "monynha_lead_generator/static/src/scss/lead_generator.scss",
             "monynha_lead_generator/static/src/js/discovery.js",
+            "monynha_lead_generator/static/src/js/report.js",
         ],
     },
     "installable": True,
