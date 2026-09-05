@@ -1,0 +1,40 @@
+name: Odoo 19 CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pytest
+      - run: pytest -q tests
+
+  odoo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start PostgreSQL 16
+        run: |
+          docker network create monynha-ci
+          docker run -d --name monynha-db --network monynha-ci -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -e POSTGRES_DB=monynha_ci postgres:16
+          for i in $(seq 1 30); do docker exec monynha-db pg_isready -U odoo -d monynha_ci && exit 0; sleep 2; done
+          exit 1
+      - name: Install addons and run tests
+        run: |
+          docker run --rm --network monynha-ci -e HOST=monynha-db -e PORT=5432 -e USER=odoo -e PASSWORD=odoo -v "$GITHUB_WORKSPACE:/mnt/extra-addons:ro" -v monynha-data:/var/lib/odoo odoo:19.0 --addons-path=/usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons --workers=0 --without-demo=True -d monynha_ci -i theme_monynha,monynha_lead_generator --test-tags /theme_monynha,/monynha_lead_generator --stop-after-init
+      - name: Upgrade addons and rerun regression tests
+        run: |
+          docker run --rm --network monynha-ci -e HOST=monynha-db -e PORT=5432 -e USER=odoo -e PASSWORD=odoo -v "$GITHUB_WORKSPACE:/mnt/extra-addons:ro" -v monynha-data:/var/lib/odoo odoo:19.0 --addons-path=/usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons --workers=0 --without-demo=True -d monynha_ci -u theme_monynha,monynha_lead_generator --test-tags /theme_monynha,/monynha_lead_generator --stop-after-init
+      - name: PostgreSQL logs on failure
+        if: failure()
+        run: docker logs monynha-db || true
