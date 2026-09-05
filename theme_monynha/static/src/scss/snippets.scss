@@ -314,3 +314,262 @@
         transform: none;
     }
 }
+
+/* M4 reusable snippet compositions. */
+.s_monynha_hero_split,
+.s_monynha_section_header,
+.s_monynha_longform_intro,
+.s_monynha_split_content,
+.s_monynha_media_copy,
+.s_monynha_quote,
+.s_monynha_steps,
+.s_monynha_timeline,
+.s_monynha_feature_grid,
+.s_monynha_technology_grid,
+.s_monynha_deliverables,
+.s_monynha_engagement_scope,
+.s_monynha_comparison,
+.s_monynha_terminal_panel,
+.s_monynha_contact_cta {
+    min-width: 0;
+    padding-inline: 1.25rem;
+    overflow: hidden;
+}
+
+.s_monynha_hero_split {
+    background:
+        radial-gradient(circle at 88% 18%, rgba(139, 92, 246, .22), transparent 28rem),
+        var(--monynha-night);
+    color: var(--monynha-white);
+}
+
+.s_monynha_hero_split h1 {
+    max-width: 10ch;
+    margin: 0;
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: .91;
+    letter-spacing: -.06em;
+    overflow-wrap: anywhere;
+}
+
+.s_monynha_hero_split .lead {
+    max-width: 40rem;
+    color: rgba(255, 255, 255, .74);
+}
+
+.s_monynha_hero_split .monynha-terminal,
+.s_monynha_terminal_panel .monynha-terminal {
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.s_monynha_longform_intro .monynha-longform {
+    display: grid;
+    grid-template-columns: minmax(0, .45fr) minmax(0, 1.55fr);
+    gap: clamp(2rem, 6vw, 6rem);
+}
+
+.s_monynha_longform_intro h2,
+.s_monynha_split_content h2,
+.s_monynha_media_copy h2,
+.s_monynha_deliverables h2,
+.s_monynha_terminal_panel h2,
+.s_monynha_contact_cta h2 {
+    margin: 0;
+    font-size: clamp(2.3rem, 5vw, 4.8rem);
+    line-height: .98;
+    letter-spacing: -.045em;
+    overflow-wrap: anywhere;
+}
+
+.s_monynha_split_content .monynha-panel,
+.s_monynha_technology_grid .monynha-panel,
+.s_monynha_engagement_scope .monynha-panel,
+.s_monynha_comparison .monynha-panel {
+    min-width: 0;
+    padding: 1.5rem;
+}
+
+.s_monynha_media_copy .monynha-media-frame {
+    display: grid;
+    min-width: 0;
+    min-height: clamp(15rem, 35vw, 28rem);
+    margin: 0;
+    place-items: center;
+    border: var(--monynha-border);
+    border-radius: var(--monynha-radius);
+    padding: clamp(1.5rem, 5vw, 4rem);
+    background: var(--monynha-void);
+    box-shadow: var(--monynha-shadow-violet);
+}
+
+.s_monynha_media_copy img {
+    display: block;
+    width: 100%;
+    max-width: 34rem;
+    height: auto;
+}
+
+.s_monynha_quote {
+    background: var(--monynha-violet);
+    color: var(--monynha-void);
+}
+
+.s_monynha_quote blockquote {
+    max-width: 18ch;
+    margin: 0 0 1.5rem;
+    font-size: clamp(2.4rem, 6vw, 5.6rem);
+    font-weight: 800;
+    line-height: .98;
+    letter-spacing: -.05em;
+    overflow-wrap: anywhere;
+}
+
+.s_monynha_quote .monynha-meta {
+    color: inherit;
+}
+
+.s_monynha_timeline .monynha-timeline-list {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.s_monynha_timeline .monynha-timeline-list li {
+    display: grid;
+    grid-template-columns: minmax(0, .4fr) minmax(0, 1.6fr);
+    gap: 1.5rem;
+    min-width: 0;
+    border-top: var(--monynha-border);
+    padding: 1.5rem 0;
+}
+
+.s_monynha_timeline .monynha-timeline-list li:last-child {
+    border-bottom: var(--monynha-border);
+}
+
+.s_monynha_timeline h3 {
+    margin-top: 0;
+    font-weight: 800;
+}
+
+.s_monynha_deliverables .monynha-deliverables-list {
+    display: grid;
+    gap: .75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.s_monynha_deliverables .monynha-deliverables-list li {
+    display: grid;
+    gap: .25rem;
+    min-width: 0;
+    border-bottom: 1px solid rgba(11, 11, 16, .18);
+    padding: 1rem 0;
+    overflow-wrap: anywhere;
+}
+
+.s_monynha_engagement_scope .monynha-scope-grid,
+.s_monynha_comparison .monynha-comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.s_monynha_comparison .monynha-comparison-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.s_monynha_contact_cta {
+    background: var(--monynha-void);
+    color: var(--monynha-white);
+}
+
+.s_monynha_contact_cta .monynha-contact-panel {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: clamp(2rem, 5vw, 5rem);
+    min-width: 0;
+}
+
+.s_monynha_contact_cta .monynha-contact-panel > * {
+    min-width: 0;
+}
+
+.s_monynha_contact_cta .lead {
+    max-width: 42rem;
+    color: rgba(255, 255, 255, .74);
+}
+
+@media (max-width: 991.98px) {
+    .s_monynha_longform_intro .monynha-longform,
+    .s_monynha_engagement_scope .monynha-scope-grid,
+    .s_monynha_comparison .monynha-comparison-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .s_monynha_contact_cta .monynha-contact-panel {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .s_monynha_hero_split,
+    .s_monynha_section_header,
+    .s_monynha_longform_intro,
+    .s_monynha_split_content,
+    .s_monynha_media_copy,
+    .s_monynha_quote,
+    .s_monynha_steps,
+    .s_monynha_timeline,
+    .s_monynha_feature_grid,
+    .s_monynha_technology_grid,
+    .s_monynha_deliverables,
+    .s_monynha_engagement_scope,
+    .s_monynha_comparison,
+    .s_monynha_terminal_panel,
+    .s_monynha_contact_cta {
+        padding-inline: .9rem;
+    }
+
+    .s_monynha_timeline .monynha-timeline-list li {
+        grid-template-columns: minmax(0, 1fr);
+        gap: .5rem;
+    }
+
+    .s_monynha_contact_cta .monynha-cluster,
+    .s_monynha_hero_split .monynha-cluster {
+        align-items: stretch;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .s_monynha_contact_cta .monynha-button,
+    .s_monynha_hero_split .monynha-button {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .s_monynha_hero_split *,
+    .s_monynha_section_header *,
+    .s_monynha_longform_intro *,
+    .s_monynha_split_content *,
+    .s_monynha_media_copy *,
+    .s_monynha_quote *,
+    .s_monynha_steps *,
+    .s_monynha_timeline *,
+    .s_monynha_feature_grid *,
+    .s_monynha_technology_grid *,
+    .s_monynha_deliverables *,
+    .s_monynha_engagement_scope *,
+    .s_monynha_comparison *,
+    .s_monynha_terminal_panel *,
+    .s_monynha_contact_cta * {
+        scroll-behavior: auto;
+    }
+}
