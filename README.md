@@ -2,22 +2,39 @@
 
 Native Odoo 19 Community implementation of the Monynha Softwares website experience and lead-generation workflow.
 
-The project revives the interaction and visual DNA of the historical `open2.tech` v6.0.1 lead-generator while replacing its old parallel frontend/backend stack with standard Odoo Website and CRM mechanisms.
+The project revives the interaction and visual DNA of the historical Monynha/open2.tech presence while replacing its old parallel frontend/backend stack with standard Odoo Website and CRM mechanisms.
 
 ## Addons
 
 ### `theme_monynha`
 
-Visual identity and Website Builder layer:
+M3 completes the visual identity and Website Builder layer as an **Odoo-native branded theme**:
 
-- violet-led brutalist-digital design tokens;
-- reusable components and Monynha snippet group;
-- Hero, Services, Process, Labs, CTA, Project Signal, Selected Work, Capability, Manifesto, Metrics, FAQ and Page Intro snippets;
+- brutalist-futuristic design system led by void/black, violet and paper surfaces;
+- self-contained Monynha wordmark asset;
+- reusable Monynha Website Builder snippet group;
+- Hero, Services, Process, Labs, CTA, Project Signal, Selected Work, Capability, Manifesto, Metrics, FAQ, Page Intro, Operating Principles and Labs Showcase snippets;
 - Odoo-native `theme.website.page` starters for Services, Odoo, Software, AI & Automation, Process, Labs, About and a safe `/start` fallback;
 - Odoo-native `theme.website.menu` navigation seed;
-- homepage composition metadata through `configurator_snippets`;
-- standard Website header/footer styling without replacing Odoo navigation logic;
-- responsive and `prefers-reduced-motion` behavior.
+- homepage composition through `configurator_snippets`, not a destructive direct `/` page seed;
+- standard Odoo Website header, menu, dropdown, mobile navbar and footer rendering with Monynha styling layered on top;
+- responsive typography, reduced hard shadows on narrow screens, visible focus states and `prefers-reduced-motion` support;
+- no React/Vue frontend runtime, parallel CMS or theme-specific business model.
+
+The final homepage composition is:
+
+```text
+Hero
+→ Project Signal
+→ Capabilities
+→ Selected Work
+→ Operating Principles
+→ Labs / Open Work
+→ Manifesto
+→ CTA
+```
+
+Selected Work and Labs use real editorial project references — FACODI, Codoo Importer and Monynha Odoo — without fabricated client outcomes or commercial metrics.
 
 ### `monynha_lead_generator`
 
@@ -35,9 +52,43 @@ Commercial discovery layer:
 - Odoo `mail.template` messages for diagnosis-ready and follow-up confirmation;
 - no mandatory external AI provider.
 
-The addons are intentionally independent: neither depends on the other. With only the theme installed, `/start` remains a safe Website page that falls back to `/contactus`. With the lead-generator installed, its explicit `/start` controller provides the interactive discovery.
+The addons are intentionally independent: neither depends on the other. With only the theme installed, `/start` remains a safe Website page that falls back to `/contactus`. With the lead generator installed, its explicit `/start` controller provides the interactive discovery.
 
-## End-to-end flow
+## Website ownership model
+
+M3 deliberately keeps Odoo Website as the owner of the public experience:
+
+```text
+Homepage starter     configurator_snippets
+Seeded pages         theme.website.page → editable website.page copies
+Navigation           theme.website.menu → standard website.menu copies
+Header / footer      standard Odoo Website rendering + Monynha SCSS
+Labs / Selected Work ordinary editable Website content
+/start               theme fallback; lead-generator controller when installed
+```
+
+The theme does not hardcode a second navigation tree, replace the Odoo header/footer, create a Labs CMS, or rewrite user-edited `website.page` bodies during normal upgrades.
+
+## Public routes
+
+The theme seeds editable starters for:
+
+- `/services`
+- `/services/odoo`
+- `/services/software`
+- `/services/ai-automation`
+- `/process`
+- `/labs`
+- `/about`
+- `/start` — safe standalone fallback
+
+`/process` uses the four-stage method:
+
+```text
+Discovery → Architecture → Build → Observe
+```
+
+## End-to-end commercial flow
 
 ```text
 Website
@@ -60,21 +111,6 @@ crm.lead timestamp + internal note + standard CRM activity
 ```
 
 The lead is created **before** diagnosis processing, so a provider failure never loses the commercial enquiry. Diagnosis history is append-only; later analyses do not silently overwrite prior results.
-
-## Public website
-
-The theme seeds editable starters for:
-
-- `/services`
-- `/services/odoo`
-- `/services/software`
-- `/services/ai-automation`
-- `/process`
-- `/labs`
-- `/about`
-- `/start` (theme-only fallback)
-
-Editorial ownership remains with Odoo Website Builder. Labs and selected work are intentionally Website content in M2 rather than a custom CMS model.
 
 ## Project Signal schema
 
@@ -110,6 +146,18 @@ These values describe where a technical conversation should begin. They are not 
 - Raw diagnosis payloads and technical errors remain internal/system-only.
 - No arbitrary administrator is assigned when a lead has no salesperson or team leader.
 
+## Website Builder editing
+
+After theme installation, editors should use normal Odoo Website tools:
+
+- edit page copy and hierarchy through Website Builder;
+- reorder or replace Monynha snippets as normal sections;
+- edit Labs and Selected Work cards directly rather than changing a model;
+- manage the canonical Website menu in Odoo after the initial theme seed;
+- keep `/start` content as a safe theme-only fallback — the lead generator owns the interactive controller when installed.
+
+See `docs/m3-theme-completion.md` for the M3 ownership and route map.
+
 ## Development
 
 Contract tests:
@@ -134,7 +182,12 @@ odoo --stop-after-init -d monynha_test \
   --test-enable
 ```
 
-GitHub Actions runs the contract suite plus clean install and upgrade using the official Odoo 19 image, PostgreSQL 16 and a pinned Odoo `design-themes` checkout for `theme_common`.
+GitHub Actions uses the official Odoo 19 image, PostgreSQL 16 and a pinned Odoo `design-themes` checkout for `theme_common`. The release gate verifies:
+
+- theme-only installation;
+- lead-generator-only installation and regressions;
+- combined installation;
+- combined upgrade regressions.
 
 ## Future provider extensions
 

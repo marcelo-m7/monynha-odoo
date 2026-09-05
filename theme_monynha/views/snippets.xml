@@ -10,9 +10,42 @@
             <t t-snippet="theme_monynha.s_monynha_cta" string="Monynha CTA" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
         </xpath>
     </template>
-    <template id="s_monynha_hero" name="Monynha Hero"><section class="s_monynha_hero o_cc o_cc1" data-snippet="s_monynha_hero" data-name="Monynha Hero"><span class="monynha-spark" aria-hidden="true"/><div class="monynha-hero-inner"><p class="monynha-kicker">Engenharia encontra intuição</p><h1 class="monynha-display">MONYNHA <em>SOFTWARES</em></h1><p class="lead">Produtos digitais, Odoo e automação desenhados para transformar complexidade em sistemas que realmente funcionam.</p><div class="monynha-actions"><a href="/start" class="monynha-button monynha-button-primary">Começar projeto <i class="fa fa-arrow-right" aria-hidden="true"/></a><a href="/labs" class="monynha-button monynha-button-secondary">Explorar Labs</a></div></div></section></template>
-    <template id="s_monynha_services" name="Monynha Services"><section class="s_monynha_services o_cc o_cc3" data-snippet="s_monynha_services" data-name="Monynha Services"><div class="container"><p class="monynha-kicker">What we build</p><h2 class="display-4 fw-bold mb-5">Tecnologia com personalidade.</h2><div class="monynha-grid"><article class="monynha-card"><h3>Odoo</h3><p>ERP, workflows e operações integradas sobre mecanismos standard sempre que possível.</p></article><article class="monynha-card"><h3>Software</h3><p>Produtos web, ferramentas internas e integrações construídas em torno do problema real.</p></article><article class="monynha-card"><h3>IA &amp; Automação</h3><p>Automação aplicada com supervisão, contexto e impacto operacional mensurável.</p></article></div></div></section></template>
+
+    <template id="s_monynha_hero" name="Monynha Hero">
+        <section class="s_monynha_hero o_cc o_cc1" data-snippet="s_monynha_hero" data-name="Monynha Hero">
+            <span class="monynha-spark" aria-hidden="true"/>
+            <span class="monynha-hero-grid" aria-hidden="true"/>
+            <div class="monynha-hero-inner">
+                <img class="monynha-wordmark" src="/theme_monynha/static/src/img/monynha-wordmark.svg" alt="Monynha Softwares"/>
+                <p class="monynha-kicker">Digital engineering studio</p>
+                <h1 class="monynha-display">Where Engineering Meets Intuition</h1>
+                <p class="lead">Odoo, custom software and applied automation built around the real operation — with clear boundaries, observable data and the smallest useful system.</p>
+                <div class="monynha-actions">
+                    <a href="/start" class="monynha-button monynha-button-primary">Start a Project <i class="fa fa-arrow-right" aria-hidden="true"/></a>
+                    <a href="/labs" class="monynha-button monynha-button-secondary">Explore Labs</a>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_services" name="Monynha Services">
+        <section class="s_monynha_services o_cc o_cc3" data-snippet="s_monynha_services" data-name="Monynha Services">
+            <div class="container">
+                <div class="monynha-section-header">
+                    <p class="monynha-kicker">Capabilities</p>
+                    <h2>Tecnologia em torno da operação real.</h2>
+                    <p class="lead">Três áreas estáveis, uma regra comum: começar pelo mecanismo que já funciona e construir apenas a camada que falta.</p>
+                </div>
+                <div class="monynha-grid">
+                    <article class="monynha-card"><small>01 / Odoo</small><h3>Odoo</h3><p>ERP, CRM, Website, portal, serviços e workflows sobre mecanismos standard sempre que possível.</p><a href="/services/odoo">Explorar Odoo <i class="fa fa-arrow-right" aria-hidden="true"/></a></article>
+                    <article class="monynha-card"><small>02 / Software</small><h3>Custom Software</h3><p>Produtos web, ferramentas internas, APIs e integrações com fronteiras pequenas e compreensíveis.</p><a href="/services/software">Explorar Software <i class="fa fa-arrow-right" aria-hidden="true"/></a></article>
+                    <article class="monynha-card"><small>03 / Automation</small><h3>AI &amp; Automation</h3><p>Automação contextual com providers substituíveis, fallbacks e supervisão humana onde a decisão importa.</p><a href="/services/ai-automation">Explorar Automação <i class="fa fa-arrow-right" aria-hidden="true"/></a></article>
+                </div>
+            </div>
+        </section>
+    </template>
+
     <template id="s_monynha_process" name="Monynha Process"><section class="s_monynha_process o_cc o_cc3" data-snippet="s_monynha_process" data-name="Monynha Process"><div class="container"><p class="monynha-kicker">Como trabalhamos</p><div class="monynha-grid"><article class="monynha-panel"><small>01</small><h3>Discovery</h3><p>Entender contexto, gargalos e resultado esperado.</p></article><article class="monynha-panel"><small>02</small><h3>Architecture</h3><p>Encontrar a menor arquitetura que resolve o problema.</p></article><article class="monynha-panel"><small>03</small><h3>Build &amp; Improve</h3><p>Entregar, observar e melhorar com evidência.</p></article></div></div></section></template>
-    <template id="s_monynha_labs" name="Monynha Labs"><section class="s_monynha_labs o_cc o_cc3" data-snippet="s_monynha_labs" data-name="Monynha Labs"><div class="container"><p class="monynha-kicker">Labs</p><h2 class="display-5 fw-bold">Experimentos que viram ferramentas.</h2><p class="lead mb-4">Use este bloco para apresentar projetos, protótipos e open source sem acoplar o theme a um modelo de negócio específico.</p><a href="/labs" class="monynha-button monynha-button-secondary">Ver Labs</a></div></section></template>
-    <template id="s_monynha_cta" name="Monynha CTA"><section class="s_monynha_cta o_cc o_cc2" data-snippet="s_monynha_cta" data-name="Monynha CTA"><div class="container"><p class="monynha-kicker">Start a quest</p><h2>Conta-nos o que estás tentando construir.</h2><p class="lead mx-auto mb-4" style="max-width: 42rem;">Em poucos passos, organizamos o contexto do teu projeto e geramos um primeiro mapa de oportunidades.</p><a href="/start" class="monynha-button monynha-button-primary">Começar projeto</a></div></section></template>
+    <template id="s_monynha_labs" name="Monynha Labs"><section class="s_monynha_labs o_cc o_cc3" data-snippet="s_monynha_labs" data-name="Monynha Labs"><div class="container"><p class="monynha-kicker">Labs</p><h2 class="display-5 fw-bold">Experimentos que viram ferramentas.</h2><p class="lead mb-4">Projetos, protótipos e open work continuam como conteúdo editorial do Website Builder.</p><a href="/labs" class="monynha-button monynha-button-secondary">Ver Labs</a></div></section></template>
+    <template id="s_monynha_cta" name="Monynha CTA"><section class="s_monynha_cta o_cc o_cc2" data-snippet="s_monynha_cta" data-name="Monynha CTA"><div class="container"><p class="monynha-kicker">Start a quest</p><h2>Conta-nos o que estás tentando construir.</h2><p class="lead monynha-copy-narrow">Em poucos passos, organizamos o contexto do teu projeto e encontramos um primeiro caminho técnico sem saltar direto para a solução.</p><a href="/start" class="monynha-button monynha-button-primary">Começar projeto</a></div></section></template>
 </odoo>

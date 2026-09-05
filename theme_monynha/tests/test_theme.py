@@ -13,7 +13,7 @@ class TestMonynhaTheme(HttpCase):
         website.theme_id = theme
         theme._theme_get_stream_themes().with_context(load_all_views=True)._theme_load(website)
 
-    def test_core_and_m2_snippets_registered(self):
+    def test_core_m2_and_m3_snippets_registered(self):
         keys = {
             "theme_monynha.s_monynha_hero",
             "theme_monynha.s_monynha_services",
@@ -27,6 +27,8 @@ class TestMonynhaTheme(HttpCase):
             "theme_monynha.s_monynha_metrics",
             "theme_monynha.s_monynha_faq",
             "theme_monynha.s_monynha_intro",
+            "theme_monynha.s_monynha_principles",
+            "theme_monynha.s_monynha_labs_showcase",
         }
         views = self.env["ir.ui.view"].search([("key", "in", list(keys)), ("website_id", "!=", False)])
         self.assertEqual(set(views.mapped("key")), keys)

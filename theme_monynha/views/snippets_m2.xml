@@ -18,16 +18,17 @@
                 <div class="monynha-section-header">
                     <p class="monynha-kicker">Project Signal</p>
                     <h2>Antes da proposta, clareza.</h2>
-                    <p class="lead">O discovery organiza o problema, identifica oportunidades e cria um primeiro mapa para a conversa técnica.</p>
-                    <a href="/contactus" class="monynha-button monynha-button-primary">Começar discovery</a>
+                    <p class="lead">O discovery organiza o problema e transforma contexto disperso num primeiro mapa de conversa técnica.</p>
+                    <a href="/start" class="monynha-button monynha-button-primary">Começar discovery</a>
                 </div>
                 <article class="monynha-signal-card">
-                    <p class="monynha-kicker">Sample signal</p>
-                    <div class="monynha-signal-score"><strong>82</strong><span>/ 100</span></div>
+                    <p class="monynha-kicker">Discovery lens</p>
+                    <h3>Quatro sinais para enquadrar o sistema.</h3>
                     <div class="monynha-signal-bars">
-                        <span>Automation potential <strong>91</strong></span>
-                        <span>Process clarity <strong>68</strong></span>
-                        <span>Odoo fit <strong>86</strong></span>
+                        <span><strong>Operation</strong><small>onde o trabalho acontece</small></span>
+                        <span><strong>Friction</strong><small>onde existe repetição ou perda de contexto</small></span>
+                        <span><strong>Integration</strong><small>onde dados e ferramentas precisam conversar</small></span>
+                        <span><strong>Automation</strong><small>onde a automação pode ser útil e segura</small></span>
                     </div>
                 </article>
             </div>
@@ -39,13 +40,13 @@
             <div class="container">
                 <div class="monynha-section-header">
                     <p class="monynha-kicker">Selected work</p>
-                    <h2>Problemas reais. Sistemas que ficam.</h2>
-                    <p class="lead">Edite estes cartões no Website Builder para destacar produtos, implementações e experiências.</p>
+                    <h2>Experimentos, ferramentas e plataformas em evolução.</h2>
+                    <p class="lead">Conteúdo editorial editável no Website Builder, sem inventar resultados comerciais ou transformar o theme num CMS paralelo.</p>
                 </div>
                 <div class="monynha-work-grid">
-                    <article class="monynha-work-card"><div><small>Odoo</small><h3>Operações conectadas</h3><p>CRM, vendas, execução e dados trabalhando no mesmo sistema.</p></div><a href="/services/odoo">Explorar <i class="fa fa-arrow-right" aria-hidden="true"/></a></article>
-                    <article class="monynha-work-card"><div><small>Software</small><h3>Ferramentas sob medida</h3><p>Interfaces e integrações desenhadas em torno do fluxo real.</p></div><a href="/services/software">Explorar <i class="fa fa-arrow-right" aria-hidden="true"/></a></article>
-                    <article class="monynha-work-card"><div><small>Labs</small><h3>Experimentos úteis</h3><p>Protótipos, open source e ideias que podem virar produto.</p></div><a href="/labs">Ver Labs <i class="fa fa-arrow-right" aria-hidden="true"/></a></article>
+                    <article class="monynha-work-card"><div><small>Education / Odoo</small><h3>FACODI</h3><p>Plataforma comunitária de aprendizagem aberta construída sobre mecanismos Odoo e conteúdo público.</p></div><a href="/labs">Explorar <i class="fa fa-arrow-right" aria-hidden="true"/></a></article>
+                    <article class="monynha-work-card"><div><small>Developer tooling</small><h3>Codoo Importer</h3><p>Experimento em fluxos de importação, mapeamento e integração de dados com Odoo.</p></div><a href="/labs">Explorar <i class="fa fa-arrow-right" aria-hidden="true"/></a></article>
+                    <article class="monynha-work-card"><div><small>Open architecture</small><h3>Monynha Odoo</h3><p>Theme e mecanismos comerciais Odoo-native para a própria presença digital da Monynha.</p></div><a href="/labs">Explorar <i class="fa fa-arrow-right" aria-hidden="true"/></a></article>
                 </div>
             </div>
         </section>
@@ -73,7 +74,7 @@
         <section class="s_monynha_manifesto" data-snippet="s_monynha_manifesto" data-name="Manifesto">
             <div class="container monynha-manifesto-layout">
                 <p class="monynha-kicker">Philosophy</p>
-                <blockquote>Menos software por hábito. Mais sistema por intenção.</blockquote>
+                <blockquote>Engineering should make complexity legible — not merely move it somewhere else.</blockquote>
             </div>
         </section>
     </template>
@@ -83,9 +84,9 @@
             <div class="container">
                 <div class="monynha-section-header"><p class="monynha-kicker">Signals</p><h2>O que importa pode ser observado.</h2></div>
                 <div class="monynha-metrics-grid">
-                    <article class="monynha-metric"><small>01</small><strong>1 sistema</strong><p>Uma fonte operacional clara antes de multiplicar ferramentas.</p></article>
-                    <article class="monynha-metric"><small>02</small><strong>- fricção</strong><p>Automação deve remover trabalho repetitivo, não esconder complexidade.</p></article>
-                    <article class="monynha-metric"><small>03</small><strong>+ contexto</strong><p>Decisões melhores começam com dados e ownership visíveis.</p></article>
+                    <article class="monynha-metric"><small>01</small><strong>1 system</strong><p>Uma fonte operacional clara antes de multiplicar ferramentas.</p></article>
+                    <article class="monynha-metric"><small>02</small><strong>less friction</strong><p>Automação deve remover trabalho repetitivo, não esconder complexidade.</p></article>
+                    <article class="monynha-metric"><small>03</small><strong>more context</strong><p>Decisões melhores começam com dados e ownership visíveis.</p></article>
                 </div>
             </div>
         </section>

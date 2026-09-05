@@ -11,6 +11,7 @@
     font-weight: 800;
     letter-spacing: .12em;
     text-transform: uppercase;
+    overflow-wrap: anywhere;
 }
 
 .monynha-button {
@@ -24,7 +25,10 @@
     padding: .85rem 1.2rem;
     font-weight: 800;
     text-decoration: none;
-    transition: transform var(--monynha-motion-fast) ease, box-shadow var(--monynha-motion-fast) ease;
+    overflow-wrap: anywhere;
+    transition:
+        transform var(--monynha-motion-fast) var(--monynha-ease-standard),
+        box-shadow var(--monynha-motion-fast) var(--monynha-ease-standard);
 }
 
 .monynha-button-primary {
@@ -52,12 +56,16 @@
 .monynha-capability,
 .monynha-metric,
 .monynha-faq,
-.monynha-terminal {
+.monynha-terminal,
+.monynha-principle-card,
+.monynha-lab-card {
+    min-width: 0;
     border: var(--monynha-border);
     border-radius: var(--monynha-radius);
     background: var(--monynha-paper);
     color: var(--monynha-ink);
     box-shadow: var(--monynha-shadow);
+    overflow-wrap: anywhere;
 }
 
 .monynha-grid {
@@ -76,6 +84,7 @@
     font-size: clamp(2.25rem, 5vw, 4.75rem);
     line-height: .98;
     letter-spacing: -.045em;
+    overflow-wrap: anywhere;
 }
 
 .monynha-section-header .lead {
@@ -88,58 +97,110 @@
 .monynha-capability,
 .monynha-metric,
 .monynha-faq,
-.monynha-terminal {
+.monynha-terminal,
+.monynha-principle-card,
+.monynha-lab-card {
     padding: 1.5rem;
 }
 
-.monynha-signal-score {
+.monynha-card {
     display: flex;
-    align-items: baseline;
-    gap: .35rem;
-    margin-bottom: 1rem;
-}
-
-.monynha-signal-score strong {
-    font-size: clamp(3rem, 8vw, 6rem);
-    line-height: .85;
-    letter-spacing: -.06em;
-}
-
-.monynha-signal-bars {
-    display: grid;
-    gap: .75rem;
-}
-
-.monynha-signal-bars span {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    border-bottom: 1px solid rgba(11, 11, 16, .18);
-    padding-bottom: .55rem;
-    font-weight: 700;
-}
-
-.monynha-work-card {
-    display: flex;
-    min-height: 15rem;
+    min-height: 18rem;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1.5rem;
 }
 
+.monynha-card > p {
+    flex: 1 1 auto;
+}
+
+.monynha-card > a,
+.monynha-work-card > a {
+    color: var(--monynha-ink);
+    font-weight: 800;
+    text-decoration-thickness: 2px;
+    text-underline-offset: .22em;
+}
+
+.monynha-card > a:focus-visible,
+.monynha-work-card > a:focus-visible,
+.monynha-lab-card a:focus-visible,
+.monynha-principle-card a:focus-visible {
+    border-radius: .2rem;
+    outline: 3px solid var(--monynha-violet);
+    outline-offset: 4px;
+}
+
+.monynha-card small,
 .monynha-work-card small,
 .monynha-capability small,
-.monynha-metric small {
+.monynha-metric small,
+.monynha-principle-card small,
+.monynha-lab-card small {
     color: var(--monynha-muted);
     font-weight: 800;
     letter-spacing: .08em;
     text-transform: uppercase;
 }
 
+.monynha-signal-bars {
+    display: grid;
+    gap: .75rem;
+    margin-top: 1.25rem;
+}
+
+.monynha-signal-bars span {
+    display: grid;
+    grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr);
+    align-items: baseline;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(11, 11, 16, .18);
+    padding-bottom: .75rem;
+}
+
+.monynha-signal-bars strong {
+    font-weight: 800;
+}
+
+.monynha-signal-bars small {
+    color: var(--monynha-muted);
+}
+
+.monynha-work-card {
+    display: flex;
+    min-height: 16rem;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .monynha-work-card h3,
-.monynha-capability h3 {
+.monynha-capability h3,
+.monynha-principle-card h3,
+.monynha-lab-card h3 {
     margin-top: 1rem;
     font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+.monynha-principle-card {
+    min-height: 14rem;
+}
+
+.monynha-lab-card {
+    min-height: 17rem;
+    border-color: rgba(255, 255, 255, .72);
+    background: rgba(5, 7, 10, .72);
+    color: var(--monynha-white);
+    box-shadow: var(--monynha-shadow-violet);
+}
+
+.monynha-lab-card small {
+    color: var(--monynha-cyan);
+}
+
+.monynha-lab-card p {
+    color: rgba(255, 255, 255, .72);
 }
 
 .monynha-metric strong {
@@ -147,6 +208,7 @@
     margin-top: .5rem;
     font-size: clamp(2rem, 5vw, 4rem);
     line-height: 1;
+    overflow-wrap: anywhere;
 }
 
 .monynha-faq details + details {
@@ -167,6 +229,7 @@
 
 .monynha-terminal code {
     color: var(--monynha-cyan);
+    overflow-wrap: anywhere;
 }
 
 .monynha-spark {
@@ -183,8 +246,24 @@
     }
 }
 
+@media (max-width: 575.98px) {
+    .monynha-signal-bars span {
+        grid-template-columns: 1fr;
+        gap: .2rem;
+    }
+
+    .monynha-button {
+        min-height: 3rem;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .monynha-button {
         transition: none;
+    }
+
+    .monynha-button:hover,
+    .monynha-button:focus-visible {
+        transform: none;
     }
 }

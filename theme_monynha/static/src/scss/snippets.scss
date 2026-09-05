@@ -9,40 +9,56 @@
 .s_monynha_manifesto,
 .s_monynha_metrics,
 .s_monynha_faq,
-.s_monynha_intro {
+.s_monynha_intro,
+.s_monynha_principles,
+.s_monynha_labs_showcase {
     padding: var(--monynha-section-space) 1.25rem;
 }
 
 .s_monynha_hero {
     position: relative;
     display: grid;
-    min-height: 76vh;
+    min-height: 78vh;
     place-items: center;
     overflow: hidden;
-    background: radial-gradient(circle at 15% 10%, rgba(151, 103, 228, .2), transparent 32rem), radial-gradient(circle at 85% 70%, rgba(0, 229, 255, .09), transparent 30rem), var(--monynha-night);
+    background:
+        radial-gradient(circle at 15% 10%, rgba(139, 92, 246, .24), transparent 32rem),
+        radial-gradient(circle at 85% 70%, rgba(37, 217, 232, .11), transparent 30rem),
+        var(--monynha-night);
     color: var(--monynha-white);
     text-align: center;
 }
 
 .s_monynha_hero .monynha-hero-inner {
-    max-width: 900px;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 960px;
+}
+
+.s_monynha_hero .monynha-wordmark {
+    display: block;
+    width: 100%;
+    max-width: 42rem;
+    height: auto;
+    margin: 0 auto 2rem;
+    border: 2px solid rgba(255, 255, 255, .12);
+    border-radius: var(--monynha-radius);
 }
 
 .s_monynha_hero h1 {
-    font-size: clamp(3.3rem, 9vw, 7rem);
-    line-height: .92;
+    margin-inline: auto;
+    max-width: 12ch;
+    font-size: clamp(3.1rem, 9vw, 7.4rem);
+    line-height: .9;
     letter-spacing: -.065em;
-}
-
-.s_monynha_hero h1 em {
-    color: var(--monynha-violet);
-    font-style: italic;
+    overflow-wrap: anywhere;
 }
 
 .s_monynha_hero .lead {
-    max-width: 680px;
+    max-width: 720px;
     margin: 1.5rem auto 0;
-    color: rgba(255, 255, 255, .75);
+    color: rgba(255, 255, 255, .76);
 }
 
 .s_monynha_hero .monynha-actions {
@@ -57,7 +73,18 @@
     position: absolute;
     top: 18%;
     left: 13%;
-    animation: monynhaFloat 5.5s ease-in-out infinite;
+    animation: monynhaFloat 5.5s var(--monynha-ease-standard) infinite;
+}
+
+.monynha-hero-grid {
+    position: absolute;
+    inset: 0;
+    opacity: .18;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, .08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .08) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 78%, transparent);
 }
 
 .s_monynha_services,
@@ -67,7 +94,8 @@
 .s_monynha_selected_work,
 .s_monynha_capability,
 .s_monynha_metrics,
-.s_monynha_faq {
+.s_monynha_faq,
+.s_monynha_principles {
     background: var(--monynha-paper);
     color: var(--monynha-ink);
 }
@@ -94,10 +122,70 @@
 }
 
 .s_monynha_selected_work .monynha-work-grid,
-.s_monynha_metrics .monynha-metrics-grid {
+.s_monynha_metrics .monynha-metrics-grid,
+.s_monynha_labs_showcase .monynha-labs-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.25rem;
+}
+
+.s_monynha_principles .monynha-principles-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.s_monynha_principles .monynha-principle-card {
+    grid-column: span 4;
+}
+
+.s_monynha_principles .monynha-principle-card:nth-child(4),
+.s_monynha_principles .monynha-principle-card:nth-child(5) {
+    grid-column: span 6;
+}
+
+.s_monynha_labs_showcase {
+    position: relative;
+    overflow: hidden;
+    background: var(--monynha-void);
+    color: var(--monynha-white);
+}
+
+.s_monynha_labs_showcase .container {
+    position: relative;
+    z-index: 1;
+}
+
+.s_monynha_labs_showcase .monynha-section-header .lead {
+    color: rgba(255, 255, 255, .7);
+}
+
+.s_monynha_labs_showcase .monynha-kicker {
+    color: var(--monynha-cyan);
+}
+
+.monynha-labs-orbit {
+    position: absolute;
+    width: clamp(12rem, 28vw, 26rem);
+    aspect-ratio: 1;
+    border: 1px solid rgba(139, 92, 246, .45);
+    border-radius: 50%;
+    filter: blur(.1px);
+}
+
+.monynha-labs-orbit-one {
+    top: -8rem;
+    right: -6rem;
+}
+
+.monynha-labs-orbit-two {
+    bottom: -12rem;
+    left: -8rem;
+    border-color: rgba(37, 217, 232, .25);
+}
+
+.monynha-section-actions {
+    margin-top: 2rem;
 }
 
 .s_monynha_manifesto {
@@ -111,6 +199,7 @@
     font-weight: 800;
     line-height: .98;
     letter-spacing: -.05em;
+    overflow-wrap: anywhere;
 }
 
 .s_monynha_intro {
@@ -131,6 +220,7 @@
     font-size: clamp(3rem, 8vw, 6.5rem);
     line-height: .92;
     letter-spacing: -.055em;
+    overflow-wrap: anywhere;
 }
 
 .s_monynha_cta {
@@ -142,6 +232,13 @@
 .s_monynha_cta h2 {
     font-size: clamp(2.5rem, 6vw, 5rem);
     letter-spacing: -.045em;
+    overflow-wrap: anywhere;
+}
+
+.s_monynha_cta .monynha-copy-narrow {
+    max-width: 42rem;
+    margin: 0 auto 1.5rem;
+    color: rgba(255, 255, 255, .74);
 }
 
 @keyframes monynhaFloat {
@@ -154,8 +251,19 @@
     .s_monynha_capability .monynha-capability-layout,
     .s_monynha_manifesto .monynha-manifesto-layout,
     .s_monynha_selected_work .monynha-work-grid,
-    .s_monynha_metrics .monynha-metrics-grid {
+    .s_monynha_metrics .monynha-metrics-grid,
+    .s_monynha_labs_showcase .monynha-labs-grid {
         grid-template-columns: 1fr;
+    }
+
+    .s_monynha_principles .monynha-principles-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .s_monynha_principles .monynha-principle-card,
+    .s_monynha_principles .monynha-principle-card:nth-child(4),
+    .s_monynha_principles .monynha-principle-card:nth-child(5) {
+        grid-column: span 1;
     }
 
     .s_monynha_intro .container {
@@ -164,8 +272,45 @@
     }
 }
 
+@media (max-width: 575.98px) {
+    .s_monynha_hero,
+    .s_monynha_services,
+    .s_monynha_process,
+    .s_monynha_labs,
+    .s_monynha_cta,
+    .s_monynha_signal,
+    .s_monynha_selected_work,
+    .s_monynha_capability,
+    .s_monynha_manifesto,
+    .s_monynha_metrics,
+    .s_monynha_faq,
+    .s_monynha_intro,
+    .s_monynha_principles,
+    .s_monynha_labs_showcase {
+        padding-inline: .9rem;
+    }
+
+    .s_monynha_principles .monynha-principles-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .s_monynha_hero .monynha-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .s_monynha_hero .monynha-button {
+        width: 100%;
+    }
+
+    .monynha-labs-orbit {
+        opacity: .65;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .s_monynha_hero .monynha-spark {
         animation: none;
+        transform: none;
     }
 }

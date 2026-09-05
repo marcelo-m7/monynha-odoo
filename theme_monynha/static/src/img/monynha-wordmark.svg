@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 170" role="img" aria-labelledby="title desc">
+  <title id="title">Monynha Softwares</title>
+  <desc id="desc">Monynha Softwares wordmark</desc>
+  <rect width="760" height="170" rx="18" fill="#05070a"/>
+  <path d="M34 128V40h20l28 42 28-42h20v88h-20V72L82 113 54 72v56z" fill="#8b5cf6"/>
+  <rect x="150" y="38" width="4" height="94" fill="#8b5cf6"/>
+  <text x="184" y="91" fill="#fafafc" font-family="Space Grotesk, Inter, Arial, sans-serif" font-size="56" font-weight="700" letter-spacing="4">MONYNHA</text>
+  <text x="188" y="126" fill="#8b5cf6" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="9">SOFTWARES</text>
+  <circle cx="710" cy="50" r="9" fill="#25d9e8"/>
+  <path d="M705 50h10M710 45v10" stroke="#05070a" stroke-width="2" stroke-linecap="round"/>
+</svg>
