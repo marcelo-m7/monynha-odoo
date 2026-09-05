@@ -6,7 +6,21 @@ class MonynhaContentQuery(models.AbstractModel):
     _description = "Monynha Public Content Query"
 
     @api.model
-    def _work_domain(self, website, work_type=None, tag=None, featured=None):
+    def _resolve_website(self, website=None):
+        """Resolve the website without depending on a frontend HTTP request.
+
+        Website Builder renders snippets through backend RPC calls where the
+        global request exists but ``request.website`` is not initialized.  The
+        standard website model already knows how to resolve the active website
+        from the session/context and safely falls back when necessary.
+        """
+        if not website:
+            return self.env["website"].get_current_website()
+        return self.env["website"].browse(website) if isinstance(website, int) else website
+
+    @api.model
+    def _work_domain(self, website=None, work_type=None, tag=None, featured=None):
+        website = self._resolve_website(website)
         domain = [
             ("is_published", "=", True),
             ("website_id", "in", [False, website.id]),
@@ -23,7 +37,7 @@ class MonynhaContentQuery(models.AbstractModel):
     @api.model
     def get_works(
         self,
-        website,
+        website=None,
         work_type=None,
         tag=None,
         featured=None,
@@ -45,7 +59,7 @@ class MonynhaContentQuery(models.AbstractModel):
         )
 
     @api.model
-    def count_works(self, website, work_type=None, tag=None, featured=None):
+    def count_works(self, website=None, work_type=None, tag=None, featured=None):
         domain = self._work_domain(
             website,
             work_type=work_type,
@@ -55,7 +69,8 @@ class MonynhaContentQuery(models.AbstractModel):
         return self.env["monynha.work"].sudo().search_count(domain)
 
     @api.model
-    def get_work_by_slug(self, website, slug_value):
+    def get_work_by_slug(self, website=None, slug_value=None):
+        website = self._resolve_website(website)
         _, record_id = self.env["ir.http"]._unslug(slug_value or "")
         if not record_id:
             return self.env["monynha.work"]
@@ -70,7 +85,8 @@ class MonynhaContentQuery(models.AbstractModel):
         return work
 
     @api.model
-    def get_blog_posts(self, website, limit=3, offset=0):
+    def get_blog_posts(self, website=None, limit=3, offset=0):
+        website = self._resolve_website(website)
         domain = [
             ("is_published", "=", True),
             ("website_id", "in", [False, website.id]),
