@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="snippets_m2" inherit_id="website.snippets" name="Monynha M2 snippets">
+        <xpath expr="//snippets[@id='snippet_structure']" position="inside">
+            <t t-snippet="theme_monynha.s_monynha_signal" string="Project Signal" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="theme_monynha.s_monynha_selected_work" string="Selected Work" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="theme_monynha.s_monynha_capability" string="Capability" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="theme_monynha.s_monynha_manifesto" string="Manifesto" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="theme_monynha.s_monynha_metrics" string="Metrics" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="theme_monynha.s_monynha_faq" string="FAQ" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="theme_monynha.s_monynha_intro" string="Page Intro" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+        </xpath>
+    </template>
+
+    <template id="s_monynha_signal" name="Monynha Project Signal">
+        <section class="s_monynha_signal o_cc o_cc3" data-snippet="s_monynha_signal" data-name="Project Signal">
+            <div class="container monynha-signal-layout">
+                <div class="monynha-section-header">
+                    <p class="monynha-kicker">Project Signal</p>
+                    <h2>Antes da proposta, clareza.</h2>
+                    <p class="lead">O discovery organiza o problema, identifica oportunidades e cria um primeiro mapa para a conversa técnica.</p>
+                    <a href="/contactus" class="monynha-button monynha-button-primary">Começar discovery</a>
+                </div>
+                <article class="monynha-signal-card">
+                    <p class="monynha-kicker">Sample signal</p>
+                    <div class="monynha-signal-score"><strong>82</strong><span>/ 100</span></div>
+                    <div class="monynha-signal-bars">
+                        <span>Automation potential <strong>91</strong></span>
+                        <span>Process clarity <strong>68</strong></span>
+                        <span>Odoo fit <strong>86</strong></span>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_selected_work" name="Monynha Selected Work">
+        <section class="s_monynha_selected_work o_cc o_cc3" data-snippet="s_monynha_selected_work" data-name="Selected Work">
+            <div class="container">
+                <div class="monynha-section-header">
+                    <p class="monynha-kicker">Selected work</p>
+                    <h2>Problemas reais. Sistemas que ficam.</h2>
+                    <p class="lead">Edite estes cartões no Website Builder para destacar produtos, implementações e experiências.</p>
+                </div>
+                <div class="monynha-work-grid">
+                    <article class="monynha-work-card"><div><small>Odoo</small><h3>Operações conectadas</h3><p>CRM, vendas, execução e dados trabalhando no mesmo sistema.</p></div><a href="/services/odoo">Explorar <i class="fa fa-arrow-right" aria-hidden="true"/></a></article>
+                    <article class="monynha-work-card"><div><small>Software</small><h3>Ferramentas sob medida</h3><p>Interfaces e integrações desenhadas em torno do fluxo real.</p></div><a href="/services/software">Explorar <i class="fa fa-arrow-right" aria-hidden="true"/></a></article>
+                    <article class="monynha-work-card"><div><small>Labs</small><h3>Experimentos úteis</h3><p>Protótipos, open source e ideias que podem virar produto.</p></div><a href="/labs">Ver Labs <i class="fa fa-arrow-right" aria-hidden="true"/></a></article>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_capability" name="Monynha Capability">
+        <section class="s_monynha_capability o_cc o_cc3" data-snippet="s_monynha_capability" data-name="Capability">
+            <div class="container monynha-capability-layout">
+                <div class="monynha-section-header">
+                    <p class="monynha-kicker">Capability</p>
+                    <h2>Construímos a camada que falta.</h2>
+                    <p class="lead">Partimos do mecanismo standard quando ele existe e personalizamos apenas onde a operação realmente precisa.</p>
+                </div>
+                <article class="monynha-capability">
+                    <small>01 / Discovery</small>
+                    <h3>Contexto antes de código</h3>
+                    <p>Mapeamos pessoas, dados, fricções e resultados esperados antes de escolher a implementação.</p>
+                    <ul><li>Processos</li><li>Arquitetura</li><li>Integrações</li><li>Automação</li></ul>
+                </article>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_manifesto" name="Monynha Manifesto">
+        <section class="s_monynha_manifesto" data-snippet="s_monynha_manifesto" data-name="Manifesto">
+            <div class="container monynha-manifesto-layout">
+                <p class="monynha-kicker">Philosophy</p>
+                <blockquote>Menos software por hábito. Mais sistema por intenção.</blockquote>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_metrics" name="Monynha Metrics">
+        <section class="s_monynha_metrics o_cc o_cc3" data-snippet="s_monynha_metrics" data-name="Metrics">
+            <div class="container">
+                <div class="monynha-section-header"><p class="monynha-kicker">Signals</p><h2>O que importa pode ser observado.</h2></div>
+                <div class="monynha-metrics-grid">
+                    <article class="monynha-metric"><small>01</small><strong>1 sistema</strong><p>Uma fonte operacional clara antes de multiplicar ferramentas.</p></article>
+                    <article class="monynha-metric"><small>02</small><strong>- fricção</strong><p>Automação deve remover trabalho repetitivo, não esconder complexidade.</p></article>
+                    <article class="monynha-metric"><small>03</small><strong>+ contexto</strong><p>Decisões melhores começam com dados e ownership visíveis.</p></article>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_faq" name="Monynha FAQ">
+        <section class="s_monynha_faq o_cc o_cc3" data-snippet="s_monynha_faq" data-name="FAQ">
+            <div class="container">
+                <div class="monynha-section-header"><p class="monynha-kicker">FAQ</p><h2>Perguntas antes de começar.</h2></div>
+                <div class="monynha-faq">
+                    <details open="open"><summary>Vocês trabalham apenas com Odoo?</summary><p>Não. Odoo é uma das bases que usamos quando o problema é operacional. Também construímos software, integrações e automações específicas.</p></details>
+                    <details><summary>Preciso chegar com a solução definida?</summary><p>Não. O discovery existe precisamente para separar o problema da solução e encontrar a menor arquitetura adequada.</p></details>
+                    <details><summary>IA é obrigatória no projeto?</summary><p>Não. IA entra quando existe benefício operacional claro e um fluxo seguro para supervisão e dados.</p></details>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_intro" name="Monynha Page Intro">
+        <section class="s_monynha_intro" data-snippet="s_monynha_intro" data-name="Page Intro">
+            <div class="container">
+                <div><p class="monynha-kicker">Monynha Softwares</p><h1>Transformamos complexidade em sistemas.</h1></div>
+                <span class="monynha-spark" aria-hidden="true"/>
+            </div>
+        </section>
+    </template>
+</odoo>
