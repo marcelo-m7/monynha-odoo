@@ -100,6 +100,14 @@ def test_discovery_keeps_progressive_accessible_keyboard_and_draft_behavior():
     assert 'vue' not in js.lower()
 
 
+def test_discovery_draft_storage_is_optional_to_the_submission_flow():
+    js = (ROOT / 'monynha_lead_generator' / 'static' / 'src' / 'js' / 'discovery.js').read_text()
+    assert 'function saveDraft(' in js
+    assert 'function clearDraft(' in js
+    assert 'saveDraft(state)' in js
+    assert 'clearDraft()' in js
+
+
 def test_followup_idempotency_is_serialized_at_the_crm_lead_row():
     diagnosis = (ROOT / 'monynha_lead_generator' / 'models' / 'diagnosis.py').read_text()
     assert 'FOR UPDATE' in diagnosis
