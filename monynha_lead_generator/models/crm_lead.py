@@ -63,8 +63,13 @@ class CrmLead(models.Model):
             completed = lead.monynha_diagnosis_ids.filtered(
                 lambda diagnosis: diagnosis.state == "completed"
             )
+            # Odoo datetimes have second-level precision. Use the append-only
+            # record id as a deterministic tie-breaker for same-second runs.
             latest = completed.sorted(
-                key=lambda diagnosis: diagnosis.completed_at or diagnosis.create_date,
+                key=lambda diagnosis: (
+                    diagnosis.completed_at or diagnosis.create_date,
+                    diagnosis.id,
+                ),
                 reverse=True,
             )[:1]
             lead.monynha_diagnosis_score = latest.score if latest else 0
