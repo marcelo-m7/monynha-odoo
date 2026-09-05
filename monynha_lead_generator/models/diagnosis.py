@@ -7,6 +7,14 @@ from ..services.scoring import score_discovery
 
 _logger = logging.getLogger(__name__)
 
+RECOMMENDED_ACTION_SELECTION = [
+    ("clarify", "Clarify the operating model"),
+    ("automate", "Automate repetitive work"),
+    ("centralize", "Centralize operational context"),
+    ("integrate", "Integrate system boundaries"),
+    ("architecture", "Define the target architecture"),
+]
+
 
 class MonynhaLeadDiagnosis(models.Model):
     _name = "monynha.lead.diagnosis"
@@ -37,9 +45,16 @@ class MonynhaLeadDiagnosis(models.Model):
     odoo_fit = fields.Integer(readonly=True)
     summary = fields.Text(readonly=True)
     signals = fields.Json(readonly=True)
+    opportunities = fields.Json(readonly=True)
+    recommended_action = fields.Selection(RECOMMENDED_ACTION_SELECTION, readonly=True)
     raw_payload = fields.Json(readonly=True, groups="base.group_system")
     error_message = fields.Text(readonly=True, groups="base.group_system")
-    public_token = fields.Char(default=lambda self: secrets.token_urlsafe(32), copy=False, readonly=True, index=True)
+    public_token = fields.Char(
+        default=lambda self: secrets.token_urlsafe(32),
+        copy=False,
+        readonly=True,
+        index=True,
+    )
     public_url = fields.Char(compute="_compute_public_url")
 
     _public_token_unique = models.Constraint(
@@ -52,7 +67,9 @@ class MonynhaLeadDiagnosis(models.Model):
         base_url = self.env["ir.config_parameter"].sudo().get_param("web.base.url")
         for diagnosis in self:
             diagnosis.public_url = (
-                f"{base_url}/diagnosis/{diagnosis.public_token}" if diagnosis.public_token else False
+                f"{base_url}/diagnosis/{diagnosis.public_token}"
+                if diagnosis.public_token
+                else False
             )
 
     def _get_provider_registry(self):
@@ -74,45 +91,62 @@ class MonynhaLeadDiagnosis(models.Model):
             ),
             key=lambda item: item[1],
         )[0]
+        action_labels = dict(RECOMMENDED_ACTION_SELECTION)
+        action = action_labels.get(result.get("recommended_action"), "Define the next architecture step")
         return (
             f"The discovery shows {strongest} as the strongest current signal. "
-            "Use the detailed dimensions and signals as a conversation starter, not as an automatic sales decision."
+            f"Suggested next move: {action}. "
+            "Use the dimensions and opportunities as a conversation starter, not as an automatic sales decision."
         )
 
     def action_process(self):
         for diagnosis in self:
             if diagnosis.state == "completed":
                 continue
-            diagnosis.write({"state": "processing", "started_at": fields.Datetime.now(), "error_message": False})
+            diagnosis.write(
+                {
+                    "state": "processing",
+                    "started_at": fields.Datetime.now(),
+                    "error_message": False,
+                }
+            )
             provider = diagnosis._get_provider_registry().get(diagnosis.provider)
             if not provider:
-                diagnosis.write({
-                    "state": "failed",
-                    "completed_at": fields.Datetime.now(),
-                    "error_message": f"Unknown diagnosis provider: {diagnosis.provider}",
-                })
+                diagnosis.write(
+                    {
+                        "state": "failed",
+                        "completed_at": fields.Datetime.now(),
+                        "error_message": f"Unknown diagnosis provider: {diagnosis.provider}",
+                    }
+                )
                 continue
             try:
                 result = provider()
             except Exception as error:  # keep the lead and diagnosis history intact
                 _logger.exception("Monynha diagnosis failed for lead %s", diagnosis.lead_id.id)
-                diagnosis.write({
-                    "state": "failed",
-                    "completed_at": fields.Datetime.now(),
-                    "error_message": str(error),
-                })
+                diagnosis.write(
+                    {
+                        "state": "failed",
+                        "completed_at": fields.Datetime.now(),
+                        "error_message": str(error),
+                    }
+                )
                 continue
-            diagnosis.write({
-                "state": "completed",
-                "completed_at": fields.Datetime.now(),
-                "model_name": "monynha-local-rules-v1",
-                "score": result["overall"],
-                "digital_maturity": result["digital_maturity"],
-                "automation_potential": result["automation_potential"],
-                "process_clarity": result["process_clarity"],
-                "odoo_fit": result["odoo_fit"],
-                "summary": diagnosis._build_summary(result),
-                "signals": result["signals"],
-                "raw_payload": result,
-            })
+            diagnosis.write(
+                {
+                    "state": "completed",
+                    "completed_at": fields.Datetime.now(),
+                    "model_name": "monynha-local-rules-v2",
+                    "score": result["overall"],
+                    "digital_maturity": result["digital_maturity"],
+                    "automation_potential": result["automation_potential"],
+                    "process_clarity": result["process_clarity"],
+                    "odoo_fit": result["odoo_fit"],
+                    "summary": diagnosis._build_summary(result),
+                    "signals": result["signals"],
+                    "opportunities": result["opportunities"],
+                    "recommended_action": result["recommended_action"],
+                    "raw_payload": result,
+                }
+            )
         return True
