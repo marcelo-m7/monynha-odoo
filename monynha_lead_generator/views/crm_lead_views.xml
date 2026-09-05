@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_lead_view_form_monynha" model="ir.ui.view">
+        <field name="name">crm.lead.form.monynha.discovery</field><field name="model">crm.lead</field><field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside"><button name="action_monynha_view_diagnoses" type="object" class="oe_stat_button" icon="fa-signal" invisible="monynha_diagnosis_count == 0"><field name="monynha_diagnosis_count" widget="statinfo" string="Diagnoses"/></button></xpath>
+            <xpath expr="//notebook" position="inside"><page name="monynha_discovery" string="Monynha Discovery"><group><group string="Discovery"><field name="monynha_brand_name"/><field name="monynha_revenue_model"/><field name="monynha_decision_profile"/><field name="monynha_discovery_version"/><field name="monynha_discovery_completed_at"/></group><group string="Digital Presence"><field name="website" widget="url"/><field name="monynha_instagram_url" widget="url"/><field name="monynha_linkedin_url" widget="url"/></group></group><group string="Primary Struggle"><field name="monynha_struggle" nolabel="1"/></group><group string="Latest Diagnosis"><field name="monynha_diagnosis_score" readonly="1"/><field name="monynha_diagnosis_summary" readonly="1" nolabel="1"/><button name="action_monynha_generate_diagnosis" type="object" string="Generate Diagnosis" class="btn-primary"/></group></page></xpath>
+        </field>
+    </record>
+</odoo>
