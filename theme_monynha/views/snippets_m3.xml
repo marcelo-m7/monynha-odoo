@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="snippets_m3" inherit_id="website.snippets" name="Monynha M3 snippets">
+        <xpath expr="//snippets[@id='snippet_structure']" position="inside">
+            <t t-snippet="theme_monynha.s_monynha_principles" string="Operating Principles" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+            <t t-snippet="theme_monynha.s_monynha_labs_showcase" string="Labs Showcase" group="monynha" t-thumbnail="/theme_monynha/static/description/theme_monynha.svg"/>
+        </xpath>
+    </template>
+
+    <template id="s_monynha_principles" name="Monynha Operating Principles">
+        <section class="s_monynha_principles o_cc o_cc3" data-snippet="s_monynha_principles" data-name="Operating Principles">
+            <div class="container">
+                <div class="monynha-section-header">
+                    <p class="monynha-kicker">Operating principles</p>
+                    <h2>Construir menos. Entender melhor.</h2>
+                    <p class="lead">Princípios simples para manter sistemas legíveis, verificáveis e sustentáveis ao longo do tempo.</p>
+                </div>
+                <div class="monynha-principles-grid">
+                    <article class="monynha-principle-card"><small>01</small><h3>Standard first</h3><p>Reutilizar mecanismos maduros antes de criar equivalentes próprios.</p></article>
+                    <article class="monynha-principle-card"><small>02</small><h3>Smallest useful system</h3><p>Escolher a menor arquitetura capaz de resolver o problema real.</p></article>
+                    <article class="monynha-principle-card"><small>03</small><h3>Observable interfaces</h3><p>Dados, estados, fronteiras e ownership devem poder ser inspecionados.</p></article>
+                    <article class="monynha-principle-card"><small>04</small><h3>Build, verify, observe, improve</h3><p>Entregar em passos que possam ser testados e corrigidos com evidência.</p></article>
+                    <article class="monynha-principle-card"><small>05</small><h3>Automation with boundaries</h3><p>Automatizar com fallbacks, limites explícitos e revisão humana quando necessário.</p></article>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_monynha_labs_showcase" name="Monynha Labs Showcase">
+        <section class="s_monynha_labs_showcase" data-snippet="s_monynha_labs_showcase" data-name="Labs Showcase">
+            <span class="monynha-labs-orbit monynha-labs-orbit-one" aria-hidden="true"/>
+            <span class="monynha-labs-orbit monynha-labs-orbit-two" aria-hidden="true"/>
+            <div class="container">
+                <div class="monynha-section-header">
+                    <p class="monynha-kicker">Labs / Open work</p>
+                    <h2>Experimentar em público torna a arquitetura mais concreta.</h2>
+                    <p class="lead">Labs é uma vitrine editorial para plataformas, ferramentas e experiências reais da Monynha. O Website Builder continua sendo o editor.</p>
+                </div>
+                <div class="monynha-labs-grid">
+                    <article class="monynha-lab-card"><small>Education / Odoo</small><h3>FACODI</h3><p>Plataforma comunitária de aprendizagem aberta e organização curricular sobre Odoo.</p></article>
+                    <article class="monynha-lab-card"><small>Developer tooling</small><h3>Codoo Importer</h3><p>Exploração de uma experiência mais assistida para importar, mapear e relacionar dados no Odoo.</p></article>
+                    <article class="monynha-lab-card"><small>Odoo-native web</small><h3>Monynha Odoo</h3><p>Theme, discovery e Project Signal construídos sobre Website, CRM e mecanismos standard do Odoo.</p></article>
+                </div>
+                <div class="monynha-section-actions"><a href="/labs" class="monynha-button monynha-button-secondary">Explorar Labs <i class="fa fa-arrow-right" aria-hidden="true"/></a></div>
+            </div>
+        </section>
+    </template>
+</odoo>
