@@ -37,5 +37,6 @@ def test_m4_uses_native_new_page_template_mechanism():
 def test_m4_container_avoids_mixed_unit_sass_min():
     scss = (THEME / "static/src/scss/components.scss").read_text()
     assert "min(100% - 2rem" not in scss
+    assert "min(100%, 16rem)" not in scss
     assert "width: calc(100% - 2rem);" in scss
     assert "max-width: 80rem;" in scss
