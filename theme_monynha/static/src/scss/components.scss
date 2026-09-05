@@ -246,7 +246,8 @@
 }
 
 .monynha-container {
-    width: min(100% - 2rem, 80rem);
+    width: calc(100% - 2rem);
+    max-width: 80rem;
     margin-inline: auto;
 }
 
