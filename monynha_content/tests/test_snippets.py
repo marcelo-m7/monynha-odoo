@@ -1,4 +1,5 @@
 from odoo.tests import HttpCase, tagged
+from odoo.addons.http_routing.tests.common import MockRequest
 
 
 @tagged("-at_install", "post_install")
@@ -104,6 +105,13 @@ class TestMonynhaContentSnippets(HttpCase):
             self.assertTrue(self.env.ref(f"monynha_content.{key}"))
             self.assertIn(f't-snippet="monynha_content.{key}"', arch)
         self.assertGreaterEqual(arch.count('group="monynha"'), len(self.SNIPPET_KEYS))
+
+    def test_builder_preview_renders_without_frontend_request_website(self):
+        with MockRequest(self.env):
+            rendered = self.env["ir.ui.view"].with_context(
+                website_id=self.website.id
+            ).render_public_asset("monynha_content.s_monynha_featured_work")
+        self.assertIn("Featured Project", rendered)
 
     def test_latest_labs_filters_publication_and_handles_empty_state(self):
         rendered = self._render("s_monynha_latest_labs")
