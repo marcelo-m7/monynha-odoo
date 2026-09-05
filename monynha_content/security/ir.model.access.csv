@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_monynha_work_editor,monynha.work editor,model_monynha_work,website.group_website_restricted_editor,1,1,1,0
+access_monynha_work_designer,monynha.work designer,model_monynha_work,website.group_website_designer,1,1,1,1
+access_monynha_work_tag_editor,monynha.work.tag editor,model_monynha_work_tag,website.group_website_restricted_editor,1,1,1,0
+access_monynha_work_tag_designer,monynha.work.tag designer,model_monynha_work_tag,website.group_website_designer,1,1,1,1

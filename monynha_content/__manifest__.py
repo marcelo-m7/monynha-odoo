@@ -7,7 +7,10 @@
     "website": "https://monynha.com",
     "license": "LGPL-3",
     "depends": ["theme_monynha", "website", "website_blog"],
-    "data": [],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/work_views.xml",
+    ],
     "installable": True,
     "application": False,
 }
