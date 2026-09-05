@@ -58,7 +58,7 @@
 
 .monynha-report { min-height: 82vh; padding: 5rem 1rem; background: radial-gradient(circle at 80% 10%, rgba(151,103,228,.2), transparent 30rem), var(--m-void); color: #fff; }
 .monynha-report-shell { max-width: 980px; }
-.monynha-report-kicker { color: var(--m-violet); font-weight: 900; letter-spacing: .12em; }
+.monynha-report-kicker { color: var(--m-violet); font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
 .monynha-score-orbit { width: 180px; height: 180px; display: grid; place-content: center; margin: 2rem 0; border: 4px solid var(--m-violet); border-radius: 50%; box-shadow: 8px 8px 0 rgba(151,103,228,.28); }
 .monynha-score-orbit strong { font-size: 4rem; line-height: .8; }
 .monynha-report h1 { font-size: clamp(3rem,8vw,6.5rem); letter-spacing: -.06em; }
@@ -67,14 +67,24 @@
 .monynha-dimensions span, .monynha-dimensions strong { display: block; }
 .monynha-dimensions span { color: rgba(255,255,255,.62); font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; }
 .monynha-dimensions strong { margin-top: .6rem; font-size: 2.2rem; }
-.monynha-report-signals { margin: 3rem 0; padding: 1.5rem; background: var(--m-paper); color: var(--m-ink); border: 3px solid #000; border-radius: 1rem; box-shadow: 7px 7px 0 var(--m-violet); }
+.monynha-report-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1.5rem; margin: 3rem 0; }
+.monynha-report-signals, .monynha-report-opportunities { margin: 0; padding: 1.5rem; background: var(--m-paper); color: var(--m-ink); border: 3px solid #000; border-radius: 1rem; box-shadow: 7px 7px 0 var(--m-violet); }
+.monynha-report-opportunities { background: var(--m-violet); color: #fff; box-shadow: 7px 7px 0 #fff; }
+.monynha-report-signals h2, .monynha-report-opportunities h2 { font-size: clamp(1.7rem,4vw,2.7rem); font-weight: 900; }
+.monynha-report-signals ol, .monynha-report-opportunities ol { display: grid; gap: .75rem; margin: 1rem 0 0; padding-left: 1.4rem; }
+.monynha-next-move { margin: 3rem 0; padding: clamp(1.5rem,4vw,2.5rem); border: 2px solid rgba(255,255,255,.55); border-radius: 1rem; background: rgba(255,255,255,.05); }
+.monynha-next-move h2 { max-width: 720px; margin: .5rem 0 1rem; font-size: clamp(2rem,5vw,4rem); line-height: .98; letter-spacing: -.04em; }
+.monynha-next-move p:last-child { max-width: 700px; color: rgba(255,255,255,.68); }
 .monynha-route { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin: 3rem 0; color: rgba(255,255,255,.78); font-weight: 800; }
+.monynha-followup-zone { display: grid; justify-items: start; gap: .85rem; }
 .monynha-report-cta { padding: 1rem 1.4rem; border: 2px solid #000; border-radius: .8rem; background: var(--m-violet); color: #fff; box-shadow: 6px 6px 0 #fff; font-weight: 900; }
+.monynha-report-cta[aria-disabled="true"] { opacity: .75; pointer-events: none; }
+.monynha-followup-status { min-height: 1.4rem; color: rgba(255,255,255,.72); font-size: .9rem; }
 .monynha-report-note { margin-top: 2rem; color: rgba(255,255,255,.5); font-size: .85rem; }
 
 @keyframes monynhaPulse { 50% { transform: scale(1.25); filter: brightness(1.4); } }
 @media(max-width: 767.98px) {
-    .monynha-choice-grid, .monynha-dimensions { grid-template-columns: 1fr; }
+    .monynha-choice-grid, .monynha-dimensions, .monynha-report-grid { grid-template-columns: 1fr; }
     .monynha-discovery fieldset { min-height: 0; }
 }
 @media(prefers-reduced-motion: reduce) {

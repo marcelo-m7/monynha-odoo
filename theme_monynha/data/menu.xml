@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="menu_services" model="theme.website.menu">
+        <field name="name">Services</field>
+        <field name="page_id" ref="page_services"/>
+        <field name="sequence" type="int">20</field>
+    </record>
+    <record id="menu_services_odoo" model="theme.website.menu">
+        <field name="name">Odoo</field>
+        <field name="page_id" ref="page_services_odoo"/>
+        <field name="parent_id" ref="menu_services"/>
+        <field name="sequence" type="int">21</field>
+    </record>
+    <record id="menu_services_software" model="theme.website.menu">
+        <field name="name">Software</field>
+        <field name="page_id" ref="page_services_software"/>
+        <field name="parent_id" ref="menu_services"/>
+        <field name="sequence" type="int">22</field>
+    </record>
+    <record id="menu_services_ai" model="theme.website.menu">
+        <field name="name">AI &amp; Automation</field>
+        <field name="page_id" ref="page_services_ai"/>
+        <field name="parent_id" ref="menu_services"/>
+        <field name="sequence" type="int">23</field>
+    </record>
+    <record id="menu_process" model="theme.website.menu">
+        <field name="name">Process</field>
+        <field name="page_id" ref="page_process"/>
+        <field name="sequence" type="int">30</field>
+    </record>
+    <record id="menu_labs" model="theme.website.menu">
+        <field name="name">Labs</field>
+        <field name="page_id" ref="page_labs"/>
+        <field name="sequence" type="int">40</field>
+    </record>
+    <record id="menu_about" model="theme.website.menu">
+        <field name="name">About</field>
+        <field name="page_id" ref="page_about"/>
+        <field name="sequence" type="int">50</field>
+    </record>
+    <record id="menu_start" model="theme.website.menu">
+        <field name="name">Start Project</field>
+        <field name="page_id" ref="page_start"/>
+        <field name="sequence" type="int">90</field>
+    </record>
+</odoo>

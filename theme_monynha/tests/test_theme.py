@@ -13,13 +13,48 @@ class TestMonynhaTheme(HttpCase):
         website.theme_id = theme
         theme._theme_get_stream_themes().with_context(load_all_views=True)._theme_load(website)
 
-    def test_core_snippets_registered(self):
+    def test_core_and_m2_snippets_registered(self):
         keys = {
             "theme_monynha.s_monynha_hero",
             "theme_monynha.s_monynha_services",
             "theme_monynha.s_monynha_process",
             "theme_monynha.s_monynha_labs",
             "theme_monynha.s_monynha_cta",
+            "theme_monynha.s_monynha_signal",
+            "theme_monynha.s_monynha_selected_work",
+            "theme_monynha.s_monynha_capability",
+            "theme_monynha.s_monynha_manifesto",
+            "theme_monynha.s_monynha_metrics",
+            "theme_monynha.s_monynha_faq",
+            "theme_monynha.s_monynha_intro",
         }
         views = self.env["ir.ui.view"].search([("key", "in", list(keys)), ("website_id", "!=", False)])
         self.assertEqual(set(views.mapped("key")), keys)
+
+    def test_theme_page_starters_registered(self):
+        xmlids = (
+            "theme_monynha.page_start",
+            "theme_monynha.page_services",
+            "theme_monynha.page_services_odoo",
+            "theme_monynha.page_services_software",
+            "theme_monynha.page_services_ai",
+            "theme_monynha.page_process",
+            "theme_monynha.page_labs",
+            "theme_monynha.page_about",
+        )
+        for xmlid in xmlids:
+            page = self.env.ref(xmlid, raise_if_not_found=False)
+            self.assertTrue(page, xmlid)
+            self.assertEqual(page._name, "theme.website.page")
+
+    def test_theme_menu_seed_registered(self):
+        for xmlid in (
+            "theme_monynha.menu_services",
+            "theme_monynha.menu_process",
+            "theme_monynha.menu_labs",
+            "theme_monynha.menu_about",
+            "theme_monynha.menu_start",
+        ):
+            menu = self.env.ref(xmlid, raise_if_not_found=False)
+            self.assertTrue(menu, xmlid)
+            self.assertEqual(menu._name, "theme.website.menu")

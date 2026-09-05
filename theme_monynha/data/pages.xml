@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="view_start" name="Start a Project">
+        <t t-set="additional_title" t-valuef="Start a Project"/>
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure">
+                <section class="s_monynha_intro"><div class="container"><div><p class="monynha-kicker">Start a quest</p><h1>Conta-nos o que estás tentando construir.</h1></div><span class="monynha-spark" aria-hidden="true"/></div></section>
+                <section class="s_monynha_capability o_cc o_cc3"><div class="container monynha-capability-layout"><div class="monynha-section-header"><p class="monynha-kicker">Project Discovery</p><h2>Começamos pelo problema.</h2><p class="lead">Quando o lead generator Monynha está instalado, esta rota abre o discovery interativo. Neste theme standalone, o contacto standard continua disponível como fallback seguro.</p></div><article class="monynha-terminal"><p>&gt; context</p><p>&gt; friction</p><p>&gt; expected outcome</p><p><code>&gt; build the smallest useful system</code></p></article></div></section>
+                <section class="s_monynha_cta"><div class="container"><p class="monynha-kicker">Fallback</p><h2>Vamos começar pela conversa.</h2><p class="lead mx-auto mb-4">Explica o contexto e o próximo passo fica mais claro.</p><a href="/contactus" class="monynha-button monynha-button-primary">Falar com a Monynha</a></div></section>
+            </div>
+        </t>
+    </template>
+    <record id="page_start" model="theme.website.page"><field name="view_id" ref="view_start"/><field name="is_published" eval="True"/><field name="url">/start</field></record>
+
+    <template id="view_services" name="Services">
+        <t t-set="additional_title" t-valuef="Services"/>
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure">
+                <section class="s_monynha_intro"><div class="container"><div><p class="monynha-kicker">What we build</p><h1>Tecnologia em torno da operação real.</h1></div><span class="monynha-spark" aria-hidden="true"/></div></section>
+                <section class="s_monynha_selected_work o_cc o_cc3"><div class="container"><div class="monynha-section-header"><p class="monynha-kicker">Capabilities</p><h2>Três portas. O mesmo princípio.</h2><p class="lead">Usar o mecanismo standard quando ele resolve. Construir a camada que falta quando não resolve.</p></div><div class="monynha-work-grid"><article class="monynha-work-card"><div><small>01 / Odoo</small><h3>Operação conectada</h3><p>CRM, vendas, projetos, serviços, inventário, portais e integrações.</p></div><a href="/services/odoo">Ver Odoo <i class="fa fa-arrow-right" aria-hidden="true"/></a></article><article class="monynha-work-card"><div><small>02 / Software</small><h3>Ferramentas específicas</h3><p>Produtos web, interfaces internas, APIs e utilitários para fluxos particulares.</p></div><a href="/services/software">Ver Software <i class="fa fa-arrow-right" aria-hidden="true"/></a></article><article class="monynha-work-card"><div><small>03 / AI</small><h3>IA &amp; Automação</h3><p>Assistência, processamento e automação com contexto, limites e supervisão.</p></div><a href="/services/ai-automation">Ver Automação <i class="fa fa-arrow-right" aria-hidden="true"/></a></article></div></div></section>
+                <section class="s_monynha_cta"><div class="container"><p class="monynha-kicker">Project Signal</p><h2>Não sabes ainda qual porta?</h2><p class="lead mx-auto mb-4">Começa pelo discovery. A arquitetura vem depois.</p><a href="/start" class="monynha-button monynha-button-primary">Começar projeto</a></div></section>
+            </div>
+        </t>
+    </template>
+    <record id="page_services" model="theme.website.page"><field name="view_id" ref="view_services"/><field name="is_published" eval="True"/><field name="url">/services</field></record>
+
+    <template id="view_services_odoo" name="Odoo Services">
+        <t t-set="additional_title" t-valuef="Odoo"/>
+        <t t-call="website.layout"><div id="wrap" class="oe_structure">
+            <section class="s_monynha_intro"><div class="container"><div><p class="monynha-kicker">Odoo</p><h1>Menos ERP paralelo. Mais Odoo bem usado.</h1></div><span class="monynha-spark" aria-hidden="true"/></div></section>
+            <section class="s_monynha_capability o_cc o_cc3"><div class="container monynha-capability-layout"><div class="monynha-section-header"><p class="monynha-kicker">Standard first</p><h2>Começamos pelo que o Odoo já sabe fazer.</h2><p class="lead">Modelos, segurança, portal, Website, automações e workflows standard são a base. Addons entram onde existe um requisito concreto que a base não resolve.</p></div><article class="monynha-capability"><small>Common scope</small><h3>Implementação &amp; extensão</h3><ul><li>Arquitetura de addons</li><li>Integrações e APIs</li><li>Portais e Website</li><li>Migração e normalização de dados</li><li>Automação operacional</li></ul></article></div></section>
+            <section class="s_monynha_cta"><div class="container"><p class="monynha-kicker">Start</p><h2>Mostra-nos onde o fluxo quebra.</h2><a href="/start" class="monynha-button monynha-button-primary">Começar discovery</a></div></section>
+        </div></t>
+    </template>
+    <record id="page_services_odoo" model="theme.website.page"><field name="view_id" ref="view_services_odoo"/><field name="is_published" eval="True"/><field name="url">/services/odoo</field></record>
+
+    <template id="view_services_software" name="Software Services">
+        <t t-set="additional_title" t-valuef="Software"/>
+        <t t-call="website.layout"><div id="wrap" class="oe_structure">
+            <section class="s_monynha_intro"><div class="container"><div><p class="monynha-kicker">Software</p><h1>Quando a ferramenta certa ainda não existe.</h1></div><span class="monynha-spark" aria-hidden="true"/></div></section>
+            <section class="s_monynha_capability o_cc o_cc3"><div class="container monynha-capability-layout"><div class="monynha-section-header"><p class="monynha-kicker">Build</p><h2>Software pequeno o suficiente para ser compreendido.</h2><p class="lead">Interfaces web, ferramentas internas e integrações com fronteiras claras, dados observáveis e uma razão real para existir.</p></div><article class="monynha-terminal"><p>&gt; map workflow</p><p>&gt; define interfaces</p><p>&gt; prototype</p><p><code>&gt; ship + observe</code></p></article></div></section>
+            <section class="s_monynha_cta"><div class="container"><p class="monynha-kicker">Start</p><h2>Conta-nos o que hoje é planilha, improviso ou fricção.</h2><a href="/start" class="monynha-button monynha-button-primary">Começar discovery</a></div></section>
+        </div></t>
+    </template>
+    <record id="page_services_software" model="theme.website.page"><field name="view_id" ref="view_services_software"/><field name="is_published" eval="True"/><field name="url">/services/software</field></record>
+
+    <template id="view_services_ai" name="AI and Automation Services">
+        <t t-set="additional_title" t-valuef="AI &amp; Automation"/>
+        <t t-call="website.layout"><div id="wrap" class="oe_structure">
+            <section class="s_monynha_intro"><div class="container"><div><p class="monynha-kicker">AI &amp; Automation</p><h1>Automatizar sem perder contexto.</h1></div><span class="monynha-spark" aria-hidden="true"/></div></section>
+            <section class="s_monynha_capability o_cc o_cc3"><div class="container monynha-capability-layout"><div class="monynha-section-header"><p class="monynha-kicker">Useful intelligence</p><h2>IA entra como componente, não como desculpa arquitetural.</h2><p class="lead">Desenhamos pipelines, assistentes e processamento automático com rastreabilidade, fallbacks e revisão humana onde a decisão importa.</p></div><article class="monynha-capability"><small>Patterns</small><h3>Automação responsável</h3><ul><li>Ingestão e enriquecimento</li><li>Classificação e sugestões</li><li>Assistentes internos</li><li>Workflows com human-in-the-loop</li><li>Providers substituíveis</li></ul></article></div></section>
+            <section class="s_monynha_cta"><div class="container"><p class="monynha-kicker">Start</p><h2>Primeiro identifica o trabalho que vale automatizar.</h2><a href="/start" class="monynha-button monynha-button-primary">Começar discovery</a></div></section>
+        </div></t>
+    </template>
+    <record id="page_services_ai" model="theme.website.page"><field name="view_id" ref="view_services_ai"/><field name="is_published" eval="True"/><field name="url">/services/ai-automation</field></record>
+
+    <template id="view_process" name="Process">
+        <t t-set="additional_title" t-valuef="Process"/>
+        <t t-call="website.layout"><div id="wrap" class="oe_structure">
+            <section class="s_monynha_intro"><div class="container"><div><p class="monynha-kicker">Process</p><h1>Descobrir. Desenhar. Construir. Observar.</h1></div><span class="monynha-spark" aria-hidden="true"/></div></section>
+            <section class="s_monynha_process o_cc o_cc3"><div class="container"><div class="monynha-section-header"><p class="monynha-kicker">How we work</p><h2>Pequenas decisões verificáveis.</h2></div><div class="monynha-grid"><article class="monynha-panel"><small>01</small><h3>Discovery</h3><p>Contexto, pessoas, dados, fricção e resultado.</p></article><article class="monynha-panel"><small>02</small><h3>Architecture</h3><p>Fronteiras, mecanismos standard e menor extensão necessária.</p></article><article class="monynha-panel"><small>03</small><h3>Build</h3><p>Implementação testável em slices que produzem valor real.</p></article><article class="monynha-panel"><small>04</small><h3>Observe</h3><p>Uso real, falhas, métricas e feedback guiam a próxima mudança.</p></article></div></div></section>
+            <section class="s_monynha_cta"><div class="container"><p class="monynha-kicker">Your turn</p><h2>Começa pelo contexto.</h2><a href="/start" class="monynha-button monynha-button-primary">Começar projeto</a></div></section>
+        </div></t>
+    </template>
+    <record id="page_process" model="theme.website.page"><field name="view_id" ref="view_process"/><field name="is_published" eval="True"/><field name="url">/process</field></record>
+
+    <template id="view_labs" name="Labs">
+        <t t-set="additional_title" t-valuef="Labs"/>
+        <t t-call="website.layout"><div id="wrap" class="oe_structure">
+            <section class="s_monynha_intro"><div class="container"><div><p class="monynha-kicker">Labs</p><h1>Experimentos que aprendem em público.</h1></div><span class="monynha-spark" aria-hidden="true"/></div></section>
+            <section class="s_monynha_selected_work o_cc o_cc3"><div class="container"><div class="monynha-section-header"><p class="monynha-kicker">Current experiments</p><h2>Edite, substitua e publique.</h2><p class="lead">Labs permanece editorial no M2: estes cartões são conteúdo do Website Builder, não um CMS paralelo.</p></div><div class="monynha-work-grid"><article class="monynha-work-card"><div><small>Education</small><h3>FACODI</h3><p>Experiência aberta de educação construída sobre mecanismos Odoo.</p></div><span>Community platform</span></article><article class="monynha-work-card"><div><small>Tools</small><h3>Codoo Importer</h3><p>Experimentos em fluxos de importação e integração de dados Odoo.</p></div><span>Developer tooling</span></article><article class="monynha-work-card"><div><small>Open slot</small><h3>Próximo experimento</h3><p>Use o Website Builder para substituir este cartão pelo que estiver vivo agora.</p></div><span>Editable</span></article></div></div></section>
+            <section class="s_monynha_cta"><div class="container"><p class="monynha-kicker">Build with us</p><h2>Algum experimento parece o teu problema?</h2><a href="/start" class="monynha-button monynha-button-primary">Começar discovery</a></div></section>
+        </div></t>
+    </template>
+    <record id="page_labs" model="theme.website.page"><field name="view_id" ref="view_labs"/><field name="is_published" eval="True"/><field name="url">/labs</field></record>
+
+    <template id="view_about" name="About Monynha">
+        <t t-set="additional_title" t-valuef="About"/>
+        <t t-call="website.layout"><div id="wrap" class="oe_structure">
+            <section class="s_monynha_intro"><div class="container"><div><p class="monynha-kicker">About Monynha</p><h1>Engenharia encontra intuição.</h1></div><span class="monynha-spark" aria-hidden="true"/></div></section>
+            <section class="s_monynha_manifesto"><div class="container monynha-manifesto-layout"><p class="monynha-kicker">Philosophy</p><blockquote>Menos software por hábito. Mais sistema por intenção.</blockquote></div></section>
+            <section class="s_monynha_metrics o_cc o_cc3"><div class="container"><div class="monynha-section-header"><p class="monynha-kicker">Principles</p><h2>Como escolhemos o que construir.</h2></div><div class="monynha-metrics-grid"><article class="monynha-metric"><small>01</small><strong>Standard</strong><p>Reutilizar mecanismos maduros antes de inventar equivalentes.</p></article><article class="monynha-metric"><small>02</small><strong>Small</strong><p>Menor arquitetura que resolve o problema e pode ser compreendida.</p></article><article class="monynha-metric"><small>03</small><strong>Useful</strong><p>Tecnologia avaliada pelo efeito na operação, não pelo número de features.</p></article></div></div></section>
+            <section class="s_monynha_cta"><div class="container"><p class="monynha-kicker">Hello</p><h2>Tem um problema interessante?</h2><a href="/start" class="monynha-button monynha-button-primary">Começar projeto</a></div></section>
+        </div></t>
+    </template>
+    <record id="page_about" model="theme.website.page"><field name="view_id" ref="view_about"/><field name="is_published" eval="True"/><field name="url">/about</field></record>
+</odoo>

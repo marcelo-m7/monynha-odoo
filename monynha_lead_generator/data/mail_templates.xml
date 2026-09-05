@@ -6,7 +6,32 @@
         <field name="subject">O teu Project Signal está pronto</field>
         <field name="email_from">{{ object.company_id.email_formatted or user.email_formatted }}</field>
         <field name="email_to">{{ object.email_from }}</field>
-        <field name="body_html" type="html"><div style="font-family: Arial, sans-serif; line-height: 1.6;"><h2>O teu primeiro mapa já está pronto.</h2><p>Organizámos as respostas do discovery num Project Signal inicial para ajudar a orientar a próxima conversa.</p><p><a t-attf-href="{{ ctx.get('report_url') }}">Abrir Project Signal</a></p><p>Este diagnóstico é um ponto de partida — não uma decisão automática sobre o teu projeto.</p></div></field>
+        <field name="body_html" type="html">
+            <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+                <h2>O teu primeiro mapa já está pronto.</h2>
+                <p>Organizámos as respostas do discovery num Project Signal inicial para ajudar a orientar a próxima conversa.</p>
+                <p><a t-attf-href="{{ ctx.get('report_url') }}">Abrir Project Signal</a></p>
+                <p>Este diagnóstico é um ponto de partida — não uma decisão automática sobre o teu projeto.</p>
+            </div>
+        </field>
+        <field name="auto_delete" eval="True"/>
+    </record>
+
+    <record id="mail_template_followup_received" model="mail.template">
+        <field name="name">Monynha: follow-up request received</field>
+        <field name="model_id" ref="crm.model_crm_lead"/>
+        <field name="subject">Recebemos o teu pedido para continuar</field>
+        <field name="email_from">{{ object.company_id.email_formatted or user.email_formatted }}</field>
+        <field name="email_to">{{ object.email_from }}</field>
+        <field name="body_html" type="html">
+            <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+                <h2>O próximo passo ficou registado.</h2>
+                <p>Recebemos o teu pedido para explorar o Project Signal com a Monynha.</p>
+                <p>Vamos usar o discovery e o diagnóstico como contexto para a próxima conversa, sem te pedir para repetir tudo de novo.</p>
+                <p t-if="ctx.get('report_url')"><a t-attf-href="{{ ctx.get('report_url') }}">Reabrir o teu Project Signal</a></p>
+                <p>Até já,<br/>Monynha Softwares</p>
+            </div>
+        </field>
         <field name="auto_delete" eval="True"/>
     </record>
 </odoo>

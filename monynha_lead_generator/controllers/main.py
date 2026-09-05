@@ -6,8 +6,16 @@ from odoo.http import request
 _logger = logging.getLogger(__name__)
 
 ALLOWED_SUBMISSION_FIELDS = {
-    "email", "brand_name", "no_brand", "revenue_model", "decision_profile",
-    "struggle", "website_url", "instagram_url", "linkedin_url", "website_company",
+    "email",
+    "brand_name",
+    "no_brand",
+    "revenue_model",
+    "decision_profile",
+    "struggle",
+    "website_url",
+    "instagram_url",
+    "linkedin_url",
+    "website_company",
 }
 ALLOWED_REVENUE_MODELS = {"service", "product", "subscription", "other"}
 ALLOWED_DECISION_PROFILES = {"solo", "delegate", "sales_focus", "unclear"}
@@ -18,7 +26,13 @@ class MonynhaDiscoveryController(http.Controller):
     def discovery_start(self, **kwargs):
         return request.render("monynha_lead_generator.discovery_start")
 
-    @http.route("/monynha/discovery/submit", type="jsonrpc", auth="public", website=True, methods=["POST"])
+    @http.route(
+        "/monynha/discovery/submit",
+        type="jsonrpc",
+        auth="public",
+        website=True,
+        methods=["POST"],
+    )
     def submit_discovery(self, **payload):
         unknown = set(payload) - ALLOWED_SUBMISSION_FIELDS
         if unknown:
@@ -36,13 +50,19 @@ class MonynhaDiscoveryController(http.Controller):
         if not email:
             return {"ok": False, "error": "Please enter a valid email address."}
         if not no_brand and len(brand_name) < 2:
-            return {"ok": False, "error": "Tell us the project or brand name, or choose the no-name option."}
+            return {
+                "ok": False,
+                "error": "Tell us the project or brand name, or choose the no-name option.",
+            }
         if revenue_model not in ALLOWED_REVENUE_MODELS:
             return {"ok": False, "error": "Choose a valid revenue model."}
         if decision_profile not in ALLOWED_DECISION_PROFILES:
             return {"ok": False, "error": "Choose a valid operating style."}
         if len(struggle) < 10:
-            return {"ok": False, "error": "Describe the main challenge in a little more detail."}
+            return {
+                "ok": False,
+                "error": "Describe the main challenge in a little more detail.",
+            }
 
         lead_values = {
             "name": f"Monynha Discovery — {brand_name or email}",
@@ -66,19 +86,63 @@ class MonynhaDiscoveryController(http.Controller):
         report_url = diagnosis.public_url if diagnosis.public_token else "/contactus"
 
         if diagnosis.state == "completed":
-            template = request.env.ref("monynha_lead_generator.mail_template_diagnosis_ready", raise_if_not_found=False)
+            template = request.env.ref(
+                "monynha_lead_generator.mail_template_diagnosis_ready",
+                raise_if_not_found=False,
+            )
             if template:
                 try:
-                    template.sudo().with_context(report_url=report_url).send_mail(lead.id, force_send=False)
+                    template.sudo().with_context(report_url=report_url).send_mail(
+                        lead.id,
+                        force_send=False,
+                    )
                 except Exception:
-                    _logger.exception("Could not queue Monynha diagnosis email for lead %s", lead.id)
+                    _logger.exception(
+                        "Could not queue Monynha diagnosis email for lead %s",
+                        lead.id,
+                    )
 
         lead.sudo().message_post(body="Monynha website discovery completed.")
         return {"ok": True, "report_url": report_url}
 
-    @http.route("/diagnosis/<string:token>", type="http", auth="public", website=True, sitemap=False)
+    @http.route(
+        "/monynha/diagnosis/followup",
+        type="jsonrpc",
+        auth="public",
+        website=True,
+        methods=["POST"],
+    )
+    def request_followup(self, token=None, **kwargs):
+        token = (token or "").strip()
+        if len(token) < 20 or len(token) > 128:
+            return {"ok": False, "error": "not_found"}
+        diagnosis = request.env["monynha.lead.diagnosis"].sudo().search(
+            [("public_token", "=", token)],
+            limit=1,
+        )
+        if not diagnosis:
+            return {"ok": False, "error": "not_found"}
+        created = diagnosis.action_request_followup()
+        return {
+            "ok": True,
+            "already_requested": not created,
+        }
+
+    @http.route(
+        "/diagnosis/<string:token>",
+        type="http",
+        auth="public",
+        website=True,
+        sitemap=False,
+    )
     def diagnosis_report(self, token, **kwargs):
-        diagnosis = request.env["monynha.lead.diagnosis"].sudo().search([("public_token", "=", token)], limit=1)
+        diagnosis = request.env["monynha.lead.diagnosis"].sudo().search(
+            [("public_token", "=", token)],
+            limit=1,
+        )
         if not diagnosis:
             return request.not_found()
-        return request.render("monynha_lead_generator.diagnosis_report", {"diagnosis": diagnosis})
+        return request.render(
+            "monynha_lead_generator.diagnosis_report",
+            {"diagnosis": diagnosis},
+        )

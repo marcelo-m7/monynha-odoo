@@ -1,15 +1,171 @@
-.s_monynha_hero, .s_monynha_services, .s_monynha_process, .s_monynha_labs, .s_monynha_cta { padding: clamp(4rem, 8vw, 8rem) 1.25rem; }
-.s_monynha_hero { position: relative; overflow: hidden; min-height: 76vh; display: grid; place-items: center; text-align: center; background: radial-gradient(circle at 15% 10%, rgba(151, 103, 228, .2), transparent 32rem), radial-gradient(circle at 85% 70%, rgba(0, 229, 255, .09), transparent 30rem), var(--monynha-night); color: #fff; }
-.s_monynha_hero .monynha-hero-inner { max-width: 900px; }
-.s_monynha_hero h1 { font-size: clamp(3.3rem, 9vw, 7rem); line-height: .92; letter-spacing: -.065em; }
-.s_monynha_hero h1 em { color: var(--monynha-violet); font-style: italic; }
-.s_monynha_hero .lead { max-width: 680px; margin: 1.5rem auto 0; color: rgba(255,255,255,.75); }
-.s_monynha_hero .monynha-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
-.s_monynha_hero .monynha-spark { position: absolute; top: 18%; left: 13%; animation: monynhaFloat 5.5s ease-in-out infinite; }
-.s_monynha_services, .s_monynha_process, .s_monynha_labs { background: var(--monynha-paper); color: var(--monynha-ink); }
-.s_monynha_services article, .s_monynha_process article, .s_monynha_labs article { padding: 1.5rem; }
-.s_monynha_services h3, .s_monynha_process h3, .s_monynha_labs h3 { font-weight: 800; }
-.s_monynha_cta { text-align: center; background: var(--monynha-void); color: #fff; }
-.s_monynha_cta h2 { font-size: clamp(2.5rem, 6vw, 5rem); letter-spacing: -.045em; }
-@keyframes monynhaFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-@media (prefers-reduced-motion: reduce) { .s_monynha_hero .monynha-spark { animation: none; } }
+.s_monynha_hero,
+.s_monynha_services,
+.s_monynha_process,
+.s_monynha_labs,
+.s_monynha_cta,
+.s_monynha_signal,
+.s_monynha_selected_work,
+.s_monynha_capability,
+.s_monynha_manifesto,
+.s_monynha_metrics,
+.s_monynha_faq,
+.s_monynha_intro {
+    padding: var(--monynha-section-space) 1.25rem;
+}
+
+.s_monynha_hero {
+    position: relative;
+    display: grid;
+    min-height: 76vh;
+    place-items: center;
+    overflow: hidden;
+    background: radial-gradient(circle at 15% 10%, rgba(151, 103, 228, .2), transparent 32rem), radial-gradient(circle at 85% 70%, rgba(0, 229, 255, .09), transparent 30rem), var(--monynha-night);
+    color: var(--monynha-white);
+    text-align: center;
+}
+
+.s_monynha_hero .monynha-hero-inner {
+    max-width: 900px;
+}
+
+.s_monynha_hero h1 {
+    font-size: clamp(3.3rem, 9vw, 7rem);
+    line-height: .92;
+    letter-spacing: -.065em;
+}
+
+.s_monynha_hero h1 em {
+    color: var(--monynha-violet);
+    font-style: italic;
+}
+
+.s_monynha_hero .lead {
+    max-width: 680px;
+    margin: 1.5rem auto 0;
+    color: rgba(255, 255, 255, .75);
+}
+
+.s_monynha_hero .monynha-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.s_monynha_hero .monynha-spark {
+    position: absolute;
+    top: 18%;
+    left: 13%;
+    animation: monynhaFloat 5.5s ease-in-out infinite;
+}
+
+.s_monynha_services,
+.s_monynha_process,
+.s_monynha_labs,
+.s_monynha_signal,
+.s_monynha_selected_work,
+.s_monynha_capability,
+.s_monynha_metrics,
+.s_monynha_faq {
+    background: var(--monynha-paper);
+    color: var(--monynha-ink);
+}
+
+.s_monynha_services article,
+.s_monynha_process article,
+.s_monynha_labs article {
+    padding: 1.5rem;
+}
+
+.s_monynha_services h3,
+.s_monynha_process h3,
+.s_monynha_labs h3 {
+    font-weight: 800;
+}
+
+.s_monynha_signal .monynha-signal-layout,
+.s_monynha_capability .monynha-capability-layout,
+.s_monynha_manifesto .monynha-manifesto-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+    align-items: center;
+    gap: clamp(2rem, 6vw, 5rem);
+}
+
+.s_monynha_selected_work .monynha-work-grid,
+.s_monynha_metrics .monynha-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.s_monynha_manifesto {
+    background: var(--monynha-violet);
+    color: var(--monynha-void);
+}
+
+.s_monynha_manifesto blockquote {
+    margin: 0;
+    font-size: clamp(2.4rem, 6vw, 5.5rem);
+    font-weight: 800;
+    line-height: .98;
+    letter-spacing: -.05em;
+}
+
+.s_monynha_intro {
+    background: var(--monynha-night);
+    color: var(--monynha-white);
+}
+
+.s_monynha_intro .container {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.s_monynha_intro h1 {
+    max-width: 48rem;
+    margin: 0;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    line-height: .92;
+    letter-spacing: -.055em;
+}
+
+.s_monynha_cta {
+    background: var(--monynha-void);
+    color: var(--monynha-white);
+    text-align: center;
+}
+
+.s_monynha_cta h2 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    letter-spacing: -.045em;
+}
+
+@keyframes monynhaFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+@media (max-width: 991.98px) {
+    .s_monynha_signal .monynha-signal-layout,
+    .s_monynha_capability .monynha-capability-layout,
+    .s_monynha_manifesto .monynha-manifesto-layout,
+    .s_monynha_selected_work .monynha-work-grid,
+    .s_monynha_metrics .monynha-metrics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .s_monynha_intro .container {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .s_monynha_hero .monynha-spark {
+        animation: none;
+    }
+}
