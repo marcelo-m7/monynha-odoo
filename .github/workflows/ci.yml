@@ -70,7 +70,10 @@ jobs:
             --stop-after-init
 
       - name: Install lead generator independently
+        shell: bash
         run: |
+          set +e
+          set -o pipefail
           docker run --rm \
             --network monynha-ci \
             -e HOST=monynha-db \
@@ -87,7 +90,21 @@ jobs:
             -d monynha_lead_ci \
             -i monynha_lead_generator \
             --test-tags /monynha_lead_generator \
-            --stop-after-init
+            --stop-after-init 2>&1 | tee /tmp/monynha-lead-install.log
+          status=${PIPESTATUS[0]}
+          if [ "$status" -ne 0 ]; then
+            echo "### Isolated lead-generator failure" >> "$GITHUB_STEP_SUMMARY"
+            echo '```text' >> "$GITHUB_STEP_SUMMARY"
+            tail -n 160 /tmp/monynha-lead-install.log >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            while IFS= read -r line; do
+              safe_line=${line//'%'/'%25'}
+              safe_line=${safe_line//$'\r'/'%0D'}
+              safe_line=${safe_line//$'\n'/'%0A'}
+              echo "::error title=Odoo isolated lead-generator failure::$safe_line"
+            done < <(grep -E 'ERROR|CRITICAL|Traceback|FAIL:|FAILED|AssertionError|AccessError|ParseError' /tmp/monynha-lead-install.log | tail -n 30)
+            exit "$status"
+          fi
 
       - name: Install addons together and run tests
         run: |
