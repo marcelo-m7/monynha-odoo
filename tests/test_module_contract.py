@@ -1,6 +1,11 @@
+import ast
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def _manifest(addon):
+    return ast.literal_eval((ROOT / addon / '__manifest__.py').read_text())
 
 
 def test_two_addons_exist_with_expected_manifests():
@@ -8,24 +13,45 @@ def test_two_addons_exist_with_expected_manifests():
     lead = ROOT / 'monynha_lead_generator' / '__manifest__.py'
     assert theme.exists()
     assert lead.exists()
-    assert 'theme_common' in theme.read_text()
-    lead_text = lead.read_text()
-    assert '"crm"' in lead_text or "'crm'" in lead_text
-    assert '"website"' in lead_text or "'website'" in lead_text
-    assert 'theme_monynha' not in lead_text
+    theme_manifest = _manifest('theme_monynha')
+    lead_manifest = _manifest('monynha_lead_generator')
+    assert 'theme_common' in theme_manifest['depends']
+    assert 'monynha_lead_generator' not in theme_manifest['depends']
+    assert 'crm' in lead_manifest['depends']
+    assert 'website' in lead_manifest['depends']
+    assert 'theme_monynha' not in lead_manifest['depends']
 
 
-def test_theme_registers_monynha_snippet_group_and_core_snippets():
-    snippets = (ROOT / 'theme_monynha' / 'views' / 'snippets.xml').read_text()
-    assert 'snippet-group="monynha"' in snippets
+def test_theme_registers_monynha_snippet_group_and_m2_snippets():
+    core = (ROOT / 'theme_monynha' / 'views' / 'snippets.xml').read_text()
+    m2_path = ROOT / 'theme_monynha' / 'views' / 'snippets_m2.xml'
+    assert 'snippet-group="monynha"' in core
+    assert m2_path.exists()
+    m2 = m2_path.read_text()
     for snippet in (
-        's_monynha_hero',
-        's_monynha_services',
-        's_monynha_process',
-        's_monynha_labs',
-        's_monynha_cta',
+        's_monynha_signal',
+        's_monynha_selected_work',
+        's_monynha_capability',
+        's_monynha_manifesto',
+        's_monynha_metrics',
+        's_monynha_faq',
+        's_monynha_intro',
     ):
-        assert snippet in snippets
+        assert snippet in m2
+
+
+def test_theme_loads_tokens_before_components_and_keeps_reduced_motion():
+    manifest = _manifest('theme_monynha')
+    assets = manifest['assets']['web.assets_frontend']
+    tokens = 'theme_monynha/static/src/scss/tokens.scss'
+    components = 'theme_monynha/static/src/scss/components.scss'
+    assert tokens in assets
+    assert assets.index(tokens) < assets.index(components)
+    scss = '\n'.join(
+        path.read_text()
+        for path in (ROOT / 'theme_monynha' / 'static' / 'src' / 'scss').glob('*.scss')
+    )
+    assert 'prefers-reduced-motion' in scss
 
 
 def test_lead_generator_uses_crm_lead_and_secure_public_report_token():
