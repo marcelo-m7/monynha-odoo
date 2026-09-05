@@ -7,8 +7,9 @@
                 <section class="monynha-discovery" data-monynha-wizard="1">
                     <div class="monynha-discovery-shell">
                         <header class="monynha-discovery-header"><a href="/" class="monynha-discovery-brand">MONYNHA / PROJECT DISCOVERY</a><span data-monynha-counter="1">01 / 06</span></header>
-                        <div class="monynha-progress" aria-hidden="true"><span data-monynha-progress="1"/></div>
-                        <p class="monynha-discovery-error" data-monynha-error="1" role="alert" aria-live="polite"/>
+                        <div class="monynha-progress" role="progressbar" aria-label="Discovery progress" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" aria-valuetext="Etapa 1 de 6"><span data-monynha-progress="1"/></div>
+                        <span class="visually-hidden" data-monynha-progress-text="1" aria-live="polite">Etapa 1 de 6</span>
+                        <p class="monynha-discovery-error" data-monynha-error="1" role="alert" aria-live="polite" tabindex="-1"/>
                         <form data-monynha-form="1" novalidate="novalidate">
                             <input class="monynha-honeypot" type="text" name="website_company" tabindex="-1" autocomplete="off" aria-hidden="true"/>
                             <fieldset data-monynha-step="1"><legend>Oi. Qual é o teu melhor e-mail?</legend><p>É onde vamos enviar o Project Signal quando estiver pronto.</p><label for="monynha_email">E-mail</label><input id="monynha_email" type="email" name="email" autocomplete="email" required="required" autofocus="autofocus" placeholder="voce@empresa.com"/></fieldset>
