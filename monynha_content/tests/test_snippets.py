@@ -1,10 +1,8 @@
-from types import SimpleNamespace
-
-from odoo.tests import TransactionCase, tagged
+from odoo.tests import HttpCase, tagged
 
 
 @tagged("-at_install", "post_install")
-class TestMonynhaContentSnippets(TransactionCase):
+class TestMonynhaContentSnippets(HttpCase):
     SNIPPET_KEYS = (
         "s_monynha_featured_work",
         "s_monynha_work_grid",
@@ -23,7 +21,6 @@ class TestMonynhaContentSnippets(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.website = cls.env["website"].get_current_website()
-        cls.empty_website = cls.env["website"].create({"name": "M4 Empty Snippet Website"})
         cls.tag = cls.env["monynha.work.tag"].create({"name": "Snippet Architecture"})
         cls.published_lab = cls.env["monynha.work"].create({
             "name": "Published Lab",
@@ -67,17 +64,38 @@ class TestMonynhaContentSnippets(TransactionCase):
             "is_published": True,
         })
 
-    def _render(self, key, website=None, main_object=False):
-        website = website or self.website
-        request_stub = SimpleNamespace(env=self.env, website=website)
-        rendered = self.env["ir.ui.view"]._render_template(
-            f"monynha_content.{key}",
-            {
-                "request": request_stub,
-                "main_object": main_object,
-            },
-        )
-        return str(rendered)
+    def setUp(self):
+        super().setUp()
+        self._render_counter = 0
+
+    def _render(self, key, main_object=False):
+        self._render_counter += 1
+        suffix = f"{key}_{self._render_counter}"
+        if main_object:
+            slug_value = main_object.website_url.rsplit("/", 1)[-1]
+            setup = (
+                "<t t-set=\"main_object\" "
+                "t-value=\"request.env['monynha.content.query']"
+                f".get_work_by_slug(request.website, '{slug_value}')\"/>"
+            )
+        else:
+            setup = '<t t-set="main_object" t-value="False"/>'
+        view = self.env["ir.ui.view"].create({
+            "name": f"M4 snippet test {suffix}",
+            "type": "qweb",
+            "key": f"monynha_content.test_snippet_{suffix}",
+            "arch_db": f'<div>{setup}<t t-call="monynha_content.{key}"/></div>',
+        })
+        page = self.env["website.page"].create({
+            "view_id": view.id,
+            "url": f"/m4-snippet-test/{suffix}",
+            "is_published": True,
+            "website_id": self.website.id,
+        })
+        self.website._force()
+        response = self.url_open(page.url)
+        self.assertEqual(response.status_code, 200)
+        return response.text
 
     def test_dynamic_snippets_exist_and_use_monynha_group(self):
         registration = self.env.ref("monynha_content.snippets")
@@ -87,14 +105,15 @@ class TestMonynhaContentSnippets(TransactionCase):
             self.assertIn(f't-snippet="monynha_content.{key}"', arch)
         self.assertGreaterEqual(arch.count('group="monynha"'), len(self.SNIPPET_KEYS))
 
-    def test_latest_labs_filters_publication_and_website_and_handles_empty_state(self):
+    def test_latest_labs_filters_publication_and_handles_empty_state(self):
         rendered = self._render("s_monynha_latest_labs")
         self.assertIn("Published Lab", rendered)
         self.assertNotIn("Unpublished Lab", rendered)
 
-        empty = self._render("s_monynha_latest_labs", website=self.empty_website)
+        self.env["monynha.work"].search([("type", "=", "lab")]).write({"is_published": False})
+        empty = self._render("s_monynha_latest_labs")
         self.assertNotIn("Published Lab", empty)
-        self.assertNotIn("broken", empty.lower())
+        self.assertIn("No labs are published yet.", empty)
 
     def test_work_snippets_use_real_work_records(self):
         self.assertIn("Featured Project", self._render("s_monynha_featured_work"))
@@ -109,7 +128,7 @@ class TestMonynhaContentSnippets(TransactionCase):
             "s_monynha_work_metadata",
             "s_monynha_work_navigation",
         ):
-            self._render(key, main_object=False)
+            self._render(key)
 
         self.assertIn(
             "Snippet Architecture",
@@ -118,6 +137,10 @@ class TestMonynhaContentSnippets(TransactionCase):
         self.assertIn(
             "Lab",
             self._render("s_monynha_work_metadata", main_object=self.published_lab),
+        )
+        self.assertIn(
+            "/labs",
+            self._render("s_monynha_work_navigation", main_object=self.published_lab),
         )
 
     def test_insights_snippets_use_standard_blog_post(self):
