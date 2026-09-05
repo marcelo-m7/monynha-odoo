@@ -45,3 +45,22 @@ def test_seeded_public_pages_are_complete_editorial_starters():
     assert 'href="/contactus"' in pages
     assert 'model="theme.website.page"' in pages
     assert 'model="website.page"' not in pages
+
+
+def test_m3_accessibility_motion_and_overflow_contract():
+    scss = "\n".join(path.read_text() for path in (THEME / "static/src/scss").glob("*.scss"))
+    tokens = (THEME / "static/src/scss/tokens.scss").read_text()
+    m3 = (THEME / "views/snippets_m3.xml").read_text()
+
+    assert ":focus-visible" in scss
+    assert "prefers-reduced-motion" in scss
+    assert "overflow-wrap" in scss
+    assert "--monynha-ease-standard" in tokens
+    assert "width: min(" not in scss
+
+    lowered = scss.lower()
+    for forbidden in ("framer", "reactbits", "@import url("):
+        assert forbidden not in lowered
+
+    assert 'class="monynha-labs-orbit monynha-labs-orbit-one" aria-hidden="true"' in m3
+    assert 'class="monynha-labs-orbit monynha-labs-orbit-two" aria-hidden="true"' in m3
