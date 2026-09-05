@@ -44,14 +44,8 @@
                                 <article><span>Odoo fit</span><strong t-out="diagnosis.odoo_fit"/></article>
                             </div>
                             <div class="monynha-report-grid">
-                                <div class="monynha-report-signals" t-if="diagnosis.signals">
-                                    <h2>What we see</h2>
-                                    <ol><li t-foreach="diagnosis.signals" t-as="signal" t-out="signal"/></ol>
-                                </div>
-                                <div class="monynha-report-opportunities" t-if="diagnosis.opportunities">
-                                    <h2>Opportunities</h2>
-                                    <ol><li t-foreach="diagnosis.opportunities" t-as="opportunity" t-out="opportunity"/></ol>
-                                </div>
+                                <div class="monynha-report-signals" t-if="diagnosis.signals"><h2>What we see</h2><ol><li t-foreach="diagnosis.signals" t-as="signal" t-out="signal"/></ol></div>
+                                <div class="monynha-report-opportunities" t-if="diagnosis.opportunities"><h2>Opportunities</h2><ol><li t-foreach="diagnosis.opportunities" t-as="opportunity" t-out="opportunity"/></ol></div>
                             </div>
                             <div class="monynha-next-move" t-if="diagnosis.recommended_action">
                                 <p class="monynha-report-kicker">Recommended next move</p>
@@ -63,12 +57,18 @@
                                 <p>O Project Signal não escolhe uma solução sozinho. Ele indica onde a próxima conversa técnica deve começar.</p>
                             </div>
                             <div class="monynha-route"><span>Discovery</span><i class="fa fa-arrow-right" aria-hidden="true"/><span>Architecture</span><i class="fa fa-arrow-right" aria-hidden="true"/><span>Prototype</span><i class="fa fa-arrow-right" aria-hidden="true"/><span>Implementation</span></div>
-                            <a href="/contactus" class="btn monynha-report-cta">Quero explorar isto com a Monynha</a>
+                            <div class="monynha-followup-zone">
+                                <a href="/contactus" class="btn monynha-report-cta" data-monynha-followup="1" t-att-data-monynha-token="diagnosis.public_token">Quero explorar isto com a Monynha</a>
+                                <span class="monynha-followup-status" data-monynha-followup-status="1" aria-live="polite"/>
+                            </div>
                         </t>
                         <t t-else="">
                             <h1>O projeto chegou.</h1>
                             <p class="lead">O diagnóstico automático não ficou disponível agora, mas o teu discovery foi preservado no nosso CRM.</p>
-                            <a href="/contactus" class="btn monynha-report-cta">Falar com a Monynha</a>
+                            <div class="monynha-followup-zone">
+                                <a href="/contactus" class="btn monynha-report-cta" data-monynha-followup="1" t-att-data-monynha-token="diagnosis.public_token">Pedir follow-up à Monynha</a>
+                                <span class="monynha-followup-status" data-monynha-followup-status="1" aria-live="polite"/>
+                            </div>
                         </t>
                         <p class="monynha-report-note">Este resultado é um ponto de partida para conversa, não uma decisão automática.</p>
                     </div>
