@@ -21,22 +21,101 @@ h1, h2, h3, h4, h5, h6, .monynha-display {
 header#top {
     border-bottom: 2px solid var(--monynha-ink);
     background: rgba(250, 250, 252, .96);
+    box-shadow: 0 5px 0 rgba(11, 11, 16, .08);
 }
 
 header#top .navbar {
-    min-height: 4.5rem;
+    min-height: 4.75rem;
+    gap: 1rem;
 }
 
-header#top .navbar-brand,
+header#top .navbar-brand {
+    color: var(--monynha-ink);
+    font-family: "Space Grotesk", Inter, system-ui, sans-serif;
+    font-weight: 850;
+    letter-spacing: -.035em;
+}
+
 header#top .nav-link {
+    position: relative;
+    min-height: 2.75rem;
+    padding: .7rem .8rem;
     color: var(--monynha-ink);
     font-weight: 750;
+}
+
+header#top .nav-link::after {
+    content: "";
+    position: absolute;
+    right: .8rem;
+    bottom: .35rem;
+    left: .8rem;
+    height: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--monynha-motion-fast) ease;
 }
 
 header#top .nav-link:hover,
 header#top .nav-link:focus-visible,
 header#top .nav-link.active {
     color: var(--monynha-violet);
+}
+
+header#top .nav-link:hover::after,
+header#top .nav-link:focus-visible::after,
+header#top .nav-link.active::after {
+    transform: scaleX(1);
+}
+
+header#top a[href="/start"] {
+    margin-inline-start: .35rem;
+    border: 2px solid var(--monynha-ink);
+    border-radius: var(--monynha-radius-sm);
+    background: var(--monynha-violet);
+    color: var(--monynha-white);
+    box-shadow: 4px 4px 0 var(--monynha-ink);
+}
+
+header#top a[href="/start"]::after {
+    display: none;
+}
+
+header#top a[href="/start"]:hover,
+header#top a[href="/start"]:focus-visible,
+header#top a[href="/start"].active {
+    background: var(--monynha-ink);
+    color: var(--monynha-white);
+}
+
+header#top .dropdown-menu {
+    border: 2px solid var(--monynha-ink);
+    border-radius: var(--monynha-radius-sm);
+    background: var(--monynha-paper);
+    box-shadow: 6px 6px 0 var(--monynha-violet);
+}
+
+header#top .dropdown-item {
+    min-height: 2.75rem;
+    padding: .7rem 1rem;
+    color: var(--monynha-ink);
+    font-weight: 700;
+}
+
+header#top .dropdown-item:hover,
+header#top .dropdown-item:focus-visible,
+header#top .dropdown-item.active {
+    background: var(--monynha-violet);
+    color: var(--monynha-white);
+}
+
+header#top .navbar-toggler {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    border: 2px solid var(--monynha-ink);
+    border-radius: var(--monynha-radius-sm);
+    color: var(--monynha-ink);
 }
 
 footer#bottom,
@@ -46,18 +125,88 @@ footer.o_footer {
     color: rgba(255, 255, 255, .78);
 }
 
-footer#bottom a,
-footer.o_footer a {
+footer#bottom h1,
+footer#bottom h2,
+footer#bottom h3,
+footer#bottom h4,
+footer#bottom h5,
+footer#bottom h6,
+footer.o_footer h1,
+footer.o_footer h2,
+footer.o_footer h3,
+footer.o_footer h4,
+footer.o_footer h5,
+footer.o_footer h6 {
     color: var(--monynha-white);
 }
 
+footer#bottom a,
+footer.o_footer a {
+    color: var(--monynha-white);
+    font-weight: 650;
+    text-decoration-color: rgba(255, 255, 255, .4);
+    text-underline-offset: .2em;
+}
+
 footer#bottom a:hover,
-footer.o_footer a:hover {
+footer#bottom a:focus-visible,
+footer.o_footer a:hover,
+footer.o_footer a:focus-visible {
     color: var(--monynha-cyan);
+    text-decoration-color: currentColor;
+}
+
+@media (max-width: 991.98px) {
+    header#top .navbar {
+        min-height: 4.25rem;
+    }
+
+    header#top .navbar-collapse {
+        margin-top: .8rem;
+        border-top: 2px solid var(--monynha-ink);
+        padding: .8rem 0 1rem;
+    }
+
+    header#top .navbar-nav {
+        gap: .35rem;
+    }
+
+    header#top .nav-link,
+    header#top a[href="/start"] {
+        width: 100%;
+        margin-inline-start: 0;
+    }
+
+    header#top a[href="/start"] {
+        margin-top: .35rem;
+        text-align: center;
+    }
+
+    header#top .dropdown-menu {
+        margin: .25rem 0 .5rem;
+        box-shadow: 4px 4px 0 var(--monynha-violet);
+    }
+}
+
+@media (max-width: 575.98px) {
+    h1, .monynha-display {
+        overflow-wrap: anywhere;
+    }
+
+    header#top .navbar-brand {
+        max-width: calc(100vw - 6rem);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
     html:focus-within {
         scroll-behavior: auto;
+    }
+
+    header#top .nav-link::after {
+        transition: none;
     }
 }
