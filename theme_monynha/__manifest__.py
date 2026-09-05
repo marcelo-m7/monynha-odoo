@@ -12,9 +12,22 @@
         "data/ir_asset.xml",
         "views/snippets.xml",
         "views/snippets_m2.xml",
+        "data/pages.xml",
+        "data/menu.xml",
     ],
     "images": ["static/description/theme_monynha.svg"],
     "images_preview_theme": {},
+    "configurator_snippets": {
+        "homepage": [
+            "s_monynha_hero",
+            "s_monynha_signal",
+            "s_monynha_services",
+            "s_monynha_process",
+            "s_monynha_selected_work",
+            "s_monynha_manifesto",
+            "s_monynha_cta",
+        ],
+    },
     "assets": {
         "web.assets_frontend": [
             "theme_monynha/static/src/scss/tokens.scss",
