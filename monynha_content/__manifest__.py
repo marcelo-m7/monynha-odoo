@@ -11,6 +11,7 @@
         "security/ir.model.access.csv",
         "views/work_views.xml",
         "views/work_templates.xml",
+        "views/snippets.xml",
     ],
     "installable": True,
     "application": False,
