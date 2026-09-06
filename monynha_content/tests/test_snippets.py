@@ -105,6 +105,22 @@ class TestMonynhaContentSnippets(HttpCase):
             self.assertIn(f't-snippet="monynha_content.{key}"', arch)
         self.assertGreaterEqual(arch.count('group="monynha"'), len(self.SNIPPET_KEYS))
 
+    def test_builder_preview_renders_without_frontend_request_website(self):
+        # Reproduce the Website Builder backend RPC path from the production
+        # traceback.  This request has request.env, but does not initialize the
+        # frontend-only request.website attribute.
+        self.authenticate("admin", "admin")
+        rendered = self.make_jsonrpc_request(
+            "/web/dataset/call_kw/ir.ui.view/render_public_asset",
+            {
+                "model": "ir.ui.view",
+                "method": "render_public_asset",
+                "args": ["monynha_content.s_monynha_featured_work"],
+                "kwargs": {"context": {"website_id": self.website.id}},
+            },
+        )
+        self.assertIn("Featured Project", rendered)
+
     def test_latest_labs_filters_publication_and_handles_empty_state(self):
         rendered = self._render("s_monynha_latest_labs")
         self.assertIn("Published Lab", rendered)
