@@ -44,6 +44,12 @@ class TestMonynhaTheme(HttpCase):
         website.theme_id = theme
         theme._theme_get_stream_themes().with_context(load_all_views=True)._theme_load(website)
 
+    def test_active_theme_marks_site_shell(self):
+        response = self.url_open("/")
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("monynha-site", response.text)
+        self.assertIn('<meta name="theme-color" content="#020205"', response.text)
+
     def test_core_m2_and_m3_snippets_registered(self):
         keys = {
             "theme_monynha.s_monynha_hero",
