@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="website_layout" inherit_id="website.layout" name="Monynha Website Layout">
+        <xpath expr="//div[@id='wrapwrap']" position="attributes">
+            <attribute name="t-attf-class" add="monynha-site" separator=" "/>
+        </xpath>
+        <xpath expr="//head" position="inside">
+            <meta name="theme-color" content="#020205"/>
+        </xpath>
+    </template>
+</odoo>

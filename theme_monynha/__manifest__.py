@@ -1,7 +1,7 @@
 {
     "name": "Monynha Theme",
     "summary": "Monynha Softwares brutalist-digital identity for Odoo Website",
-    "version": "19.0.4.0.0",
+    "version": "19.0.4.0.1",
     "category": "Theme/Creative",
     "sequence": 120,
     "author": "Monynha Softwares",
@@ -10,6 +10,7 @@
     "depends": ["theme_common", "website"],
     "data": [
         "data/ir_asset.xml",
+        "views/customizations.xml",
         "views/snippets.xml",
         "views/snippets_m2.xml",
         "views/snippets_m3.xml",
